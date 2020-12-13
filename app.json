@@ -1,0 +1,6 @@
+{
+    "name": "Express and ReactJS Project Boilerplate",
+    "description": "A project template based on create-react-app and express",
+    "repository": "https://github.com/mrsilver512/express-react-boilerplate",
+    "keywords": ["node", "express", "react", "boilerplate", "template"]
+}
