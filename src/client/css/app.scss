@@ -1,0 +1,58 @@
+//MAIN WEBSITE CSS ARE STORED HERE
+
+$blue: #0069aa;
+$indigo: #7a09fa;
+$purple: #3003d9;
+$pink: #c85086;
+$red: #891e2b;
+$orange: #ff5000;
+$yellow: #ffa214;
+$green: #1e6f50;
+$teal: #33984b;
+$cyan: #0098dc;
+$white: #fff;
+$gray-100: #f5f5fa;
+$gray-200: #e1e9f7;
+$gray-300: #c7cfdd;
+$gray-400: #92a1b9;
+$gray-500: #657392;
+$gray-600: #424c6e;
+$gray-700: #2a2f4e;
+$gray-800: #1a1932;
+$gray-900: #0e071b;
+$black: #000;
+
+$body-bg: $gray-800;
+$body-color: $gray-100;
+
+$navbar-nav-link-padding-x: 2rem;
+
+$theme-colors: (primary: $indigo, secondary: $purple, success: $teal, info: $blue, warning: $orange, danger: $red, light: $gray-400, dark: $gray-900);
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    font-family: 'Nunito', sans-serif;
+    padding-top: 70px;
+}
+
+.imageSwitch {
+    background-image: url("/res/logo.png");
+    width: 256px;
+    height: 32px;
+}
+.imageSwitch:hover {
+    background-image: url("/res/logo2.png");
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 1.4rem;
+    color: $cyan;
+    font-weight: 300;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+    font-size: 1.4rem;
+    color: $teal;
+    font-weight: 1000;
+}
