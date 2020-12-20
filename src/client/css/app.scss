@@ -25,12 +25,18 @@ $black: #000;
 $body-bg: $gray-800;
 $body-color: $gray-100;
 $navbar-nav-link-padding-x: 2rem;
+$progress-bg: $gray-500;
+$link-color: $cyan;
+$link-hover-color: $teal;
 
 $theme-colors: (primary: $indigo, secondary: $purple, success: $teal, info: $blue, warning: $orange, danger: $red, light: $gray-400, dark: $gray-900);
+
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import "~bootstrap/scss/bootstrap";
 @import url("./home.scss");
+@import url("./portfolio.scss");
 
 .bgt {background-color: rgb(random(255), random(255), random(255))}
 

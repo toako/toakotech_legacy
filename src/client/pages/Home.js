@@ -19,17 +19,17 @@ class Home extends React.Component {
                 {/*Introduction Container*/}
                 <Container style={{maxWidth: "1400px"}}>
                     <Row className="text-center"> {/*Row 1 - Name*/}
-                        <p className="display-1 home-title-shadow col-sm-12">
+                        <p className="display-1 home-title-shadow col-12">
                             Hello! I'm 
                             <span className="home-title-emphasis"> Will Kellermann</span>.
                         </p>
                     </Row>
                     <Row className="text-center"> {/*Row 2 - Location*/}
-                        <p className="display-4 home-title-shadow col-sm-12">
+                        <p className="display-4 home-title-shadow col-12">
                             Programmer in Boise, Idaho <i className="fas fa-map-marker-alt"></i> 
                         </p>
                     </Row>
-                    <Row className="col-sm-12"> {/*Row 3 - User Guiding*/}
+                    <Row className="col-12"> {/*Row 3 - User Guiding*/}
                     <div className="hoverObject" style={{marginTop: "400px"}}>
                         <p className="display-4 home-title-shadow" style={{marginLeft: "-148px"}}>Find out more</p>
                         <i className="fas fa-arrow-down fa-4x home-title-shadow"></i>
@@ -37,22 +37,22 @@ class Home extends React.Component {
                     </Row>
                 </Container>
             </div>
-            {/*Website Section 1 - Portfolio Summary*/}
+            {/*Website Section 2 - Site Options*/}
             <div className="align-items-center section-area">
                 <Container>
                     {/*Row 1*/}
                     <Row className="text-center">
-                        <h1 className="col-sm-12 section-title">I am a MERN stack developer and Unity game designer.</h1>
+                        <h1 className="col-12 section-title">I am a MERN stack developer and Unity game designer.</h1>
                     </Row>
                     <Row className="text-center">
-                        <h4 className="col-sm-12 section-subtitle">Click a section below <i className="far fa-hand-point-down"></i></h4>
+                        <h4 className="col-12 section-subtitle">Click a section below <i className="far fa-hand-point-down"></i></h4>
                     </Row>
                     <Row>
-                        <Col className="col-sm-6">
+                        <Col className="col-6">
                             <LinkContainer to="/portfolio"><a><div className="sect sect-portfolio">
                                 <img 
                                     className="sect-img img-fluid"
-                                    src="./res/logos/fcc.png"
+                                    src="./res/sect/fcc.png"
                                     alt="portfolio image" 
                                 />
                                 <div className="sect-text">
@@ -65,11 +65,11 @@ class Home extends React.Component {
                                 </div>
                             </div></a></LinkContainer>
                         </Col>
-                        <Col className="col-sm-6">
+                        <Col className="col-6">
                         <LinkContainer to="/projects"><a><div className="sect sect-projects">
                                 <img 
                                     className="sect-img img-fluid"
-                                    src="./res/gamepeek.gif"
+                                    src="./res/sect/gamepeek.gif"
                                     alt="projects gif" 
                                 />
                                 <div className="sect-text">
@@ -84,34 +84,35 @@ class Home extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="col-sm-6">
+                        <Col className="col-6">
                             <LinkContainer to="/about"><a><div className="sect sect-about">
                                 <img 
                                     className="sect-img img-fluid"
-                                    src="./res/logos/fcc.png"
-                                    alt="about image" 
+                                    src="./res/sect/profile1.png"
+                                    alt="Profile picture" 
                                 />
                                 <div className="sect-text">
                                     <h2 className="sect-header-about">About Me</h2>
                                     <h4 className="sect-desc">
-                                        Life is more than computers! Learn 
+                                        Life is more than computers! Here you can find a 
+                                        bit about my personal life, hobbies, and 
+                                        my background.
                                     </h4>
                                 </div>
                             </div></a></LinkContainer>
                         </Col>
-                        <Col className="col-sm-6">
+                        <Col className="col-6">
                         <LinkContainer to="/contact"><a><div className="sect sect-contact">
                                 <img 
                                     className="sect-img img-fluid"
-                                    src="./res/gamepeek.gif"
-                                    alt="contact image" 
+                                    src="./res/sect/phone.jpeg"
+                                    alt="Credit: Terje Sollie on pexels.com, phone.jpeg" 
                                 />
                                 <div className="sect-text">
                                     <h2 className="sect-header-contact">Contact Me</h2>
                                     <h4 className="sect-desc">
-                                        Get a sneak peek of what games and apps I am 
-                                        working on. Check back for progress and see
-                                        future plans I may have.
+                                        Submit a question or get in touch with 
+                                        me. Also includes links to all of my social media.
                                     </h4>
                                 </div>
                             </div></a></LinkContainer>
@@ -119,7 +120,9 @@ class Home extends React.Component {
                     </Row>
                 </Container>
             </div>
-                
+            <div >
+
+            </div>
         </div>);
     }
 }

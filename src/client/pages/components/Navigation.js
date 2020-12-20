@@ -26,7 +26,7 @@ export default function Navigation () {
                 </LinkContainer>
                 <LinkContainer to="/eclipse">
                     <Nav.Link>Eclipse <img 
-                        src="/res/mitsu.png" 
+                        src="/res/logos/mitsu.png" 
                         alt="mitsubishi logo" 
                         width="20px" 
                         height="20px" 

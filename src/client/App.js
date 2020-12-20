@@ -10,6 +10,7 @@ import Contact from './pages/Contact.js';
 import Eclipse from'./pages/Eclipse.js';
 import Scheduler from './pages/Scheduler.js';
 import Navigation from "./pages/components/Navigation.js"
+import Footer from "./pages/components/Footer.js"
 
 
 
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route exact path="/scheduler"><Scheduler /></Route>
           </Switch>
         </div>
+        <Footer/>
       </Router>
     );
   }
