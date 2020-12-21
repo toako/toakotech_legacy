@@ -6,9 +6,10 @@
 .exp {
     color: $gray-100;
     border-radius: 4px;
+    padding: 1px 4px 1px 4px;
 }
 
-.opt { background-color: $red; padding: 0px 4px 0px 4px;}
+.opt { background-color: $red;}
 .fam { background-color: $orange; }
 .skl { background-color: $blue; }
 .adv { background-color: $indigo; }
@@ -38,5 +39,24 @@ hr {
 }
 
 .lang-item {
-    margin: 20px;
+    margin: 16px;
+}
+
+.port-header {
+    margin: -20px 0px 0px 0px;
+    color: $teal;
+    letter-spacing: .6em;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif; 
+    font-size: 100px;
+}
+
+.port-title {
+    color: $cyan;
+}
+
+.port-subtitle {
+    margin-top: 20px;
+    color: $teal;
+    text-decoration: underline;
 }

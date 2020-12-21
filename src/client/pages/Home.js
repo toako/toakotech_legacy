@@ -120,9 +120,6 @@ class Home extends React.Component {
                     </Row>
                 </Container>
             </div>
-            <div >
-
-            </div>
         </div>);
     }
 }
