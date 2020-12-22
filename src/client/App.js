@@ -12,8 +12,6 @@ import Scheduler from './pages/Scheduler.js';
 import Navigation from "./pages/components/Navigation.js"
 import Footer from "./pages/components/Footer.js"
 
-
-
 class App extends React.Component {
   render () {
     return (

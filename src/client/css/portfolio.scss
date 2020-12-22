@@ -14,7 +14,6 @@
 .skl { background-color: $blue; }
 .adv { background-color: $indigo; }
 
-
 .port-body {
     padding: 20px;
 }
@@ -31,24 +30,18 @@
     margin-top: 20px;
 }
 
-hr {
-    border-color: $gray-500;
-    border-width: 1px 0;
-    border-style: solid none;
-    margin: 10px 0px 10px 0px;
-}
-
 .lang-item {
     margin: 16px;
 }
 
 .port-header {
-    margin: -20px 0px 0px 0px;
+    margin: -20px 0px 0px 0.1em;
     color: $teal;
-    letter-spacing: .6em;
+    letter-spacing: .2em;
     font-weight: bold;
     font-family: "Roboto", sans-serif; 
     font-size: 100px;
+    text-align: center;
 }
 
 .port-title {

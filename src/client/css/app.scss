@@ -1,5 +1,6 @@
-//MAIN WEBSITE CSS ARE STORED HERE
-
+//////////////////
+//MAIN SCSS FILE//
+//////////////////
 $blue: #0069aa;
 $indigo: #7a09fa;
 $purple: #3003d9;
@@ -37,6 +38,7 @@ $theme-colors: (primary: $indigo, secondary: $purple, success: $teal, info: $blu
 @import "~bootstrap/scss/bootstrap";
 @import url("./home.scss");
 @import url("./portfolio.scss");
+@import url("./projects.scss");
 
 .bgt {background-color: rgb(random(255), random(255), random(255))}
 
@@ -80,3 +82,12 @@ a:hover {
 .display-4 { font-family: "Roboto", sans-serif; }
 .display-5 { font-family: "Roboto", sans-serif; }
 .display-6 { font-family: "Roboto", sans-serif; }
+
+.bar {
+    width: 100%;
+    height: 2px;
+    border-color: $gray-500;
+    border-width: 1px 0;
+    border-style: solid none;
+    margin: 10px 0px 10px 0px;
+}

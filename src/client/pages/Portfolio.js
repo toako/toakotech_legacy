@@ -83,14 +83,12 @@ class Portfolio extends React.Component {
     render () {
         return (<div className="align-items-center port-body">
             <Container fluid={true}>
-                <Row className="text-center">
-                    <p className="col-12 port-header">Portfolio</p>
-                </Row>
+            <p className="col-12 port-header">Portfolio</p>
                 <Row>
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">Overview</h1>
-                            <hr/>
+                            <div className="bar"/>
                             <h2 className="port-subtitle">Important Takeaway</h2>
                             <h5>
                                 I am a self-taught programmer, who has dabbled in many things, but I am 
@@ -125,14 +123,14 @@ class Portfolio extends React.Component {
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">Coding Skillsets</h1>
-                            <hr/>
+                            <div className="bar"/>
                             {this.state.lang.map((skill) => this.skillTemplate(skill[0], skill[1], skill[2], skill[3]))}
                         </div>
                     </Col>
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">FreeCodeCamp Certifications</h1>
-                            <hr/>
+                            <div className="bar"/>
                             {this.state.certs.map((cert) => this.certTemplate(cert[0], cert[1], cert[2], cert[3]))}
                             <h4 className="fcc-prog font-italic">
                                 Check out my FreeCodeCamp profile <a href="https://www.freecodecamp.org/toako">here</a>.
