@@ -39,6 +39,7 @@ $theme-colors: (primary: $indigo, secondary: $purple, success: $teal, info: $blu
 @import url("./home.scss");
 @import url("./portfolio.scss");
 @import url("./projects.scss");
+@import url("./about.scss");
 
 .bgt {background-color: rgb(random(255), random(255), random(255))}
 
