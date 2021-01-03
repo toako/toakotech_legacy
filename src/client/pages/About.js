@@ -13,7 +13,7 @@ const introText = "Hi! My name is William Kellermann. I was born in Sacramento, 
 "I know tells me I am ambitious, to a fault at times, but I am always waiting for the " +
 "next big challenge to conquer. It would also be fair to say I am a massive nerd...";
 const intrComp = "This one is no secret. I am a programmer! I was introduced to " + 
-"computers from an early age. When I was little, I would spend my time infactuated " + 
+"computers from an early age. When I was little, I would spend my time infatuated " + 
 "with the once very primitive Google Maps, and I would browse around for hours. I began " + 
 "playing flash games on the internet around 2nd grade, and a few years later, I got " + 
 "into more serious games like Minecraft and Team Fortress 2. The first time I physically "  + 
@@ -48,7 +48,19 @@ const intrPrgm = "I've been waiting to talk about this one. This has already bee
 "unannounced game project in Unity, which is another software I have been working with thru " + 
 "high school. This is being done in my free time, so it may take several years to complete. " + 
 "Stay tuned.";
-const goalText = "";
+const intrCar = "I never was interested in cars until the beginning of 2020. I've learned " +
+"a decent amount in a short amount of time. The most I have done so far is pull off the head " +
+"of my engine and failed miserably! Ha ha. Since I put more time towards programming, I " +
+"don't dedicate a lot of time to cars and for now it has been put largely on the backburner. " +
+"Anyways, I own a 1995 Mitsubishi Eclipse GSX. It is an absolute blast to drive, as it " +
+"utilizes a turbocharged four-cylinder engine mated to a manual transmission and all-wheel " +
+"drivetrain. It has the 4g63t 2.0L DOHC turbo engine, which is the same one found in the EVO. " +
+"I'm going to leave this section brief for now, as I will have a dedicated page to my car. ";
+const goalText = "I have a few goals that I would like to achieve in the upcoming years. My " +
+"first and most attainable goal is to be hired on as a full-stack web dev for a company here in Boise. I want to work " +
+"with others. My next goal after that is to finish building my game and eventually, if sensible, " +
+"release it on Steam. If all goes well, I would use all profits to create a business where " +
+"I create artificial intelligence related solutions and products that will benefit the world.";
 
 class About extends React.Component {
     constructor (props) {
@@ -70,28 +82,28 @@ class About extends React.Component {
                     <article>
                         <h1 className="main-heading">Introduction</h1>
                         <div className="main-bar"></div>
-                        <h3 className="main-text">{introText}</h3>
+                        <h4 className="main-text">{introText}</h4>
                     </article>
                     <article>
                         <h1 className="main-heading">Interests</h1>
                         <div className="main-bar"></div>
-                        <h3 className="main-text"><span className="emph">Computers:</span> {intrComp}</h3>
+                        <h4 className="main-text"><span className="emph">Computers:</span> {intrComp}</h4>
                             <div className="text-center">
                                 <img className="main-img" src="/res/about/computers.jpg"/>
                             </div>
-                        <h3 className="main-text"><span className="emph">Coding:</span> {intrPrgm}</h3>
+                        <h4 className="main-text"><span className="emph">Coding:</span> {intrPrgm}</h4>
                             <div className="text-center">
                                 <img className="main-img" src="/res/about/coding.png"/>
                             </div>
-                        <h3 className="main-text"><span className="emph">Cars:</span> {intrPrgm}</h3>
+                        <h4 className="main-text"><span className="emph">Cars:</span> {intrCar}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/coding.png"/>
+                                <img className="main-img" src="/res/about/cars.jpg"/>
                             </div>
                     </article>
                     <article>
                         <h1 className="main-heading">Goals</h1>
                         <div className="main-bar"></div>
-                        <h3 className="main-text">{goalText}</h3>
+                        <h4 className="main-text">{goalText}</h4>
                     </article>
                 </Col>
             </Row>
