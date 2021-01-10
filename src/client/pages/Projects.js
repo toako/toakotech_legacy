@@ -1,8 +1,7 @@
 import React from "react";
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import { LinkContainer } from "react-router-bootstrap"
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 let projects = [
     {
@@ -57,7 +56,7 @@ class Projects extends React.Component {
         return (
         <a href={link}><Row className="text-center proj-box">
             <Col className="col-5">
-                <img src={imageSource} className="proj-img rounded"/>
+                <img src={imageSource} className="proj-img rounded" alt=""/>
             </Col>
             <Col className="col-7 text-left">
                 <p className="proj-name">{name}</p>

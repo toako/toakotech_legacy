@@ -1,11 +1,13 @@
 import React from "react";
-import { LinkContainer } from "react-router-bootstrap"
 
+/*
+    This component feeds the bottom footer that is found on main parts of the site.
+*/
 
-export default function Navigation () {
+export default function Footer () {
     return (
-        <footer className="text-center" style={{paddingTop: "50px"}}>
+        <footer className="text-center">
             <p>© 2020 ToakoTech. Website is created by Will Kellermann.</p>
         </footer>
-    )   
+    )
 }

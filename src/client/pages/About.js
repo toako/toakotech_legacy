@@ -2,8 +2,6 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar"
 
 const introText = "Hi! My name is William Kellermann. I was born in Sacramento, California, " +
 "on May 13th, 2001. Being a Gen Z, I grew up in the era of Bionicles, Minecraft, and " +
@@ -89,15 +87,15 @@ class About extends React.Component {
                         <div className="main-bar"></div>
                         <h4 className="main-text"><span className="emph">Computers:</span> {intrComp}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/computers.jpg"/>
+                                <img className="main-img" src="/res/about/computers.jpg" alt=""/>
                             </div>
                         <h4 className="main-text"><span className="emph">Coding:</span> {intrPrgm}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/coding.png"/>
+                                <img className="main-img" src="/res/about/coding.png" alt=""/>
                             </div>
                         <h4 className="main-text"><span className="emph">Cars:</span> {intrCar}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/cars.jpg"/>
+                                <img className="main-img" src="/res/about/cars.jpg" alt=""/>
                             </div>
                     </article>
                     <article>

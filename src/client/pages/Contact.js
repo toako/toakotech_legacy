@@ -1,7 +1,5 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import '@fortawesome/fontawesome-free/js/all.js';
 
 class Contact extends React.Component {
@@ -22,8 +20,6 @@ class Contact extends React.Component {
                 <h2 className="cont-method"><span className="cmt"><i class="fab fa-steam"></i> Steam: </span>toakonguf12</h2>
                 <h2 className="cont-method"><span className="cmt"><i class="fab fa-snapchat-ghost"></i> Snapchat: </span> wkellermann</h2>
                 <h2 className="cont-method"><span className="cmt"><i class="fab fa-instagram"></i> Instagram: </span> will_kellermann</h2>
-            
-            
             </div>
         </Container>
     </div>);

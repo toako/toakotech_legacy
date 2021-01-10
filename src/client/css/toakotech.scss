@@ -1,0 +1,454 @@
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*
+*           STYLESHEET FOR PORTFOLIO SEGMENT OF WEBSITE
+*
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+// GLOBALS
+///////////////////////////////////////////////////
+
+$blue: #0069aa;
+$indigo: #7a09fa;
+$purple: #3003d9;
+$pink: #c85086;
+$red: #891e2b;
+$orange: #ff5000;
+$yellow: #ffa214;
+$green: #1e6f50;
+$teal: #33984b;
+$cyan: #0098dc;
+$white: #fff;
+$gray-100: #f5f5fa;
+$gray-200: #e1e9f7;
+$gray-300: #c7cfdd;
+$gray-400: #92a1b9;
+$gray-500: #657392;
+$gray-600: #424c6e;
+$gray-700: #2a2f4e;
+$gray-800: #1a1932;
+$gray-900: #0e071b;
+$black: #000;
+
+
+$fn: "Nunito", sans-serif; //Nunito variable
+$fr: "Roboto", sans-serif; //Roboto variable
+
+.fn { font-family: $fn } //Nunito
+.fr { font-family: $fr } //Roboto
+
+// WEBSITE NAVIGATION BAR
+///////////////////////////////////////////////////
+#navbar-tt {
+    background-color: $gray-900;
+    box-shadow: 0px 2px 7px 2px rgba($black, 0.3);
+}
+
+#navbar-tt #nav-logo{
+    background: url("/res/logo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: none;
+	padding: 0;
+	outline: inherit;
+    max-width: 256px;
+    max-height: 32px;
+    width: 16rem;
+    height: 2rem;
+}
+
+#navbar-tt #nav-logo:hover {
+    background: url("/res/logo2.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#navbar-tt .navbar-nav .nav-btn {
+    background: none;
+	border: none;
+	padding: 0;
+	outline: inherit;
+    font-size: 1.4rem;
+    color: $cyan;
+    font-family: $fn;
+    margin: 8px 20px 8px 20px;
+}
+
+#navbar-tt .navbar-nav .nav-btn:hover {
+    color: $teal;
+    font-weight: bold;
+}
+
+#navbar-tt .navbar-nav .nav-btn:active {
+    color: $blue;
+    font-weight: bold;
+}
+
+footer {
+    padding: "10px";
+    background-color: $gray-800;;
+    color: $white;
+}
+
+/////////////
+/////////////
+/////////////
+//HOME PAGE//
+/////////////
+/////////////
+/////////////
+
+// HOME PAGE - GREETING AREA
+///////////////////////////////////////////////////
+#home-greet-area {
+    background-image: url("/res/bgHome.JPEG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 1080px;
+    padding-top: 200px;
+}
+
+#home-greet-title {
+    color: $white;
+    font-family: $fr;
+    font-size: 5vw;
+    text-shadow: 0px 0px 16px rgba($gray-900, .5);
+}
+
+#home-greet-location {
+    color: $white;
+    font-family: $fr;
+    font-size: 3vw;
+    text-shadow: 0px 0px 16px rgba($gray-900, .5);
+}
+
+#home-greet-hover-fom {
+    animation: MoveUpDown 3s linear infinite;
+    position: relative;
+    left: 50%;
+    bottom: 90%;
+    color: $white;
+    text-shadow: 0px 0px 8px rgba($gray-900, .5);
+    margin-top: 300px;
+}
+@keyframes MoveUpDown {
+    0%, 100% { bottom: 0; }
+    50% { bottom: 30px; }
+}
+
+#home-greet-fom {
+    font-size: 4vw;
+}
+
+// HOME PAGE - TOPIC AREA
+///////////////////////////////////////////////////
+
+#home-topic-area {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: $gray-800;
+}
+
+#home-topic-title {
+    color: $cyan;
+    margin-bottom: 20px;
+    font-family: $fn;
+    font-size: 2vw;
+}
+
+#home-topic-subtitle {
+    color: $indigo;
+    font-family: $fn;
+    font-size: 1.5vw;
+}
+
+.sect {
+    border-style: solid;
+    border-width: 10px 0px 0px 0px;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 0;
+    background-color: $gray-700;
+    min-height: 490px;
+}
+
+.sect:focus {
+    outline: inherit;
+}
+
+.sect:hover {
+    transform: scale(0.98);
+    transition-timing-function: ease-in;
+    transition: 0.2s;
+}
+
+.sect:not(:hover) {
+    transform: scale(1);
+    transition-timing-function: ease-in;
+    transition: 0.2s;
+}
+
+.sect-portfolio { border-color: $green;}
+.sect-projects { border-color: $yellow;}
+.sect-about { border-color: $red;}
+.sect-contact { border-color: $blue;}
+
+.sect-img {
+    width: 100%;
+    height: 100%;
+}
+
+.sect-header-portfolio { color: $green; font-weight: bold; };
+.sect-header-projects { color: $yellow; font-weight: bold; };
+.sect-header-about { color: $red; font-weight: bold; };
+.sect-header-contact { color: $blue; font-weight: bold; };
+
+.sect-text {
+    margin: 25px 40px 25px 40px;
+}
+
+.sect-desc {
+    color: $gray-200;
+}
+
+//////////////////
+//PORTFOLIO PAGE//
+//////////////////
+.exp {
+    color: $gray-100;
+    border-radius: 4px;
+    padding: 1px 4px 1px 4px;
+}
+
+.opt { background-color: $red;}
+.fam { background-color: $orange; }
+.skl { background-color: $blue; }
+.adv { background-color: $indigo; }
+
+.bar {
+    width: 100%;
+    height: 2px;
+    border-color: $gray-500;
+    border-width: 1px 0;
+    border-style: solid none;
+    margin: 10px 0px 10px 0px;
+}
+
+.port-body {
+    padding: 20px;
+}
+
+.port-area {
+    background-color: $gray-700;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 5px;
+    height: 100%
+}
+
+.fcc-prog {
+    margin-top: 20px;
+}
+
+.lang-item {
+    margin: 16px;
+}
+
+.port-header {
+    margin: -20px 0px 0px 0.1em;
+    color: $teal;
+    letter-spacing: .2em;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif; 
+    font-size: 100px;
+    text-align: center;
+}
+
+.port-title {
+    color: $cyan;
+}
+
+.port-subtitle {
+    margin-top: 20px;
+    color: $teal;
+    text-decoration: underline;
+}
+
+/////////////////
+//PROJECTS PAGE//
+/////////////////
+
+.proj-body {
+    width: 75%
+}
+
+.proj-header {
+    margin: -20px 0px 0px 0.15em;
+    color: $yellow;
+    letter-spacing: .2em;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif; 
+    font-size: 100px;
+    text-align: center;
+}
+
+.proj-box {
+    border-style: solid;
+    border-width: 0px 0px 0px 6px;
+    border-radius: 10px;
+    border-color: $yellow;
+    margin-top: 15px;
+    margin-bottom: 50px;
+    padding: 0;
+    background-color: $gray-700;
+    min-height: 200px;
+}
+
+.proj-box:hover {
+    transform: scale(0.99);
+    transition-timing-function: ease-in;
+    transition: 0.2s;
+}
+
+.proj-box:not(:hover) {
+    transform: scale(1);
+    transition-timing-function: ease-in;
+    transition: 0.2s;
+}
+
+.proj-img {
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%
+}
+
+.proj-name {
+    font-size: 32px;
+    position: relative;
+}
+
+.proj-desc {
+    font-size: 16px;
+    color: $white;
+    position: absolute;
+    bottom: 0;
+    left: 2;
+    padding-right: 20px;
+}
+
+//////////////////
+////ABOUT PAGE////
+//////////////////
+
+.legend-panel {
+    background-color: $gray-900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.legend-title {
+    font-family: "Roboto", sans-serif; 
+    font-weight: bold;
+    font-size: 52px;
+    margin: 40px;
+    text-align: center;
+}
+
+.legend-item {
+    color: $red;
+    background-color: $gray-900;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+}
+
+.legend-item:hover {
+    background-color: $gray-800;
+    color: $yellow;
+}
+
+.stick {
+    position: fixed;
+    width: 17%;
+    top: 5%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-panel {
+    color: $gray-800;
+    background-color: $gray-300;
+    padding: 50px 200px 50px 200px;
+}
+
+.main-bar {
+    width: 20%;
+    height: 2px;
+    border-color: $gray-800;
+    border-width: 1px 0;
+    border-style: solid none;
+    margin: 20px 0px 20px 0px;
+}
+
+.main-heading {
+    color: $red;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba($black, 0.2);
+}
+
+.main-text {
+    margin-bottom: 50px;
+    line-height: 1.5;
+}
+
+.emph {
+    font-weight: bold;
+    color: $gray-500;
+    text-decoration: underline;
+}
+
+.main-img {
+    width: 70%;
+    margin-bottom: 50px;
+}
+
+/////////////////
+//CONTACTS PAGE//
+/////////////////
+
+.contact-header {
+    margin: -20px 0px 0px 0.05em;
+    color: $blue;
+    letter-spacing: .2em;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif; 
+    font-size: 7rem;
+    text-align: center;
+}
+
+.contact-main {
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: $gray-700;
+    text-align: center;
+}
+
+.cont-method {
+    margin-top: 30px;
+    font-size: 1.5rem;
+}
+
+.cmt {
+    color: $cyan;
+    font-weight: bold;
+}

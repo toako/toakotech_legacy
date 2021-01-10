@@ -7,6 +7,10 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 import { LinkContainer } from "react-router-bootstrap"
 
+/*
+    This component serves the homepage of the website.
+*/
+
 class Home extends React.Component {
     constructor (props) {
         super(props);
@@ -14,46 +18,38 @@ class Home extends React.Component {
     }
     render () {
         return (<div>
-            {/*Website Section 1 - Introduction*/}
-            <div className="home-bg align-items-center">
-                {/*Introduction Container*/}
+            {/*Greeting Area*/}
+            <div id="home-greet-area" className="align-items-center">
                 <Container style={{maxWidth: "1400px"}}>
-                    <Row className="text-center"> {/*Row 1 - Name*/}
-                        <p className="display-1 home-title-shadow col-12">
-                            Hello! I'm 
-                            <span className="home-title-emphasis"> Will Kellermann</span>.
-                        </p>
+                    <Row className="text-center">
+                        <p id="home-greet-title" className="col-12">Hello! I'm <span style={{color: "#ffa214", fontWeight: "bold"}}> Will Kellermann</span>.</p>
                     </Row>
-                    <Row className="text-center"> {/*Row 2 - Location*/}
-                        <p className="display-4 home-title-shadow col-12">
-                            Programmer in Boise, Idaho <i className="fas fa-map-marker-alt"></i> 
-                        </p>
+                    <Row className="text-center">
+                        <p id="home-greet-location" className="home-greet-location col-12">Programmer in Boise, Idaho <i className="fas fa-map-marker-alt"></i></p>
                     </Row>
-                    <Row className="col-12"> {/*Row 3 - User Guiding*/}
-                    <div className="hoverObject" style={{marginTop: "400px"}}>
-                        <p className="display-4 home-title-shadow" style={{marginLeft: "-148px"}}>Find out more</p>
-                        <i className="fas fa-arrow-down fa-4x home-title-shadow"></i>
-                    </div>
+                    <Row className="col-12">
+                        <div id="home-greet-hover-fom">
+                            <i id="home-greet-fom" className="fas fa-arrow-down fa-4x"></i>
+                        </div>
                     </Row>
                 </Container>
             </div>
-            {/*Website Section 2 - Site Options*/}
-            <div className="align-items-center section-area">
+            {/*Topic Area*/}
+            <div id="home-topic-area" className="align-items-center">
                 <Container>
-                    {/*Row 1*/}
                     <Row className="text-center">
-                        <h1 className="col-12 section-title">I am a MERN stack developer and Unity game designer.</h1>
+                        <h1 id="home-topic-title" className="col-12">I am a MERN stack developer and Unity game designer.</h1>
                     </Row>
                     <Row className="text-center">
-                        <h4 className="col-12 section-subtitle">Click a section below <i className="far fa-hand-point-down"></i></h4>
+                        <h4 id="home-topic-subtitle" className="col-12">Click a section below <i className="far fa-hand-point-down"></i></h4>
                     </Row>
                     <Row>
                         <Col className="col-6">
-                            <LinkContainer to="/portfolio"><a><div className="sect sect-portfolio">
+                            <LinkContainer to="/portfolio"><button className="sect sect-portfolio">
                                 <img 
                                     className="sect-img img-fluid"
                                     src="./res/sect/fcc.png"
-                                    alt="portfolio image" 
+                                    alt="portfolio" 
                                 />
                                 <div className="sect-text">
                                     <h2 className="sect-header-portfolio">Portfolio</h2>
@@ -63,10 +59,10 @@ class Home extends React.Component {
                                         experience with programming and technology.
                                     </h4>
                                 </div>
-                            </div></a></LinkContainer>
+                            </button></LinkContainer>
                         </Col>
                         <Col className="col-6">
-                        <LinkContainer to="/projects"><a><div className="sect sect-projects">
+                        <LinkContainer to="/projects"><button className="sect sect-projects">
                                 <img 
                                     className="sect-img img-fluid"
                                     src="./res/sect/gamepeek.gif"
@@ -80,16 +76,16 @@ class Home extends React.Component {
                                         future plans I may have.
                                     </h4>
                                 </div>
-                            </div></a></LinkContainer>
+                            </button></LinkContainer>
                         </Col>
                     </Row>
                     <Row>
                         <Col className="col-6">
-                            <LinkContainer to="/about"><a><div className="sect sect-about">
+                            <LinkContainer to="/about"><button className="sect sect-about">
                                 <img 
                                     className="sect-img img-fluid"
                                     src="./res/sect/profile1.png"
-                                    alt="Profile picture" 
+                                    alt="Profile" 
                                 />
                                 <div className="sect-text">
                                     <h2 className="sect-header-about">About Me</h2>
@@ -99,10 +95,10 @@ class Home extends React.Component {
                                         my background.
                                     </h4>
                                 </div>
-                            </div></a></LinkContainer>
+                            </button></LinkContainer>
                         </Col>
                         <Col className="col-6">
-                        <LinkContainer to="/contact"><a><div className="sect sect-contact">
+                        <LinkContainer to="/contact"><button className="sect sect-contact">
                                 <img 
                                     className="sect-img img-fluid"
                                     src="./res/sect/phone.jpeg"
@@ -115,7 +111,7 @@ class Home extends React.Component {
                                         me. Also includes links to all of my social media.
                                     </h4>
                                 </div>
-                            </div></a></LinkContainer>
+                            </button></LinkContainer>
                         </Col>
                     </Row>
                 </Container>

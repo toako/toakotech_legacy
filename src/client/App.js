@@ -1,35 +1,37 @@
+//Overarching imports
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./css/app.scss"
-import Home from'./pages/Home.js';
+import "./css/app.scss";
+
+//Page imports
+import Home from './pages/Home.js';
 import Portfolio from './pages/Portfolio.js';
 import Projects from './pages/Projects.js';
 import About from './pages/About.js';
 import Contact from './pages/Contact.js';
 import Eclipse from'./pages/Eclipse.js';
-import Scheduler from './pages/Scheduler.js';
-import Navigation from "./pages/components/Navigation.js"
-import Footer from "./pages/components/Footer.js"
+import Navigation from "./pages/components/Navigation.js";
+import NavGap from "./pages/components/NavGap.js"
+import Footer from "./pages/components/Footer.js";
 
+//Scheduler Imports
+import Auth from "./scheduler/Auth.js"
+
+//App class
 class App extends React.Component {
   render () {
     return (
-      <Router>
-        <Navigation/>
-        <div>
-          <Switch>
-            <Route exact path="/"><Home /></Route>
-            <Route exact path="/portfolio"><Portfolio /></Route>
-            <Route exact path="/projects"><Projects /></Route>
-            <Route exact path="/about"><About /></Route>
-            <Route exact path="/contact"><Contact /></Route>
-            <Route exact path="/eclipse"><Eclipse /></Route>
-            <Route exact path="/scheduler"><Scheduler /></Route>
-          </Switch>
-        </div>
-        <Footer/>
-      </Router>
+      (<Router> {/* This is a react router, allowing for easy page navigation*/}
+        <Switch>
+          <Route exact path="/"><Navigation/><NavGap/><Home/><Footer/></Route>
+          <Route exact path="/portfolio"><Navigation/><NavGap/><Portfolio /><Footer/></Route>
+          <Route exact path="/projects"><Navigation/><NavGap/><Projects /><Footer/></Route>
+          <Route exact path="/about"><Navigation/><NavGap/><About /><Footer/></Route>
+          <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>
+          <Route exact path="/eclipse"><Navigation/><NavGap/><Eclipse /><Footer/></Route>
+          <Route exact path="/s"><Auth /></Route>
+        </Switch>
+      </Router>)
     );
   }
 }
