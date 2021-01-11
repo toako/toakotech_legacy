@@ -6,7 +6,7 @@ import React from "react";
 
 export default function Footer () {
     return (
-        <footer className="text-center">
+        <footer id="main-footer" className="text-center">
             <p>© 2020 ToakoTech. Website is created by Will Kellermann.</p>
         </footer>
     )

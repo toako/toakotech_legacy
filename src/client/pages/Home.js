@@ -16,6 +16,7 @@ class Home extends React.Component {
         super(props);
         this.state = {};
     }
+    
     render () {
         return (<div>
             {/*Greeting Area*/}
@@ -41,19 +42,19 @@ class Home extends React.Component {
                         <h1 id="home-topic-title" className="col-12">I am a MERN stack developer and Unity game designer.</h1>
                     </Row>
                     <Row className="text-center">
-                        <h4 id="home-topic-subtitle" className="col-12">Click a section below <i className="far fa-hand-point-down"></i></h4>
+                        <h4 id="home-topic-subtitle" className="col-12">Click a topic below <i className="far fa-hand-point-down"></i></h4>
                     </Row>
                     <Row>
                         <Col className="col-6">
-                            <LinkContainer to="/portfolio"><button className="sect sect-portfolio">
+                            <LinkContainer to="/portfolio"><button className="home-topic home-topic-portfolio">
                                 <img 
-                                    className="sect-img img-fluid"
-                                    src="./res/sect/fcc.png"
+                                    className="home-topic-img img-fluid"
+                                    src="./res/topic/fcc.png"
                                     alt="portfolio" 
                                 />
-                                <div className="sect-text">
-                                    <h2 className="sect-header-portfolio">Portfolio</h2>
-                                    <h4 className="sect-desc">
+                                <div className="home-topic-textarea">
+                                    <h2 className="home-topic-header-portfolio">Portfolio</h2>
+                                    <h4 className="home-topic-desc">
                                         Are you an <span style={{fontWeight: "bold", color: "#0098dc"}}>employer</span>? Learn 
                                         about my skillsets, certifications, and
                                         experience with programming and technology.
@@ -62,15 +63,15 @@ class Home extends React.Component {
                             </button></LinkContainer>
                         </Col>
                         <Col className="col-6">
-                        <LinkContainer to="/projects"><button className="sect sect-projects">
+                        <LinkContainer to="/projects"><button className="home-topic home-topic-projects">
                                 <img 
-                                    className="sect-img img-fluid"
-                                    src="./res/sect/gamepeek.gif"
+                                    className="home-topic-img img-fluid"
+                                    src="./res/topic/gamepeek.gif"
                                     alt="projects gif" 
                                 />
-                                <div className="sect-text">
-                                    <h2 className="sect-header-projects">Projects</h2>
-                                    <h4 className="sect-desc">
+                                <div className="home-topic-textarea">
+                                    <h2 className="home-topic-header-projects">Projects</h2>
+                                    <h4 className="home-topic-desc">
                                         Get a sneak peek of what games and apps I am 
                                         working on. Check back for progress and see
                                         future plans I may have.
@@ -81,15 +82,15 @@ class Home extends React.Component {
                     </Row>
                     <Row>
                         <Col className="col-6">
-                            <LinkContainer to="/about"><button className="sect sect-about">
+                            <LinkContainer to="/about"><button className="home-topic home-topic-about">
                                 <img 
-                                    className="sect-img img-fluid"
-                                    src="./res/sect/profile1.png"
+                                    className="home-topic-img img-fluid"
+                                    src="./res/topic/profile1.png"
                                     alt="Profile" 
                                 />
-                                <div className="sect-text">
-                                    <h2 className="sect-header-about">About Me</h2>
-                                    <h4 className="sect-desc">
+                                <div className="home-topic-textarea">
+                                    <h2 className="home-topic-header-about">About Me</h2>
+                                    <h4 className="home-topic-desc">
                                         Life is more than computers! Here you can find a 
                                         bit about my personal life, hobbies, and 
                                         my background.
@@ -98,15 +99,15 @@ class Home extends React.Component {
                             </button></LinkContainer>
                         </Col>
                         <Col className="col-6">
-                        <LinkContainer to="/contact"><button className="sect sect-contact">
+                        <LinkContainer to="/contact"><button className="home-topic home-topic-contact">
                                 <img 
-                                    className="sect-img img-fluid"
-                                    src="./res/sect/phone.jpeg"
+                                    className="home-topic-img img-fluid"
+                                    src="./res/topic/phone.jpeg"
                                     alt="Credit: Terje Sollie on pexels.com, phone.jpeg" 
                                 />
-                                <div className="sect-text">
-                                    <h2 className="sect-header-contact">Contact Me</h2>
-                                    <h4 className="sect-desc">
+                                <div className="home-topic-textarea">
+                                    <h2 className="home-topic-header-contact">Contact Me</h2>
+                                    <h4 className="home-topic-desc">
                                         Submit a question or get in touch with 
                                         me. Also includes links to all of my social media.
                                     </h4>

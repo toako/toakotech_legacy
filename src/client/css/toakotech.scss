@@ -39,11 +39,21 @@ $fr: "Roboto", sans-serif; //Roboto variable
 .fn { font-family: $fn } //Nunito
 .fr { font-family: $fr } //Roboto
 
+
+footer {
+    padding: 10px;
+    background-color: $gray-800;
+    color: $white;
+}
+
+//*{ border: 1px solid red; }
+
 // WEBSITE NAVIGATION BAR
 ///////////////////////////////////////////////////
 #navbar-tt {
     background-color: $gray-900;
     box-shadow: 0px 2px 7px 2px rgba($black, 0.3);
+    width: 100vw;
 }
 
 #navbar-tt #nav-logo{
@@ -84,12 +94,6 @@ $fr: "Roboto", sans-serif; //Roboto variable
 #navbar-tt .navbar-nav .nav-btn:active {
     color: $blue;
     font-weight: bold;
-}
-
-footer {
-    padding: "10px";
-    background-color: $gray-800;;
-    color: $white;
 }
 
 /////////////
@@ -165,7 +169,7 @@ footer {
     font-size: 1.5vw;
 }
 
-.sect {
+.home-topic {
     border-style: solid;
     border-width: 10px 0px 0px 0px;
     border-radius: 10px;
@@ -174,71 +178,65 @@ footer {
     background-color: $gray-700;
     min-height: 490px;
 }
-
-.sect:focus {
+.home-topic:focus {
     outline: inherit;
 }
-
-.sect:hover {
+.home-topic:hover {
     transform: scale(0.98);
     transition-timing-function: ease-in;
     transition: 0.2s;
 }
-
-.sect:not(:hover) {
+.home-topic:not(:hover) {
     transform: scale(1);
     transition-timing-function: ease-in;
     transition: 0.2s;
 }
 
-.sect-portfolio { border-color: $green;}
-.sect-projects { border-color: $yellow;}
-.sect-about { border-color: $red;}
-.sect-contact { border-color: $blue;}
+.home-topic-portfolio { border-color: $green;}
+.home-topic-projects { border-color: $yellow;}
+.home-topic-about { border-color: $red;}
+.home-topic-contact { border-color: $blue;}
 
-.sect-img {
+.home-topic-img {
     width: 100%;
     height: 100%;
 }
 
-.sect-header-portfolio { color: $green; font-weight: bold; };
-.sect-header-projects { color: $yellow; font-weight: bold; };
-.sect-header-about { color: $red; font-weight: bold; };
-.sect-header-contact { color: $blue; font-weight: bold; };
-
-.sect-text {
+.home-topic-textarea {
     margin: 25px 40px 25px 40px;
 }
 
-.sect-desc {
+.home-topic-header-portfolio { color: $green; font-weight: bold; font-family: $fn; };
+.home-topic-header-projects { color: $yellow; font-weight: bold; font-family: $fn; };
+.home-topic-header-about { color: $red; font-weight: bold; font-family: $fn; };
+.home-topic-header-contact { color: $blue; font-weight: bold; font-family: $fn; };
+
+.home-topic-desc {
     color: $gray-200;
+    font-family: $fn;
 }
 
-//////////////////
-//PORTFOLIO PAGE//
-//////////////////
-.exp {
-    color: $gray-100;
-    border-radius: 4px;
-    padding: 1px 4px 1px 4px;
-}
-
-.opt { background-color: $red;}
-.fam { background-color: $orange; }
-.skl { background-color: $blue; }
-.adv { background-color: $indigo; }
-
-.bar {
-    width: 100%;
-    height: 2px;
-    border-color: $gray-500;
-    border-width: 1px 0;
-    border-style: solid none;
-    margin: 10px 0px 10px 0px;
-}
+/////////////
+/////////////
+/////////////
+//PORTFOLIO//
+/// PAGE ////
+/////////////
+/////////////
 
 .port-body {
     padding: 20px;
+    background-color: $gray-800;
+}
+
+.port-header {
+    margin-top: -20px 0px 0px 0px;
+    color: $teal;
+    letter-spacing: .2em;
+    font-weight: bold;
+    font-family: $fr; 
+    font-size: 100px;
+    text-align: center;
 }
 
 .port-area {
@@ -249,37 +247,62 @@ footer {
     height: 100%
 }
 
-.fcc-prog {
-    margin-top: 20px;
-}
-
-.lang-item {
-    margin: 16px;
-}
-
-.port-header {
-    margin: -20px 0px 0px 0.1em;
-    color: $teal;
-    letter-spacing: .2em;
-    font-weight: bold;
-    font-family: "Roboto", sans-serif; 
-    font-size: 100px;
-    text-align: center;
-}
-
 .port-title {
     color: $cyan;
+    font-family: $fn;
+}
+
+.port-bar {
+    width: 100%;
+    height: 2px;
+    border-color: $gray-500;
+    border-width: 1px 0;
+    border-style: solid none;
+    margin: 10px 0px 10px 0px;
 }
 
 .port-subtitle {
     margin-top: 20px;
     color: $teal;
     text-decoration: underline;
+    font-family: $fn;
 }
 
-/////////////////
-//PROJECTS PAGE//
-/////////////////
+.port-area h5 {
+    font-family: $fn;
+    color: $white;
+}
+
+.exp {
+    color: $gray-100;
+    border-radius: 4px;
+    padding: 1px 4px 1px 4px;
+    font-family: $fn;
+}
+
+.lang-item { 
+    margin: 16px; 
+    font-family: $fn;
+    color: $white;
+}
+.opt { background-color: $red; }
+.fam { background-color: $orange; }
+.skl { background-color: $blue; }
+.adv { background-color: $indigo; }
+
+.fcc-prog {
+    margin-top: 20px;
+    font-family: $fn;
+    color: $white;
+}
+
+/////////////
+/////////////
+/////////////
+///PROJECTS//
+///  PAGE ///
+/////////////
+/////////////
 
 .proj-body {
     width: 75%
@@ -300,19 +323,19 @@ footer {
     border-width: 0px 0px 0px 6px;
     border-radius: 10px;
     border-color: $yellow;
-    margin-top: 15px;
-    margin-bottom: 50px;
+    margin-top: 50px;
     padding: 0;
     background-color: $gray-700;
     min-height: 200px;
 }
-
+.proj-box:focus {
+    outline: inherit;
+}
 .proj-box:hover {
     transform: scale(0.99);
     transition-timing-function: ease-in;
     transition: 0.2s;
 }
-
 .proj-box:not(:hover) {
     transform: scale(1);
     transition-timing-function: ease-in;
@@ -326,12 +349,16 @@ footer {
 }
 
 .proj-name {
-    font-size: 32px;
+    margin-top: 20px;
+    font-size: 1.8vw;
+    font-family: $fn;
+    color: $yellow;
     position: relative;
 }
 
 .proj-desc {
-    font-size: 16px;
+    font-size: 1.3vw;
+    font-family: $fn;
     color: $white;
     position: absolute;
     bottom: 0;
@@ -339,42 +366,47 @@ footer {
     padding-right: 20px;
 }
 
-//////////////////
-////ABOUT PAGE////
-//////////////////
+/////////////
+/////////////
+/////////////
+/// ABOUT ///
+///  PAGE ///
+/////////////
+/////////////
 
-.legend-panel {
+.about-legend-panel {
     background-color: $gray-900;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-.legend-title {
-    font-family: "Roboto", sans-serif; 
+.about-legend-title {
+    font-family: $fr; 
     font-weight: bold;
-    font-size: 52px;
+    font-size: 2.5vw;
+    color: $gray-300;
+    padding-top: 5vh;
     margin: 40px;
     text-align: center;
 }
 
-.legend-item {
+.about-legend-item {
     color: $red;
     background-color: $gray-900;
-    font-size: 36px;
+    font-size: 2vw;
     font-weight: bold;
-    font-family: "Roboto", sans-serif;
+    font-family: $fr;
     border: none;
     width: 100%;
     padding: 20px 0px 20px 0px;
 }
-
-.legend-item:hover {
+.about-legend-item:hover {
     background-color: $gray-800;
     color: $yellow;
 }
 
-.stick {
+.about-stick {
     position: fixed;
     width: 17%;
     top: 5%;
@@ -383,13 +415,13 @@ footer {
     padding: 0;
 }
 
-.main-panel {
+.about-main-panel {
     color: $gray-800;
     background-color: $gray-300;
-    padding: 50px 200px 50px 200px;
+    padding: 50px 10vw 50px 10vw;
 }
 
-.main-bar {
+.about-main-bar {
     width: 20%;
     height: 2px;
     border-color: $gray-800;
@@ -398,54 +430,59 @@ footer {
     margin: 20px 0px 20px 0px;
 }
 
-.main-heading {
+.about-main-heading {
     color: $red;
     font-weight: bold;
     text-shadow: 0px 0px 5px rgba($black, 0.2);
+    font-family: $fn;
 }
 
-.main-text {
+.about-main-text {
     margin-bottom: 50px;
     line-height: 1.5;
+    font-family: $fn;
 }
 
-.emph {
+.about-emph {
     font-weight: bold;
     color: $gray-500;
     text-decoration: underline;
 }
 
-.main-img {
+.about-main-img {
     width: 70%;
     margin-bottom: 50px;
 }
 
-/////////////////
-//CONTACTS PAGE//
-/////////////////
+/////////////
+/////////////
+/////////////
+// CONTACT //
+///  PAGE ///
+/////////////
+/////////////
+
+.contact-body {
+    background-color: $gray-800;
+    height: 100vh;
+}
 
 .contact-header {
-    margin: -20px 0px 0px 0.05em;
+    margin: -20px 0px 0px 0px;
     color: $blue;
     letter-spacing: .2em;
     font-weight: bold;
-    font-family: "Roboto", sans-serif; 
+    font-family: $fr;
     font-size: 7rem;
     text-align: center;
 }
 
-.contact-main {
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 50px;
-    padding: 30px;
-    background-color: $gray-700;
-    text-align: center;
-}
-
-.cont-method {
+.contact-method {
     margin-top: 30px;
     font-size: 1.5rem;
+    font-family: $fn;
+    color: $white;
+    text-align: center;
 }
 
 .cmt {

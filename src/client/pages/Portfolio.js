@@ -67,7 +67,7 @@ class Portfolio extends React.Component {
         )
     }
     certTemplate (name, progress, isOptional) {
-        const variantType = progress < 100 ? "warning" : "success"
+        const variantType = progress < 100 ? "incomplete" : "complete"
         const isAnimated = progress < 100;
         const barLength = progress > 5 ? progress : 5;
         const optionalText = isOptional ? (<span className="exp opt">Optional</span>) : "";
@@ -76,7 +76,7 @@ class Portfolio extends React.Component {
         return (
             <div className="fcc-prog">
                 <h5>{optionalText}{nameText}</h5>
-                <ProgressBar animated={isAnimated} variant={variantType} now={barLength} label={`${progress}%`}/>
+                <ProgressBar variant="info" animated={isAnimated} now={barLength} label={`${progress}%`}/>
             </div>
         )
     }
@@ -88,7 +88,7 @@ class Portfolio extends React.Component {
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">Overview</h1>
-                            <div className="bar"/>
+                            <div className="port-bar"/>
                             <h2 className="port-subtitle">Important Takeaway</h2>
                             <h5>
                                 I am a self-taught programmer, who has dabbled in many things, but I am 
@@ -123,14 +123,14 @@ class Portfolio extends React.Component {
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">Coding Skillsets</h1>
-                            <div className="bar"/>
+                            <div className="port-bar"/>
                             {this.state.lang.map((skill) => this.skillTemplate(skill[0], skill[1], skill[2], skill[3]))}
                         </div>
                     </Col>
                     <Col className="col-4">
                         <div className="port-area">
                             <h1 className="text-center port-title">FreeCodeCamp Certifications</h1>
-                            <div className="bar"/>
+                            <div className="port-bar"/>
                             {this.state.certs.map((cert) => this.certTemplate(cert[0], cert[1], cert[2], cert[3]))}
                             <h4 className="fcc-prog font-italic">
                                 Check out my FreeCodeCamp profile <a href="https://www.freecodecamp.org/toako">here</a>.

@@ -68,40 +68,40 @@ class About extends React.Component {
     render () {
         return (<Container fluid={true}>
             <Row>
-                <Col className="col-2 legend-panel text-center">
-                    <div className="stick">
-                        <p className="legend-title">About Me</p>
-                        <button className="legend-item" href="">Introduction</button>
-                        <button className="legend-item" href="">Interests</button>
-                        <button className="legend-item" href="">Goals</button>
+                <Col className="col-2 about-legend-panel text-center">
+                    <div className="about-stick">
+                        <p className="about-legend-title">About Me</p>
+                        <button className="about-legend-item" href="">Introduction</button>
+                        <button className="about-legend-item" href="">Interests</button>
+                        <button className="about-legend-item" href="">Goals</button>
                     </div>
                 </Col>
-                <Col className="col-10 main-panel">
+                <Col className="col-10 about-main-panel">
                     <article>
-                        <h1 className="main-heading">Introduction</h1>
-                        <div className="main-bar"></div>
-                        <h4 className="main-text">{introText}</h4>
+                        <h1 className="about-main-heading">Introduction</h1>
+                        <div className="about-main-bar"></div>
+                        <h4 className="about-main-text">{introText}</h4>
                     </article>
                     <article>
-                        <h1 className="main-heading">Interests</h1>
-                        <div className="main-bar"></div>
-                        <h4 className="main-text"><span className="emph">Computers:</span> {intrComp}</h4>
+                        <h1 className="about-main-heading">Interests</h1>
+                        <div className="about-main-bar"></div>
+                        <h4 className="about-main-text"><span className="about-emph">Computers:</span> {intrComp}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/computers.jpg" alt=""/>
+                                <img className="about-main-img" src="/res/about/computers.jpg" alt=""/>
                             </div>
-                        <h4 className="main-text"><span className="emph">Coding:</span> {intrPrgm}</h4>
+                        <h4 className="about-main-text"><span className="about-emph">Coding:</span> {intrPrgm}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/coding.png" alt=""/>
+                                <img className="about-main-img" src="/res/about/coding.png" alt=""/>
                             </div>
-                        <h4 className="main-text"><span className="emph">Cars:</span> {intrCar}</h4>
+                        <h4 className="about-main-text"><span className="about-emph">Cars:</span> {intrCar}</h4>
                             <div className="text-center">
-                                <img className="main-img" src="/res/about/cars.jpg" alt=""/>
+                                <img className="about-main-img" src="/res/about/cars.jpg" alt=""/>
                             </div>
                     </article>
                     <article>
-                        <h1 className="main-heading">Goals</h1>
-                        <div className="main-bar"></div>
-                        <h4 className="main-text">{goalText}</h4>
+                        <h1 className="about-main-heading">Goals</h1>
+                        <div className="about-main-bar"></div>
+                        <h4 className="about-main-text">{goalText}</h4>
                     </article>
                 </Col>
             </Row>

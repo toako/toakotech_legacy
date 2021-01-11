@@ -54,7 +54,7 @@ class Projects extends React.Component {
     projectTemplate (name, image, desc, link) {
         const imageSource = `/res/proj/${image}`;
         return (
-        <a href={link}><Row className="text-center proj-box">
+        <button href={link} className="proj-box col-12 text-center"><Row className="text-center">
             <Col className="col-5">
                 <img src={imageSource} className="proj-img rounded" alt=""/>
             </Col>
@@ -62,7 +62,7 @@ class Projects extends React.Component {
                 <p className="proj-name">{name}</p>
                 <p className="proj-desc">{desc}</p>
             </Col>
-    </Row></a>)
+            </Row></button>)
     }
 
     render () {

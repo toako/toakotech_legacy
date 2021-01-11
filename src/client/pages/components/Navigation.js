@@ -26,7 +26,7 @@ export default function Navigation () {
                     <button className="nav-btn">Contact <i className="fas fa-phone fa-xs"></i></button>
                 </IndexLinkContainer>
                 <IndexLinkContainer to="/eclipse">
-                    <button className="nav-btn">Eclipse <img 
+                    <button className="nav-btn" disabled>Eclipse <img 
                         src="/res/logos/mitsu.png" 
                         alt="mitsubishi logo" 
                         width="20px" 
