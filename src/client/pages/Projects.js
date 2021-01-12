@@ -49,12 +49,16 @@ class Projects extends React.Component {
         this.state = {
             proj: projects
         };
+        this.openURL = this.openURL.bind(this);
+    }
+
+    openURL(url) {
+        window.open(url)
     }
 
     projectTemplate (name, image, desc, link) {
         const imageSource = `/res/proj/${image}`;
-        return (
-        <button href={link} className="proj-box col-12 text-center"><Row className="text-center">
+        return (<button className="proj-box col-12 text-center" onClick={() => { this.openURL(link) }}><Row className="text-center">
             <Col className="col-5">
                 <img src={imageSource} className="proj-img rounded" alt=""/>
             </Col>

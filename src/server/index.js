@@ -6,9 +6,9 @@ router.use(bodyParser.json());
 router.get("/", (req, res) => {
     return res.json({ message: "Hello, World!" });
 });
-
-router.get("/about", (req, res) => {
-    return res.json({author: "toako", description: "hopefully this works"});
+router.post("/login", (req, res) => {
+    console.log(req.body);
+    return res.json(req.body);
 });
 
 module.exports = router;

@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import '@fortawesome/fontawesome-free/js/all.js';
 
 class Contact extends React.Component {

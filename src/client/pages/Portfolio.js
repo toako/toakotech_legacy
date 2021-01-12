@@ -67,7 +67,6 @@ class Portfolio extends React.Component {
         )
     }
     certTemplate (name, progress, isOptional) {
-        const variantType = progress < 100 ? "incomplete" : "complete"
         const isAnimated = progress < 100;
         const barLength = progress > 5 ? progress : 5;
         const optionalText = isOptional ? (<span className="exp opt">Optional</span>) : "";

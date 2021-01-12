@@ -8,7 +8,7 @@ app.use(express.static('build', {
     setHeaders: res => res.req.path.split("/")[1] === "static" && res.setHeader('Cache-Control', 'max-age=31536000')
 }));
 
-app.use('/api', require('./src/server'));
+app.use('/s', require('./src/server'));
 
 app.get("/*", (req, res) => {
     return res.sendFile(__dirname+'/build/index.html', err => (err.status === 404) ? 
