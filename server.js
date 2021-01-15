@@ -1,19 +1,171 @@
+
+// IMPORTS
+///////////////////////////////////////////////////
+require('dotenv').config();
 const express = require('express');
-const app = express();
+const session = require("express-session");
+const MongoDBStore = require('connect-mongodb-session')(session);
+const mongodb = require("mongodb");
+const mongoose = require("mongoose");
+const uid = require("uniqid");
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
+const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
+// USE BUILD IN PRODUCTION
+///////////////////////////////////////////////////
 app.use(express.static('build', {
     setHeaders: res => res.req.path.split("/")[1] === "static" && res.setHeader('Cache-Control', 'max-age=31536000')
 }));
 
-app.use('/s', require('./src/server'));
+// MONGO DB SESSION STORE
+///////////////////////////////////////////////////
 
+//Mongoose connection
+mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function() {
+    console.log("ToakoTech database connection established.");
+    });
+
+//Session MongoDB store
+let store = new MongoDBStore({
+    uri: process.env.URI,
+    databaseName: "scheduler",
+    collection: "sessions",
+    expires: 1000 * 60 * 60 * 24
+});
+store.on('error', function(error) {
+    console.log(error);
+});
+
+app.use(session({
+    secret: "Rosebud",
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    store: store,
+    resave: true,
+    saveUninitialized: true
+}));
+
+// COLLECTIONS
+///////////////////////////////////////////////////
+
+const Mixed = mongoose.Schema.Types.Mixed;
+
+let Organization = mongoose.model("Organization", new mongoose.Schema({
+    _id: Number,
+    name: String,
+    ownerList: Array,
+    adminList: Array,
+    userList: Array,
+    data: Mixed,
+    settings: Mixed
+}));
+
+let User = mongoose.model("User", new mongoose.Schema({
+    _id: String,
+    email: String,
+    username: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    data: Mixed,
+    settings: Mixed
+}));
+
+// SESSION AND AUTHENTICATION ROUTES
+///////////////////////////////////////////////////
+
+
+
+
+
+app.post("/s/login", (req, res) => {
+    console.log(req.session);
+    console.log(req.body);
+    return res.json(req.body);
+});
+
+app.post("/s/createOrg", (req, res) => {
+    let rb = req.body;
+    
+    // Create new owner of organization
+    let newOwner = new User({
+        _id: uid.time(),
+        email: rb.oEmail,
+        username: rb.oUsername,
+        password: rb.oPassword,
+        firstName: rb.oFirstName,
+        lastName: rb.oLastName,
+        data: {},
+        settings: {}
+    });
+
+    // Save new owner to db
+    newOwner.save((err, data) => {
+        if (err) return console.error(err);
+        console.log(`A new owner, ${newOwner.firstName} ${newOwner.lastName}, has been created successfully.`);
+    });
+    
+    // Search all organization ID's and create new organization with unique ID
+    Organization.distinct("_id", (err, ids) => {
+        if (err) return console.error(err);
+
+        let newOrgID = 0;
+        let foundNew = false;
+
+        //Keep iterating until new unique ID is found
+        while (!foundNew) {
+            let randomNum = Math.round(Math.random() * (10000 - 1000) + 1000);
+            if (!ids.includes(randomNum)) {
+                newOrgID = randomNum;
+                foundNew = true;
+            }
+        }
+        console.log(`Found unique ID: ${newOrgID} from used ID's: \n ${ids}`);
+
+        //Create organization
+        let newOrg = new Organization({
+            _id: newOrgID,
+            name: rb.oOrgName,
+            ownerList: [newOwner._id],
+            adminList: [],
+            userList: [],
+            data: {},
+            settings: {}
+        });
+
+        //Save new organization to db
+        newOrg.save((err, data) => {
+            if (err) return console.error(err);
+            console.log(`A new organization, ${newOrg.name}, has been created successfully.`);
+        });
+
+        //Set session variables to ID
+        req.session.userID = newOwner._id;
+        req.session.username = newOwner.username;
+        req.session.password = newOwner.password;
+        req.session.orgID = newOrg._id;
+        return res.json({
+            "New organization created": newOrg._id,
+            "New organization owner created": newOwner._id
+        });
+    });
+});
+
+
+
+
+
+// PAGE NAVIGATION AND RUN SERVER
+///////////////////////////////////////////////////
 app.get("/*", (req, res) => {
     return res.sendFile(__dirname+'/build/index.html', err => (err.status === 404) ? 
     res.status(404).send("<b>Error: </b>Seems like there is currently no build present for this project. Please run <code>npm run build</code> and restart the server in order to continue. Thank you.") : 
     res.status(500).send("Internal Server Error"));
 });
-
 app.listen(process.env.PORT || 5000, () => console.log(`Server is listening on port ${process.env.PORT || 5000}`));

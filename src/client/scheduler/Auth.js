@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { LinkContainer } from "react-router-bootstrap";
+import { withRouter } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/js/all.js';
 
 import Container from "react-bootstrap/Container";
@@ -12,10 +13,6 @@ import Popover from "react-bootstrap/Popover";
 import Form from "react-bootstrap/Form";
 
 const server = process.env.REACT_APP_PROJECT_SERVER ? process.env.REACT_APP_PROJECT_SERVER : "";
-const pw = "";
-const db = "mongodb+srv://toako:ahAytD9KnMEqbTiK@toakotech.5npxi.mongodb.net/<dbname>?retryWrites=true&w=majority"
-
-
 
 const infoPopover = (
     <Popover id="popover-basic">
@@ -41,7 +38,7 @@ class Auth extends React.Component {
         this.state = {
             username: "", //USED IN login POST
             password: "", //USED IN login POST
-            _id: "", //USED IN login POST
+            orgID: 0, //USED IN login POST
             oOrgName: "", //USED IN createOrg POST
             oEmail: "", //USED IN createOrg POST
             oFirstName: "", //USED IN createOrg POST
@@ -60,13 +57,14 @@ class Auth extends React.Component {
 
     handleSubmit (e) {
         if(e) e.preventDefault();
+        let action = e.target.id;
 
         const submission = {
             "login": {
                 action: "login",
                 username: this.state.username,
                 password: this.state.password,
-                _id: this.state._id
+                orgID: this.state.orgID
             },
             "createOrg": {
                 action: "createOrg",
@@ -78,12 +76,13 @@ class Auth extends React.Component {
                 oPassword: this.state.oPassword
             }
         }
-
-        Axios.post(`${server}/s/${e.target.id}`, submission[e.target.id])
+        Axios.post(`${server}/s/${action}`, submission[action])
             .then(res => {
                 console.log(res.data);
-            });
-
+                
+                this.props.history.push(`/s/${action === "login" ? "user":"admin"}`);
+            })
+            .catch(err => console.log(err));
     }
 
     render () {
@@ -118,7 +117,8 @@ class Auth extends React.Component {
                                     placeholder="Enter username" 
                                     name="username" 
                                     value={this.state.username} 
-                                    onChange={this.handleChange} />
+                                    onChange={this.handleChange} 
+                                    required/>
                             </Form.Group>
                             <Form.Group controlId="formPassword">
                                 <Form.Label>Password</Form.Label>
@@ -127,16 +127,18 @@ class Auth extends React.Component {
                                     placeholder="Enter password" 
                                     name="password" 
                                     value={this.state.password}
-                                    onChange={this.handleChange} />
+                                    onChange={this.handleChange} 
+                                    required/>
                             </Form.Group>
                             <Form.Group controlId="formOrgID">
                                 <Form.Label>Organization ID</Form.Label>
                                 <Form.Control className="w-50" 
                                 type="number" 
                                 placeholder="Enter ID" 
-                                name="_id" 
-                                value={this.state._id}
-                                onChange={this.handleChange} />
+                                name="orgID" 
+                                value={this.state.orgID}
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Button variant="primary" type="submit">
                                 Sign in
@@ -153,7 +155,8 @@ class Auth extends React.Component {
                                 placeholder="Enter organization name"
                                 name="oOrgName" 
                                 value={this.state.oOrgName}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Form.Group controlId="formOwnerEmail">
                                 <Form.Label>Email</Form.Label>
@@ -162,7 +165,8 @@ class Auth extends React.Component {
                                 placeholder="Enter e-mail"
                                 name="oEmail" 
                                 value={this.state.oEmail}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Form.Group controlId="formOwnerFirst">
                                 <Form.Label>First Name</Form.Label>
@@ -171,7 +175,8 @@ class Auth extends React.Component {
                                 placeholder="Enter first name"
                                 name="oFirstName" 
                                 value={this.state.oFirstName}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Form.Group controlId="formOwnerLast">
                                 <Form.Label>Last Name</Form.Label>
@@ -180,7 +185,8 @@ class Auth extends React.Component {
                                 placeholder="Enter last name"
                                 name="oLastName" 
                                 value={this.state.oLastName}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Form.Group controlId="formOwnerUsername">
                                 <Form.Label>Username</Form.Label>
@@ -189,7 +195,8 @@ class Auth extends React.Component {
                                 placeholder="Enter username"
                                 name="oUsername" 
                                 value={this.state.oUsername}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} 
+                                required/>
                             </Form.Group>
                             <Form.Group controlId="formOwnerPassword">
                                 <Form.Label>Password</Form.Label>
@@ -198,9 +205,9 @@ class Auth extends React.Component {
                                 placeholder="Enter password"
                                 name="oPassword" 
                                 value={this.state.oPassword}
-                                onChange={this.handleChange} />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
+                                onChange={this.handleChange} 
+                                required/>
+                            </Form.Group><Button variant="primary" type="submit">
                                 Create organization
                             </Button>
                         </Form>
@@ -211,4 +218,4 @@ class Auth extends React.Component {
     }
 }
 
-export default Auth;
+export default withRouter(Auth);

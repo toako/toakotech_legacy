@@ -15,7 +15,7 @@ import NavGap from "./pages/components/NavGap.js"
 import Footer from "./pages/components/Footer.js";
 
 //Scheduler Imports
-import Auth from "./scheduler/Auth.js"
+import Portal from "./scheduler/Portal.js"
 
 //App class
 class App extends React.Component {
@@ -29,7 +29,7 @@ class App extends React.Component {
           <Route exact path="/about"><Navigation/><NavGap/><About /><Footer/></Route>
           <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>
           <Route exact path="/eclipse"><Navigation/><NavGap/><Eclipse /><Footer/></Route>
-          <Route exact path="/s"><Auth /></Route>
+          <Route path="/s"><Portal /></Route>
         </Switch>
       </Router>)
     );
