@@ -80,7 +80,15 @@ class Auth extends React.Component {
             .then(res => {
                 console.log(res.data);
                 
-                this.props.history.push(`/s/${action === "login" ? "user":"admin"}`);
+                if (res.data.operation === "success") {
+                    if (res.data.perm === 1)
+                        this.props.history.push(`/s/admin`);
+                    else if (res.data.perm === 0)
+                        this.props.history.push(`/s/user`);
+                    else {
+                        console.log("Failed operation");
+                    }
+                }
             })
             .catch(err => console.log(err));
     }
