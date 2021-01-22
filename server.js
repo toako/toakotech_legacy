@@ -90,6 +90,7 @@ app.get("/s/admin", (req, res) => {
         if (err) console.error(err);
 
         Organization.findById(req.session.orgID, (err, org) => {
+            if (err) console.error(err);
             res.json({
                 session: req.session,
                 user: user,
@@ -231,6 +232,16 @@ app.post("/s/createOrg", (req, res) => {
             perm: 1
         });
     });
+});
+
+app.post("/s/logout", (req, res) => {
+    console.log(req.body)
+    req.session.destroy((err) => {
+        if(err) {
+            return console.log(err);
+        }
+    });
+    res.json({operation: "destroyed session"});
 });
 
 

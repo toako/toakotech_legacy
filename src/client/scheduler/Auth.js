@@ -78,8 +78,6 @@ class Auth extends React.Component {
         }
         Axios.post(`${server}/s/${action}`, submission[action])
             .then(res => {
-                console.log(res.data);
-                
                 if (res.data.operation === "success") {
                     if (res.data.perm === 1)
                         this.props.history.push(`/s/admin`);
