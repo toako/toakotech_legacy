@@ -13,26 +13,21 @@ class Admin extends React.Component {
         super(props);
         this.state = {
             session: {},
-            user: {},
-            organization: {}
+            user: {}
         };
         this.logout = this.logout.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
 
     componentDidMount () {
         Axios.get(`${server}/s/admin`)
             .then(res => {
-                console.log("Data passed from server:");
-                console.log(res.data);
                 this.setState({
                     session: res.data.session,
-                    user: res.data.user,
-                    organization: res.data.organization
+                    user: res.data.user
                 });
             })
-            .catch(err => console.log(err));
-        this.logout = this.logout.bind(this);
-        this.redirect = this.redirect.bind(this);
+            .catch(err => console.log(err));        
     }
 
     redirect (e) {
@@ -55,7 +50,8 @@ class Admin extends React.Component {
                 <Nav className="mr-auto">
                     <NavDropdown title="Manage" id="collasible-nav-dropdown">
                         <NavDropdown.Item id="nav-users" onClick={this.redirect}>Users <i className="fas fa-user-edit fa-sm"></i></NavDropdown.Item>
-                        <NavDropdown.Item id="nav-roles" onClick={this.redirect}>Roles <i className="fas fa-bars fa-sm"></i></NavDropdown.Item>
+                        <NavDropdown.Item id="nav-positions" onClick={this.redirect}>Positions <i className="fas fa-bars fa-sm"></i></NavDropdown.Item>
+                        <NavDropdown.Item id="nav-departments" onClick={this.redirect}>Departments <i className="fas fa-th-large fa-sm"></i></NavDropdown.Item>
                         <NavDropdown.Item id="nav-locations" onClick={this.redirect}>Locations <i className="fas fa-map-marker-alt fa-sm"></i></NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link id="nav-schedule" onClick={this.redirect}>Schedule <i className="fas fa-calendar-alt fa-sm"></i></Nav.Link>

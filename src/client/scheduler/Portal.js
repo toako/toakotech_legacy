@@ -9,7 +9,8 @@ import User from "./User.js";
 
 import Panel from "./admin/Panel.js";
 import Users from "./admin/Users.js";
-import Roles from "./admin/Roles.js";
+import Positions from "./admin/Positions.js";
+import Departments from "./admin/Departments.js";
 import Locations from "./admin/Locations.js";
 import Schedule from "./admin/Schedule.js";
 import Notifications from "./admin/Notifications.js";
@@ -26,9 +27,7 @@ class Portal extends React.Component {
     render () {
         return (
             <Switch>
-                <Route exact path="/s"><Container>
-                    <Auth/>
-                </Container></Route>
+                <Route exact path="/s"><Auth/></Route>
 
                 <Route exact path="/s/user"><Container>
                     <User/>
@@ -42,8 +41,12 @@ class Portal extends React.Component {
                     <Admin/><Users/>
                 </Container></Route>
 
-                <Route exact path="/s/admin/roles"><Container>
-                    <Admin/><Roles/>
+                <Route exact path="/s/admin/positions"><Container>
+                    <Admin/><Positions/>
+                </Container></Route>
+
+                <Route exact path="/s/admin/departments"><Container>
+                    <Admin/><Departments/>
                 </Container></Route>
 
                 <Route exact path="/s/admin/locations"><Container>

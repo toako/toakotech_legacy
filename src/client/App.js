@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/app.scss";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 //Page imports
 import Home from './pages/Home.js';
