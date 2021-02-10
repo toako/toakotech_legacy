@@ -40,7 +40,8 @@ class Positions extends React.Component {
         {
             dataField: 'color',
             text: 'Color',
-            sort: true
+            sort: true,
+            formatter: (cell, row) => <ColorFormat color={row.color}/>
         },
         {
             dataField: 'manager',
@@ -59,10 +60,9 @@ class Positions extends React.Component {
     componentDidMount () {
         Axios.post(`${server}/s/admin/getPos`, {})
             .then(res => {
-                // this.setState({
-                //     positions: res.data
-                // });
-                console.log(res.data.info);
+                this.setState({
+                    positions: res.data
+                });
             })
             .catch(err => console.log(err));
     }
@@ -94,7 +94,11 @@ class Positions extends React.Component {
     }
 
     handleAction (e) {
-        console.log(e.currentTarget.value);
+        const passedData = e.currentTarget.value.split(" ");
+        if (passedData[1] === "delete") {
+            return
+        }
+
     }
 
     render () {
@@ -155,8 +159,8 @@ class Positions extends React.Component {
                 data = {this.state.positions}
                 columns = { this.columns }
                 defaultSorted = {[{
-                    dataField: 'manager',
-                    order: 'desc'
+                    dataField: 'id',
+                    order: 'asc'
                 }]}
             />
         </div>);
@@ -179,5 +183,28 @@ function ActionFormat (props) {
                 <i className="fas fa-trash fa-sm"></i>
             </Button>
         </div>
+    );
+}
+
+function ColorFormat (props) {
+
+    const mainStyle = {
+        padding: 0,
+        margin: "0px 0px -10px 0px",
+        height: "25px"
+    };
+
+    let colorStyle = {
+        backgroundColor: props.color,
+        width: "92%",
+        height: "80%",
+        border: "1px solid black"
+    };
+
+    return (
+        <Row style={mainStyle}>
+            <Col className="col-4"><div style={colorStyle}></div></Col>
+            <Col className="col-8"><p>{props.color}</p></Col>
+        </Row>
     );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import BootstrapTable from 'react-bootstrap-table-next';
+import { withRouter } from 'react-router-dom';
 
 import Row from "react-bootstrap/Row";
 //import Col from "react-bootstrap/Col";
@@ -65,7 +66,7 @@ class Users extends React.Component {
                 });
                 console.log(res.data.info);
             })
-            .catch(err => console.log(err));        
+            .catch(err => console.log(err)); 
     }
 
     handleChange (e) {
@@ -76,57 +77,39 @@ class Users extends React.Component {
         let _user = e.currentTarget.value.split(" ");
         console.log(_user[0]);
         if (_user[1] === "delete") {
-            Axios.all([
-                Axios.delete(`${server}/s/admin/users/delete`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: { id: _user[0] }
-                })
-                .then(res => {
-                    if (res.data.hasOwnProperty("info")) 
-                        console.log(res.data.info);
-                    else if (res.data.hasOwnProperty("error"))
-                        console.log(res.data.error);
-                })
-                .catch(err => console.log(err)),
-                Axios.get(`${server}/s/admin/users`)
-                .then(res => {
-                    this.setState({
-                        users: res.data.userData
-                    });
+            Axios.delete(`${server}/s/admin/users/delete`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: { id: _user[0] }
+            })
+            .then(res => {
+                if (res.data.hasOwnProperty("info")) {
                     console.log(res.data.info);
-                })
-                .catch(err => console.log(err))
-            ]);
+                    this.setState({users: res.data.userData});
+                }
+                else if (res.data.hasOwnProperty("error"))
+                    console.log(res.data.error);
+            })
+            .catch(err => console.log(err));
         }
     }
 
     handleSubmit (e) {
-        Axios.all([
-            Axios.post(`${server}/s/admin/users/create`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                        firstName: this.state.firstName,
-                        lastName: this.state.lastName,
-                        username: this.state.username,
-                        password: this.state.password,
-                        email: this.state.email
-                    },
-                })
-                .catch(err => console.log(err)),
-            Axios.get(`${server}/s/admin/users`)
-                .then(res => {
-                    this.setState({
-                        users: res.data.userData
-                    });
-                    console.log(res.data.info);
-                })
-                .catch(err => console.log(err))
-        ]);
-        
+        Axios.post(`${server}/s/admin/users/create`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                username: this.state.username,
+                password: this.state.password,
+                email: this.state.email
+            }
+        }).then((res) => {
+            console.log(res);
+        }).catch(err => console.log(err));
     }
 
     render () {
@@ -209,7 +192,7 @@ class Users extends React.Component {
     }
 }
 
-export default Users;
+export default withRouter(Users);
 
 
 function ActionFormat (props) {

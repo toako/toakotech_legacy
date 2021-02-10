@@ -36,8 +36,7 @@ app.get("/s/admin/users", (req, res) => {
 });
 
 app.post("/s/admin/users/create", (req, res) => {
-    let rb = req.body;
-    console.log(req.body);
+    let rb = req.body.data;
     let newUser = new User({
         _id: uid.time(),
         orgID: req.session.orgID,
@@ -53,7 +52,7 @@ app.post("/s/admin/users/create", (req, res) => {
     // Save new owner to db
     newUser.save((err, data) => {
         if (err) return console.error(err);
-        console.log(`A new user, ${newUser.firstName} ${newUser.lastName}, has been created successfully.`);
+        res.json({info: `A new user, ${newUser.firstName} ${newUser.lastName}, has been created successfully.`});
     });
 });
 
@@ -65,7 +64,21 @@ app.delete("/s/admin/users/delete/", (req, res) => {
         else {
             User.deleteOne({_id: req.body.id }, (err) => {
                 if (err) console.error(err);
-                res.json({ info: `Successfully deleted user with ID ${req.body.id}.` });
+                User.find({orgID: req.session.orgID}, (err, users) => {
+                    if (err) console.error(err);
+                    let userList = users.map(u => {
+                        return {
+                            id: u.id,
+                            name: `${u.lastName}, ${u.firstName}`,
+                            username: u.username,
+                            email: u.email
+                        }
+                    });
+                    res.json({
+                        info:  `Successfully deleted user with ID ${req.body.id}.`,
+                        userData: userList
+                    })
+                });
             });
         }
     })
