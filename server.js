@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const authentication = require("./routes/authentication.js");
 const position = require("./routes/position.js");
 const user = require("./routes/user.js");
+const department = require("./routes/department.js");
 
 const app = express();
 app.use(cors());
@@ -32,6 +33,7 @@ mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: t
 authentication(app);
 position(app);
 user(app);
+department(app);
 
 
 // PAGE NAVIGATION AND RUN SERVER
