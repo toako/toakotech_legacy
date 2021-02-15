@@ -1,6 +1,8 @@
 import React from "react";
 import Axios from "axios";
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,10 +16,9 @@ class Positions extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: 0,
+            id: 1,
             title: "",
             color: "#000000",
-            manager: false,
             positions: []
         };
         
@@ -30,23 +31,21 @@ class Positions extends React.Component {
         {
             dataField: 'id',
             text: 'Position ID',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'title',
             text: 'Title',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'color',
             text: 'Color',
             sort: true,
-            formatter: (cell, row) => <ColorFormat color={row.color}/>
-        },
-        {
-            dataField: 'manager',
-            text: 'Is Manager?',
-            sort: true
+            formatter: (cell, row) => <ColorFormat color={row.color}/>,
+            filter: textFilter()
         },
         {
             dataField: 'actions',
@@ -58,7 +57,7 @@ class Positions extends React.Component {
     ];
 
     componentDidMount () {
-        Axios.post(`${server}/s/admin/getPos`, {})
+        Axios.get(`${server}/s/admin/positions`, {})
             .then(res => {
                 this.setState({
                     positions: res.data
@@ -75,30 +74,32 @@ class Positions extends React.Component {
 
         console.log(this.state);
         let dataPacket = {
-            action: "addPos",
             id: this.state.id,
             title: this.state.title,
-            color: this.state.color,
-            manager: this.state.manager
+            color: this.state.color
         }
 
-        Axios.post(`${server}/s/admin/addPos`, dataPacket)
-            .catch(err => console.log(err));
-        Axios.post(`${server}/s/admin/getPos`, {})
-            .then(res => {
-                this.setState({
-                    positions: res.data
-                });
-            })
+        Axios.post(`${server}/s/admin/positions/add`, dataPacket)
             .catch(err => console.log(err));
     }
 
     handleAction (e) {
-        const passedData = e.currentTarget.value.split(" ");
-        if (passedData[1] === "delete") {
-            return
+        let _position = e.currentTarget.value.split(" ");
+        console.log(_position[0]);
+        if (_position[1] === "delete") {
+            Axios.delete(`${server}/s/admin/positions/delete`, {
+                data: { id: _position[0] }
+            })
+            .then(res => {
+                if (res.data.hasOwnProperty("info")) {
+                    console.log(res.data.info);
+                    this.setState({positions: res.data.positionData});
+                }
+                else if (res.data.hasOwnProperty("error"))
+                    console.log(res.data.error);
+            })
+            .catch(err => console.log(err));
         }
-
     }
 
     render () {
@@ -140,15 +141,9 @@ class Positions extends React.Component {
                                 />
                         </Form.Group></Col>
                         <Col className="col-2"><Form.Group>
-                            <Form.Check 
-                                className="mb-2"
-                                label="Is manager?" 
-                                name="manager"
-                                value={this.state.manager}
-                                onChange={this.handleChange}
-                                />
+                            <Form.Label>Add Position</Form.Label>
                             <Button variant="info" type="submit">
-                                Create New <i className="fas fa-plus fa-sm"></i>
+                                Create <i className="fas fa-plus fa-sm"></i>
                             </Button>
                         </Form.Group></Col>
                     </Row>
@@ -162,6 +157,9 @@ class Positions extends React.Component {
                     dataField: 'id',
                     order: 'asc'
                 }]}
+                pagination={ paginationFactory() }
+                filter={ filterFactory() }
+                filterPosition="top"
             />
         </div>);
     }

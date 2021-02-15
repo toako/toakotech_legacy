@@ -37,11 +37,13 @@ app.get("/s/admin/users", (req, res) => {
 
 app.post("/s/admin/users/create", (req, res) => {
     let rb = req.body.data;
+    let randomUID = uid.time();
+    let username = rb.firstName.substr(0,1).toLowerCase() + rb.lastName.toLowerCase() + randomUID.substr(4);
     let newUser = new User({
-        _id: uid.time(),
+        _id: randomUID,
         orgID: req.session.orgID,
         email: rb.email,
-        username: rb.username,
+        username: username,
         password: bcrypt.hashSync(rb.password, hashRate),
         firstName: rb.firstName,
         lastName: rb.lastName,

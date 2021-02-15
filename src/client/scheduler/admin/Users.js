@@ -1,7 +1,9 @@
 import React from "react";
 import Axios from "axios";
-import BootstrapTable from 'react-bootstrap-table-next';
 import { withRouter } from 'react-router-dom';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 import Row from "react-bootstrap/Row";
 //import Col from "react-bootstrap/Col";
@@ -18,9 +20,8 @@ class Users extends React.Component {
             users: [],
             firstName: "",
             lastName: "",
-            username: "",
-            password: "",
-            email: ""
+            email: "",
+            password: ""
         };
         
         this.handleChange = this.handleChange.bind(this);
@@ -32,22 +33,26 @@ class Users extends React.Component {
         {
             dataField: 'id',
             text: 'User ID',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'name',
             text: 'Name',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'username',
             text: 'Username',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'email',
             text: 'E-mail',
-            sort: true
+            sort: true,
+            filter: textFilter()
         },
         {
             dataField: 'actions',
@@ -103,9 +108,8 @@ class Users extends React.Component {
             data: {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
-                username: this.state.username,
-                password: this.state.password,
-                email: this.state.email
+                email: this.state.email,
+                password: this.state.password
             }
         }).then((res) => {
             console.log(res);
@@ -144,14 +148,14 @@ class Users extends React.Component {
                     </Row>
                     <Row>
                         <Form.Group className="col-6">
-                            <Form.Label>Username</Form.Label>
+                            <Form.Label>E-mail</Form.Label>
                             <Form.Control 
-                                type="text" 
-                                placeholder="Enter username"
-                                name="username"
-                                value={this.state.username}
+                                type="email"
+                                placeholder="Enter email"
+                                name="email"
+                                value={this.state.email}
                                 onChange={this.handleChange}
-                                required/>
+                                />
                         </Form.Group>
                         <Form.Group className="col-6">
                             <Form.Label>Password</Form.Label>
@@ -164,30 +168,23 @@ class Users extends React.Component {
                                 required/>
                         </Form.Group>
                     </Row>
-                    <Form.Group>
-                        <Form.Label>E-mail</Form.Label>
-                        <Form.Control 
-                            type="email"
-                            placeholder="Enter email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                            />
-                    </Form.Group>
                     <Button variant="info" type="submit">
                             Create New User <i className="fas fa-plus fa-sm"></i>
                         </Button>
                 </Card.Body>
             </Form>
             <BootstrapTable 
-                keyField="id"
-                data = {this.state.users}
-                columns = { this.columns }
-                defaultSorted = {[{
-                    dataField: 'name',
-                    order: 'desc'
-                }]}
-            />
+                    keyField="id"
+                    data = {this.state.users}
+                    columns = { this.columns }
+                    defaultSorted = {[{
+                        dataField: 'name',
+                        order: 'desc'
+                    }]}
+                    pagination={ paginationFactory() }
+                    filter={ filterFactory() }
+                    filterPosition="top"
+                />
         </div>);
     }
 }

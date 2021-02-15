@@ -7,9 +7,16 @@ module.exports = function (app) {
 
 
 
+app.get("/s/admin/positions", (req, res) => {
+    let rb = req.body;
 
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+        res.json(org.data.positions);
+    });
+});
 
-app.post("/s/admin/addPos", (req, res) => {
+app.post("/s/admin/positions/add", (req, res) => {
     let rb = req.body;
     Organization.findById(req.session.orgID, (err, org) => {
         if (err) console.error(err);
@@ -17,13 +24,15 @@ app.post("/s/admin/addPos", (req, res) => {
         if (!org.data.hasOwnProperty("positions"))
             org.data.positions = [];
         
-        if (org.data.positions.filter((pos) => pos.id === rb.id).length > 0) {
-            console.log("Cannot create two positions with the same ID's");
+        if (org.data.positions.filter((pos) => pos.id == rb.id).length > 0) {
             res.json({error: "Cannot create two positions with the same ID's"});
-        }   
+        }
+        else if(rb.id <= 0) {
+            res.json({error: "Cannot create position with ID less than 1!"});
+        }
         else {
             org.data.positions.push({
-                id: rb.id,
+                id: parseInt(rb.id),
                 title: rb.title,
                 color: rb.color,
                 manager: rb.manager,
@@ -33,19 +42,32 @@ app.post("/s/admin/addPos", (req, res) => {
             org.markModified('data');
             org.save((err, data) => {
                 if (err) console.error(err);
-                console.log(org.data);
+                res.json({info: `A new position has been created successfully.`});
             });
         }
     });
 });
 
-app.post("/s/admin/getPos", (req, res) => {
-    let rb = req.body;
-
+app.delete("/s/admin/positions/delete/", (req, res) => {
+    let id = parseInt(req.body.id);
     Organization.findById(req.session.orgID, (err, org) => {
         if (err) console.error(err);
-        res.json(org.data.positions);
-    });
+
+        const i = org.data.positions.map((pos) => pos.id).indexOf(id);
+        if (i === -1) {
+            res.json({ error: `Cannot find position with ID ${id}.`});
+        }
+        org.data.positions.splice(i, 1);
+
+        org.markModified('data');
+        org.save((err, data) => {
+            if (err) console.error(err);
+            res.json({ 
+                info: `Successfully deleted position with ID ${id}.`,
+                positionData: org.data.positions
+            });
+        });
+    })
 });
 
 
