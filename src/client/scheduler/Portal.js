@@ -10,6 +10,7 @@ import User from "./User.js";
 import Panel from "./admin/Panel.js";
 import Users from "./admin/Users.js";
 import Positions from "./admin/Positions.js";
+import PositionsData from "./admin/PositionsData.js";
 import Departments from "./admin/Departments.js";
 import Locations from "./admin/Locations.js";
 import Schedule from "./admin/Schedule.js";
@@ -42,6 +43,10 @@ class Portal extends React.Component {
                 </Container></Route>
 
                 <Route exact path="/s/admin/positions"><Container>
+                    <Admin/><Positions/>
+                </Container></Route>
+
+                <Route exact path="/s/admin/positions/:posID"><Container>
                     <Admin/><Positions/>
                 </Container></Route>
 

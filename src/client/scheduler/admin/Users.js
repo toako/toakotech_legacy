@@ -118,7 +118,7 @@ class Users extends React.Component {
 
     render () {
         return (<div>
-            <h1>Users</h1>
+            <h1 className="mt-3">Users</h1>
             <Form className="card mt-3 mb-3" onSubmit={this.handleSubmit}>
                 <Card.Body>
                     <Card.Title>

@@ -104,7 +104,7 @@ class Positions extends React.Component {
 
     render () {
         return (<div>
-            <h1>Positions</h1>
+            <h1 className="mt-3">Positions</h1>
             <Form className="card mt-3 mb-3" onSubmit={this.handleSubmit}>
                 <Card.Body>
                     <Card.Title>
@@ -171,14 +171,11 @@ export default Positions;
 function ActionFormat (props) {
     return (
         <div>
-            <Button value={`${props.rowID} view`} onClick={props.action} className="mr-2" size="sm" variant="success"> 
-                <i className="far fa-eye fa-sm" ></i>
-            </Button>
-            <Button value={`${props.rowID} edit`} onClick={props.action} className="mr-2" size="sm" variant="info"> 
-                <i className="fas fa-pencil-alt fa-sm"></i>
+            <Button value={`${props.rowID} manage`} onClick={props.action} className="mr-2" size="sm" variant="info"> 
+                Manage <i className="fas fa-pencil-alt fa-sm"></i>
             </Button>
             <Button value={`${props.rowID} delete`} onClick={props.action} size="sm" variant="danger"> 
-                <i className="fas fa-trash fa-sm"></i>
+                Delete <i className="fas fa-trash fa-sm"></i>
             </Button>
         </div>
     );
