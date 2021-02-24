@@ -1,3 +1,8 @@
+/*
+    Organization.js
+*/
+
+
 const mongoose = require("mongoose");
 const Mixed = mongoose.Schema.Types.Mixed;
 

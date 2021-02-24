@@ -52,7 +52,6 @@ class Admin extends React.Component {
                         <NavDropdown.Item id="nav-users" onClick={this.redirect}>Users <i className="fas fa-user-edit fa-sm"></i></NavDropdown.Item>
                         <NavDropdown.Item id="nav-positions" onClick={this.redirect}>Positions <i className="fas fa-bars fa-sm"></i></NavDropdown.Item>
                         <NavDropdown.Item id="nav-departments" onClick={this.redirect}>Departments <i className="fas fa-th-large fa-sm"></i></NavDropdown.Item>
-                        <NavDropdown.Item id="nav-locations" onClick={this.redirect}>Locations <i className="fas fa-map-marker-alt fa-sm"></i></NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link id="nav-schedule" onClick={this.redirect}>Schedule <i className="fas fa-calendar-alt fa-sm"></i></Nav.Link>
                     <Nav.Link id="nav-notifications" onClick={this.redirect}>Notifications <i className="fas fa-bell fa-sm"></i></Nav.Link>

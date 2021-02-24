@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { withRouter } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
@@ -100,6 +101,9 @@ class Positions extends React.Component {
             })
             .catch(err => console.log(err));
         }
+        else if (_position[1] === "manage") {
+            this.props.history.push(`/s/admin/positions/${_position[0]}`);
+        }
     }
 
     render () {
@@ -165,7 +169,7 @@ class Positions extends React.Component {
     }
 }
 
-export default Positions;
+export default withRouter(Positions);
 
 
 function ActionFormat (props) {

@@ -5,6 +5,39 @@ const User = require("./models/User.js");
 
 module.exports = function (app) {
 
+function getPositionUserData (id, positionRegister, users) {
+
+    const userIDsOfThisPosition = positionRegister.filter(posRegUser => posRegUser[1] == id).map(posRegUser => posRegUser[0]);
+    const userIDsWithNoPosition = positionRegister.filter(posRegUser => posRegUser[1] == null).map(posRegUser => posRegUser[0]);
+    console.log(userIDsOfThisPosition);
+    console.log(userIDsWithNoPosition);
+
+    const usersOfThisPosition = userIDsOfThisPosition.map(userID => {
+        const temp = users.find(user => user._id == userID);
+        return {
+            _id: temp._id,
+            firstName: temp.firstName,
+            lastName: temp.lastName,
+            username: temp.username
+        };
+    });
+
+    const usersWithNoPosition = userIDsWithNoPosition.map(userID => {
+        const temp = users.find(user => user._id == userID);
+        return {
+            _id: temp._id,
+            firstName: temp.firstName,
+            lastName: temp.lastName,
+            username: temp.username
+        };
+    });
+
+    return { usersOfThisPosition, usersWithNoPosition };
+}
+
+
+
+
 
 
 app.get("/s/admin/positions", (req, res) => {
@@ -18,7 +51,91 @@ app.get("/s/admin/positions", (req, res) => {
                 if (err) console.error(err);
             });
         }
+
+        if (!org.data.hasOwnProperty("positionRegister")) {
+            User.find({orgID: req.session.orgID}, (err, users) => {
+                if (err) console.error(err);
+                if (users.length == 0) {
+                    org.data.positionRegister = [];
+                }
+                else {
+                    org.data.positionRegister = users.map(user => [user._id, null]);
+                }
+                org.markModified('data');
+                org.save((err) => {
+                    if (err) console.error(err);
+                });
+            });
+        }
+        else {
+            User.find({orgID: req.session.orgID}, (err, users) => {
+                if (err) console.error(err);
+                
+                users.forEach(user => {
+                    if (org.data.positionRegister.findIndex(posRegUser => posRegUser[0] == user._id) == -1) {
+                        org.data.positionRegister.push([user._id, null]);
+                    }
+                })
+                org.data.positionRegister = org.data.positionRegister.filter(posRegUser => users.findIndex(user => user._id == posRegUser[0]) != -1);
+
+                org.markModified('data');
+                org.save((err) => {
+                    if (err) console.error(err);
+                });
+            });
+        }
         res.json(org.data.positions);
+    });
+});
+
+app.get("/s/admin/positions/:posID", (req, res) => {
+    let id = parseInt(req.params.posID);
+
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+
+        const positionIndex = org.data.positions.findIndex(pos => pos.id == id);
+
+        User.find({orgID: req.session.orgID}, (err, users) => {
+            if (err) console.error(err);
+
+            let positionUserData = getPositionUserData(id, org.data.positionRegister, users);
+
+            res.json({
+                position: org.data.positions[positionIndex],
+                users: positionUserData.usersOfThisPosition,
+                usersNA: positionUserData.usersWithNoPosition
+            });
+        });
+    });
+});
+
+app.post("/s/admin/positions/:posID/assign", (req, res) => {
+    const userID = req.body.id;
+    const positionID = parseInt(req.params.posID);
+    const alreadyAssigned = req.body.alreadyAssigned;
+
+    console.log(userID);
+    console.log(`Is already assigned? ${alreadyAssigned}`);
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+
+        User.find({orgID: req.session.orgID}, (err, users) => {
+            if (err) console.error(err);
+
+            const userIndex = org.data.positionRegister.findIndex(posRegUser => posRegUser[0] == userID);
+            console.log(userIndex);
+            org.data.positionRegister[userIndex][1] = alreadyAssigned ? null : positionID;
+            org.markModified('data');
+            org.save((err) => {
+                if (err) console.error(err);
+                let positionUserData = getPositionUserData(positionID, org.data.positionRegister, users);
+                res.json({
+                    users: positionUserData.usersOfThisPosition,
+                    usersNA: positionUserData.usersWithNoPosition
+                });
+            });
+        });
     });
 });
 
@@ -73,6 +190,10 @@ app.delete("/s/admin/positions/delete/", (req, res) => {
                     org.data.departments[i].positions.splice(j, 1);
             }
         }
+
+        org.data.positionRegister.forEach(user => {
+            if (user[1] == id) user[1] = null;
+        });
 
         org.data.positions.splice(i, 1);
 

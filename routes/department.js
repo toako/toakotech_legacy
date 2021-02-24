@@ -101,7 +101,7 @@ app.post("/s/admin/departments/assign", (req, res) => {
             }
         }
         else {
-            if (org.data.departments[deptIndex].manager.id == rb.id) {
+            if (org.data.departments[deptIndex].manager && org.data.departments[deptIndex].manager.id == rb.id) {
                 org.data.departments[deptIndex].manager = null;
             }
             else {
