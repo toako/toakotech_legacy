@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Portal.js - FRONT END
+
+    Not physically visible to the user despite being React. This page is specifically for
+    routing the user around the employment scheduling app.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 

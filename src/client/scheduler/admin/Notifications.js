@@ -1,3 +1,11 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Notifications.js - FRONT END
+
+    Fetches the notifications stored in the server for the user to see in a clean format.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 
 class Notifications extends React.Component {

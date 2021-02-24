@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    User.js - FRONT END
+
+    Technically the navbar, but is the linking source for all aspects that an user would
+    need to view their schedules.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 
 class User extends React.Component {

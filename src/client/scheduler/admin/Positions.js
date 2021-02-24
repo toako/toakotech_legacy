@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Positions.js - FRONT END
+
+    Front end visuals which is able to fetch data for the creation or destruction of 
+    positions, and allowing you to navigate to each position to manage.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import Axios from "axios";
 import { withRouter } from 'react-router-dom';

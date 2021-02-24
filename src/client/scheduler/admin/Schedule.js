@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Schedule.js - FRONT END
+
+    The clean and organized visual which allows managing users to set schedules for their
+    designated employees in their department.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 
 class Schedule extends React.Component {

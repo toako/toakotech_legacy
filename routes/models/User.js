@@ -1,3 +1,13 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    User.js - MODEL
+    
+    This file is a MODEL for mongoose, which organizes data around creating a user, 
+    which contains all data regarding the user itself, to be implemented by the scheduling 
+    organization.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 const mongoose = require("mongoose");
 const Mixed = mongoose.Schema.Types.Mixed;
 

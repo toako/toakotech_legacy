@@ -1,3 +1,14 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    department.js - BACK END
+
+    Allows for the creation, modification, and destruction of departments, as well as
+    adding positions. Departments are the shell for which there is a managing position 
+    and subordinate positions. With this, an organized structure for who does the 
+    scheduling and who gets scheduled labor is initiated.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 "use strict";
 
 const Organization = require("./models/Organization.js");

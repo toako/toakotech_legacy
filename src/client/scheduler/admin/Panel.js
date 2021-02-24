@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Panel.js - FRONT END
+
+    Introduction page when first logging into your designated panel, whether it be
+    the admin, manager, or user panel.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 
 class Panel extends React.Component {

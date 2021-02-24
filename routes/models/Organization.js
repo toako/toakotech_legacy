@@ -1,7 +1,11 @@
-/*
-    Organization.js
-*/
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Organization.js - MODEL
 
+    This file is a MODEL for mongoose, which organizes data around creating organization, 
+    which manage all other aspects of the coding app.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
 
 const mongoose = require("mongoose");
 const Mixed = mongoose.Schema.Types.Mixed;

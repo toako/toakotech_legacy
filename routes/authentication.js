@@ -1,3 +1,14 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    authentication.js - BACK END
+
+    This allows for authentication and access of the user/admin by the following:
+    - Creates, carries, and removes session for the user
+    - Allows for login to be passed off to other files
+    - Authenticates passwords as well as hashing via BCrypt
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 "use strict";
 
 // LIB AND GLOBALS

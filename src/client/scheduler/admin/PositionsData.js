@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    PositionData.js - FRONT END
+
+    Manage which users are and are not in the specific position. Fetches the data from 
+    the server to allow for an easy visual of user adding/removal.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import Axios from "axios";
 import { withRouter } from 'react-router-dom';

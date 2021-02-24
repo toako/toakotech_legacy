@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Departments.js - FRONT END
+
+    React file which shows the forms and visuals necessary for creating and destroying
+    departments, as well as assigning positions to them.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import Axios from "axios";
 import BootstrapTable from "react-bootstrap-table-next";

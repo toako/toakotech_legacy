@@ -1,3 +1,11 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    user.js - BACK END
+
+    Allows for the creation or removal of users. Which would technically be the employees.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 "use strict";
 
 

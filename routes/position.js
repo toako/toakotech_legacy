@@ -1,3 +1,15 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    position.js - BACK END
+
+    Creates a way to organize users into different "jobs" or "roles". In this case, it
+    is being called "positions". Positions can then be assigned to departments for
+    organized scheduling. This file is two-part. It serves both the main file which allows 
+    for the creation or destruction of positions, as well as serving and processing data
+    for adding or removing users in each specific department.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 "use strict";
 
 const Organization = require("./models/Organization.js");

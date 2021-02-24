@@ -1,3 +1,11 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Settings.js - FRONT END
+
+    Modify the settings of your organization.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 
 class Settings extends React.Component {

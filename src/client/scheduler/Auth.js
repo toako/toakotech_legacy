@@ -1,3 +1,14 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Auth.js - FRONT END
+
+    The front page that shows either the option to create an organization or login to an
+    existing organization. This page will fetch and communicate with authentication.js
+    on the back-end to allow for a somewhat secure tunnel for users to access their 
+    organization.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import Axios from "axios";
 import { LinkContainer } from "react-router-bootstrap";

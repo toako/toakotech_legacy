@@ -1,3 +1,12 @@
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    Admin.js - FRONT END
+
+    Technically the navbar, but is the linking source for all aspects that an admin would
+    need to manage their organization.
+
+////////////////////////////////////////////////////////////////////////////////////////*/
+
 import React from "react";
 import Axios from "axios";
 import { withRouter } from 'react-router-dom';
