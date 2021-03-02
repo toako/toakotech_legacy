@@ -1,16 +1,16 @@
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-    *ADMIN*
-    
-    Settings.js - FRONT END
+    *USER*
 
-    Modify the settings of your organization.
+    Schedule.js - FRONT END
+
+    The clean and organized visual which allows users to view schedule/
 
 ////////////////////////////////////////////////////////////////////////////////////////*/
 
 import React from "react";
 
-class Settings extends React.Component {
+class Schedule extends React.Component {
     constructor (props) {
         super(props);
         this.state = {};
@@ -18,9 +18,9 @@ class Settings extends React.Component {
 
     render () {
         return (
-            <div><h1>Settings subpage</h1></div>
+            <div><h1>Schedule subpage</h1></div>
         )
     }
 }
 
-export default Settings;
+export default Schedule;

@@ -65,12 +65,33 @@ app.get("/s/admin", (req, res) => {
             user: user
         })
     });
+});
 
+app.get("/s/manager", (req, res) => {
+    User.findById(req.session._id, (err, user) => {
+        if (err) console.error(err);
+        
+        res.json({
+            session: req.session,
+            user: user
+        })
+    });
+});
+
+app.get("/s/user", (req, res) => {
+    User.findById(req.session._id, (err, user) => {
+        if (err) console.error(err);
+        
+        res.json({
+            session: req.session,
+            user: user
+        })
+    });
 });
 
 app.post("/s/login", (req, res) => {
     let rb = req.body;
-
+    console.log(rb);
     //First, find if username and organization combo exists
     User.find({username: rb.username, orgID: rb.orgID}, (err, doc) => {
         if (err) console.error(err);
@@ -85,37 +106,36 @@ app.post("/s/login", (req, res) => {
         }
         //Determine if password is correct, if so, add to response
         else if (bcrypt.compareSync(rb.password, user.password)) {
-
+            
             //Access users permission level
             Organization.findById(user.orgID, (err, org) => {
                 if (err) console.error(err);
-                
-                let tempPerm;
-                if (org.adminList.includes(user._id))
-                    tempPerm = 1;
-                else if (org.userList.includes(user._id))
-                    tempPerm = 0;
-                else 
-                    tempPerm = -1;
 
-                //If there is no user association with organization
-                if (tempPerm === -1) {
-                    res.json({
-                        operation: "failed",
-                        info: "User does not exist in organization."
-                    });
-                }
-                //Send response of completed authentication.
-                else {
+                if (user) {
+                    const userPosition = org.data.positionRegister.filter(posRegUser => posRegUser[0] == user._id)[0][1];
+                    const managerPositions = org.data.departments.map(dept => dept.manager.id);
+                    const isManager = managerPositions.filter(mp => mp === userPosition).length > 0;
+
+                    const loginLevel = org.adminList.includes(user._id) ? "admin" :
+                        (isManager ? "manager" : "user");
+
                     req.session._id = user._id;
                     req.session.username = user.username;
                     req.session.password = user.password;
                     req.session.orgID = org._id;
+                    req.session.level = loginLevel;
+                    
                     res.json({
                         operation: "success",
                         info: `${user.username} logged in successfully.`,
                         user: user,
-                        perm: tempPerm
+                        level: loginLevel
+                    });
+                }
+                else {
+                    res.json({
+                        operation: "failed",
+                        error: "User is not found."
                     });
                 }
             });
@@ -124,7 +144,7 @@ app.post("/s/login", (req, res) => {
         else {
             res.json({
                 operation: "failed",
-                info: "Invalid password."
+                error: "Invalid password."
             });
         }
     });

@@ -1,16 +1,14 @@
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-    *ADMIN*
-    
-    Settings.js - FRONT END
+    Requests.js - FRONT END
 
-    Modify the settings of your organization.
+    Allow users 
 
 ////////////////////////////////////////////////////////////////////////////////////////*/
 
 import React from "react";
 
-class Settings extends React.Component {
+class Requests extends React.Component {
     constructor (props) {
         super(props);
         this.state = {};
@@ -18,9 +16,9 @@ class Settings extends React.Component {
 
     render () {
         return (
-            <div><h1>Settings subpage</h1></div>
+            <div><h1>Requests subpage</h1></div>
         )
     }
 }
 
-export default Settings;
+export default Requests;

@@ -1,10 +1,9 @@
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-    *ADMIN*
-    
+*MANAGER*
     Settings.js - FRONT END
 
-    Modify the settings of your organization.
+    Modify the settings of your manager position.
 
 ////////////////////////////////////////////////////////////////////////////////////////*/
 

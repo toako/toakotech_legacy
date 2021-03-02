@@ -1,0 +1,23 @@
+.cal-col {
+    border-width: 1px 1px 1px 0px;
+    border-color: #222;
+    border-style: solid;
+}
+
+.cal-col:first-child {
+    border-width: 1px 1px 1px 1px;
+}
+
+.cal-col2 {
+    border-width: 0px 1px 1px 0px;
+    border-color: #222;
+    border-style: solid;
+}
+
+.cal-col2:first-child {
+    border-width: 0px 1px 1px 1px;
+}
+
+.cal-modify {
+    border: 1px solid #222;
+}

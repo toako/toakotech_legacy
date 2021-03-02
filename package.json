@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "luxon": "^1.26.0",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.12",
     "node-sass": "^4.14.1",
@@ -25,6 +26,7 @@
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.0.1",
+    "react-simple-timefield": "^3.2.3",
     "tinycolor2": "^1.4.2",
     "uniqid": "^5.2.0"
   },

@@ -1,16 +1,16 @@
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-    *ADMIN*
-    
-    Settings.js - FRONT END
+    *USER*
 
-    Modify the settings of your organization.
+    Notifications.js - FRONT END
+
+    Fetches the notifications stored in the server for the user to see in a clean format.
 
 ////////////////////////////////////////////////////////////////////////////////////////*/
 
 import React from "react";
 
-class Settings extends React.Component {
+class Notifications extends React.Component {
     constructor (props) {
         super(props);
         this.state = {};
@@ -18,9 +18,9 @@ class Settings extends React.Component {
 
     render () {
         return (
-            <div><h1>Settings subpage</h1></div>
+            <div><h1>Notifications subpage</h1></div>
         )
     }
 }
 
-export default Settings;
+export default Notifications;

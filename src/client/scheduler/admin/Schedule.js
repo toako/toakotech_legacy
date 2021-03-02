@@ -1,5 +1,7 @@
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
+    *ADMIN*
+
     Schedule.js - FRONT END
 
     The clean and organized visual which allows managing users to set schedules for their
@@ -15,10 +17,9 @@ class Schedule extends React.Component {
         this.state = {};
     }
 
-    render () {
-        return (
-            <div><h1>Schedule subpage</h1></div>
-        )
+    render () {return(<div>
+            <h1>Schedule</h1>
+        </div>)
     }
 }
 

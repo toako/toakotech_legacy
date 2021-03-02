@@ -13,9 +13,9 @@ import { Switch, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
 import Auth from "./Auth.js";
-import Admin from "./Admin.js";
-import User from "./User.js";
 
+//Admin imports
+import Admin from "./Admin.js";
 import Panel from "./admin/Panel.js";
 import Users from "./admin/Users.js";
 import Positions from "./admin/Positions.js";
@@ -24,6 +24,18 @@ import Departments from "./admin/Departments.js";
 import Schedule from "./admin/Schedule.js";
 import Notifications from "./admin/Notifications.js";
 import Settings from "./admin/Settings.js";
+
+//Manager imports
+import Manager from "./Manager.js";
+import ScheduleManager from "./manager/Schedule.js";
+import NotificationsManager from "./manager/Notifications.js";
+import SettingsManager from "./manager/Settings.js";
+
+//User imports
+import User from "./User.js";
+import ScheduleUser from "./user/Schedule.js";
+import Requests from "./user/Requests.js";
+import NotificationsUser from "./user/Notifications.js";
 
 //Portal acts only as a router.
 
@@ -38,10 +50,7 @@ class Portal extends React.Component {
             <Switch>
                 <Route exact path="/s"><Auth/></Route>
 
-                <Route exact path="/s/user"><Container>
-                    <User/>
-                </Container></Route>
-
+                {/* Admin Routes */}
                 <Route exact path="/s/admin"><Container>
                     <Admin/><Panel/>
                 </Container></Route>
@@ -73,6 +82,34 @@ class Portal extends React.Component {
                 <Route exact path="/s/admin/settings"><Container>
                     <Admin/><Settings/>
                 </Container></Route>
+
+                {/* Manager Routes */}
+                <Route exact path="/s/manager"><Container>
+                    <Manager/><Panel/>
+                </Container></Route>
+                <Route exact path="/s/manager/schedule"><Container>
+                    <Manager/><ScheduleManager/>
+                </Container></Route>
+                <Route exact path="/s/manager/notifications"><Container>
+                    <Manager/><NotificationsManager/>
+                </Container></Route>
+                <Route exact path="/s/manager/settings"><Container>
+                    <Manager/><SettingsManager/>
+                </Container></Route>
+
+                {/* User Routes */}
+                <Route exact path="/s/user"><Container>
+                    <User/><Panel/>
+                </Container></Route>
+                <Route exact path="/s/user/schedule"><Container>
+                    <User/><ScheduleUser/>
+                </Container></Route>
+                <Route exact path="/s/user/requests"><Container>
+                    <User/><Requests/>
+                </Container></Route>
+                <Route exact path="/s/user/notifications"><Container>
+                    <User/><NotificationsUser/>
+                </Container></Route>                
             </Switch>
         )
     }

@@ -69,7 +69,7 @@ class Auth extends React.Component {
     handleSubmit (e) {
         if(e) e.preventDefault();
         let action = e.target.id;
-
+        console.log(e.target.id);
         const submission = {
             "login": {
                 action: "login",
@@ -89,14 +89,11 @@ class Auth extends React.Component {
         }
         Axios.post(`${server}/s/${action}`, submission[action])
             .then(res => {
-                if (res.data.operation === "success") {
-                    if (res.data.perm === 1)
-                        this.props.history.push(`/s/admin`);
-                    else if (res.data.perm === 0)
-                        this.props.history.push(`/s/user`);
-                    else {
-                        console.log("Failed operation");
-                    }
+                console.log(res.data);
+                if (res.data.operation === "success") 
+                    this.props.history.push(`${server}/s/${res.data.level}`)
+                else {
+                    console.log(res.data.operation);
                 }
             })
             .catch(err => console.log(err));

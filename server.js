@@ -19,6 +19,8 @@ const authentication = require("./routes/authentication.js");
 const position = require("./routes/position.js");
 const user = require("./routes/user.js");
 const department = require("./routes/department.js");
+const panel = require("./routes/panel.js");
+const schedule = require("./routes/schedule.js");
 
 const app = express();
 app.use(cors());
@@ -42,7 +44,8 @@ authentication(app);
 position(app);
 user(app);
 department(app);
-
+panel(app);
+schedule(app);
 
 // PAGE NAVIGATION AND RUN SERVER
 ///////////////////////////////////////////////////
