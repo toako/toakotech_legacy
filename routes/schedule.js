@@ -32,34 +32,11 @@ function getWeekDates (isoDate) {
 }
 
 function getDeptUserData (id, org, users) {
-    // const userPosition = org.data.positionRegister.filter(posRegUser => posRegUser[0] == id)[0][1];
-    // const dept = org.data.departments.filter(dept => dept.manager.id == userPosition)[0];
-    // const deptTitle = dept.title;
-    // let deptUserIDs = [];
-
-    // dept.positions.map(pos => pos.id).forEach(pos => {
-    //     let usersInPos = org.data.positionRegister.filter(posRegUser => posRegUser[1] == pos);
-    //     usersInPos = usersInPos.map(user => user[0]);
-    //     deptUserIDs.push(...usersInPos);
-    // })
-    // let deptUsers = deptUserIDs.map(deptUserID => {
-    //     const tempUser = users.filter(user => user._id == deptUserID)[0];
-    //     return {
-    //         _id: tempUser._id,
-    //         name: `${tempUser.firstName} ${tempUser.lastName}`
-    //     };
-    // });
-    // return {
-    //     title: deptTitle,
-    //     users: deptUsers
-    // }
 
     const deptPos = org.data.departments.map(dept => ({
         title: dept.title,
         positions: dept.positions
     }));
-
-    console.log(deptPos);
 
     let allDeptUsers = deptPos.map(dept => {
         let deptUsers = [];
@@ -82,10 +59,9 @@ function getDeptUserData (id, org, users) {
         });
         return {
             title: dept.title,
-            userData: deptUsers
+            userData: deptUsers,
         };
     });
-    console.log(allDeptUsers);
     return allDeptUsers;
 }
 
@@ -106,6 +82,9 @@ app.get("/s/manager/schedule/", (req, res) => {
             if (err) console.error(err);
 
             const deptData = getDeptUserData(req.session._id, org, users);
+            const userPosition = org.data.positionRegister.filter(posRegUser => posRegUser[0] == req.session._id)[0][1];
+            const deptTitle = org.data.departments.filter(dept => dept.manager.id == userPosition)[0].title;
+            console.log(deptTitle);
 
             WeekStore.find({orgID: 8032, startDate: localeDates[0]}, (err, weekStore) => {
                 if (err) console.error(err);
@@ -141,6 +120,7 @@ app.get("/s/manager/schedule/", (req, res) => {
                         if (err) console.error(err);
                         res.json({
                             dates,
+                            deptTitle,
                             weekData: newWeekStore
                         });
                     });
@@ -148,7 +128,8 @@ app.get("/s/manager/schedule/", (req, res) => {
                 else {
                     res.json({
                         dates,
-                        weekData: weekStore
+                        deptTitle,
+                        weekData: weekStore[0]
                     });
                 }
             });
