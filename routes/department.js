@@ -84,7 +84,7 @@ app.post("/s/admin/departments/add", (req, res) => {
                 title: rb.title,
                 manager: null,
                 positions: [],
-                data: {}
+                hours: 0
             });
             org.markModified('data');
             org.save((err) => {

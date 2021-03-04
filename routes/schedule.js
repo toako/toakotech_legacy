@@ -35,6 +35,7 @@ function getDeptUserData (id, org, users) {
 
     const deptPos = org.data.departments.map(dept => ({
         title: dept.title,
+        hours: dept.hours,
         positions: dept.positions
     }));
 
@@ -59,13 +60,72 @@ function getDeptUserData (id, org, users) {
         });
         return {
             title: dept.title,
+            hours: dept.hours,
             userData: deptUsers,
         };
     });
     return allDeptUsers;
 }
 
-app.get("/s/manager/schedule/", (req, res) => {
+function orientScheduleToUser (data, deptTitle) {
+    let deptSch = [];
+
+    data.days.forEach(day => {
+        const thisDeptUsers = day.departments.find(dept => dept.title == deptTitle).users;
+        deptSch.push({
+            date: day.date,
+            users: thisDeptUsers
+        });
+    });
+
+    let userSchedules = deptSch[0].users.map(user => ({
+        id: user.id, 
+        name: user.name,
+        posColor: user.posColor,
+        posID: user.posID,
+        posTitle: user.posTitle,
+        schedule: deptSch.map(day => {
+            const daySchedule = day.users.find(user2 => user2.id == user.id);
+            const expected = daySchedule.expectedClock;
+            const actual = daySchedule.actualClock;
+
+            return {
+                date: day.date,
+                expectedClock: expected,
+                actualClock: actual
+            }
+        })
+    }));
+    return userSchedules;
+}
+
+app.get("/s/admin/schedule", (req, res) => {
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+        const departments = org.data.departments.map(dept => [dept.title, dept.hours]);
+        res.json({departments});
+    });
+});
+
+app.post("/s/admin/schedule", (req, res) => {
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+        const deptIndex = org.data.departments.findIndex(dept => dept.title === req.body.dept);
+        org.data.departments[deptIndex].hours = req.body.hours;
+        
+        org.markModified('data');
+            org.save((err) => {
+                if (err) console.error(err);
+                res.json({
+                    info: `Modified department ${req.body.dept} to ${req.body.hours} hours.`,
+                    departments: org.data.departments.map(dept => [dept.title, dept.hours])
+                });
+            }); 
+    });
+});
+
+
+app.get("/s/manager/schedule", (req, res) => {
 
     let currentDate = DateTime.now();
     const dates = getWeekDates(currentDate.toISO());
@@ -83,8 +143,9 @@ app.get("/s/manager/schedule/", (req, res) => {
 
             const deptData = getDeptUserData(req.session._id, org, users);
             const userPosition = org.data.positionRegister.filter(posRegUser => posRegUser[0] == req.session._id)[0][1];
-            const deptTitle = org.data.departments.filter(dept => dept.manager.id == userPosition)[0].title;
-            console.log(deptTitle);
+            const thisDept = org.data.departments.filter(dept => dept.manager.id == userPosition)[0];
+            const deptTitle = thisDept.title;
+            const deptHours = thisDept.hours;
 
             WeekStore.find({orgID: 8032, startDate: localeDates[0]}, (err, weekStore) => {
                 if (err) console.error(err);
@@ -100,6 +161,7 @@ app.get("/s/manager/schedule/", (req, res) => {
                             departments: deptData.map(dept => {
                                 return {
                                     title: dept.title,
+                                    hours: dept.hours,
                                     users: dept.userData.map(user => {
                                         return {
                                             id: user.id,
@@ -115,21 +177,22 @@ app.get("/s/manager/schedule/", (req, res) => {
                             })
                         }))
                     });
-        
+                    const userOrientSchedule = orientScheduleToUser(newWeekStore, deptTitle);
                     newWeekStore.save(err => {
                         if (err) console.error(err);
                         res.json({
                             dates,
-                            deptTitle,
-                            weekData: newWeekStore
+                            deptHours,
+                            weekData: userOrientSchedule
                         });
                     });
                 }
                 else {
+                    const userOrientSchedule = orientScheduleToUser(weekStore[0], deptTitle);
                     res.json({
                         dates,
-                        deptTitle,
-                        weekData: weekStore[0]
+                        deptHours,
+                        weekData: userOrientSchedule
                     });
                 }
             });
