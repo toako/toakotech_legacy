@@ -26,6 +26,7 @@ class Schedule extends React.Component {
             dateBox: "",
             dates: [],
             weekData: [],
+            deptTitle: "",
             clockon: "",
             lunchon: "",
             lunchoff: "",
@@ -57,9 +58,11 @@ class Schedule extends React.Component {
         Axios.get(`${server}/s/manager/schedule`)
             .then (res => {
                 console.log(res.data.weekData);
+                console.log(res.data.deptTitle);
                 this.setState({
                     dates: res.data.dates,
                     totalHours: res.data.deptHours,
+                    deptTitle: res.data.deptTitle,
                     weekData: res.data.weekData
                 });
             })
@@ -73,6 +76,7 @@ class Schedule extends React.Component {
                 this.setState({
                     dateBox: e.target.value,
                     dates: res.data.dates,
+                    deptTitle: res.data.deptTitle,
                     weekData: res.data.weekData
                 });
             })
@@ -117,24 +121,83 @@ class Schedule extends React.Component {
     }
 
     handleTimeSubmit (e) {
-
-        if (this.state.clockon == "00:00") console.log(true);
         let dt1 = Duration.fromISOTime(this.state.clockon);
         let dt2 = Duration.fromISOTime(this.state.lunchon);
         let dt3 = Duration.fromISOTime(this.state.lunchoff);
         let dt4 = Duration.fromISOTime(this.state.clockoff);
 
-        console.log(`${this.state.modalUserID} ${this.state.modalDate}`);
-        console.log(dt1 < dt2);
-        console.log(dt1.toObject());
-        console.log(dt2.toObject());
-        console.log(dt3.toObject());
-        console.log(dt4.toObject());
 
+        let noLunch = false;
+        let error = false;
+        let info = "";
+
+        //Determine if no lunch, but clock on and clock off are present
+        if (this.state.clockon !== "00:00" && 
+            this.state.clockoff !== "00:00" &&
+            this.state.lunchon === "00:00" && 
+            this.state.lunchoff === "00:00") {
+            noLunch = true;
+        }
+        //Determine if all clocks are present
+        else if (this.state.clockon !== "00:00" && 
+                this.state.lunchon !== "00:00" && 
+                this.state.lunchoff !== "00:00" &&
+                this.state.clockoff !== "00:00") {
+            noLunch = false;
+        }
+        //Some times are not present that should be
+        else {
+            error = true;
+            info = "A clock time is missing.";
+        }
+
+        //If there is no lunch, but clock off and clock on are in order
+        if (noLunch && !error && dt1 < dt4) {
+            error = false;
+        }
+        //If lunch is present, and all clock times are in order
+        else if (!noLunch && !error && dt1 < dt2 && dt2 < dt3 && dt3 < dt4) {
+            error = false;
+        }
+        //If times are not in order.
+        else {
+            error = true;
+            if (info !== "A clock time is missing.")
+            info = "Clock times are not in chronological order.";
+        }
+
+        if (error) {
+            this.setState({
+                modalInfo: info
+            });
+        }
+        else {
+            Axios.post(`${server}/s/manager/schedule/modify`, {
+                id: this.state.modalUserID,
+                date: this.state.modalDate,
+                title: this.state.deptTitle,
+                clocks: [ this.state.clockon, this.state.lunchon, this.state.lunchoff, this.state.clockoff ]
+            }).then(res => {
+                this.setState({
+                    weekData: res.data.weekData,
+                    modalInfo: res.data.info
+                });
+            }).catch(err => console.log(err));
+        }
     }
 
     handleTimeReset (e) {
-
+        Axios.post(`${server}/s/manager/schedule/modify`, {
+            id: this.state.modalUserID,
+            date: this.state.modalDate,
+            title: this.state.deptTitle,
+            clocks: [ "00:00", "00:00", "00:00", "00:00" ]
+        }).then(res => {
+            this.setState({
+                weekData: res.data.weekData,
+                modalInfo: res.data.info
+            });
+        }).catch(err => console.log(err));
     }
 
     render () { return (<div className="m-3">
@@ -213,6 +276,7 @@ class Schedule extends React.Component {
             close={this.handleModalClose}
             change={this.handleTimeChange}
             submit={this.handleTimeSubmit}
+            reset={this.handleTimeReset}
             clockon={this.state.clockon}
             lunchon={this.state.lunchon}
             lunchoff={this.state.lunchoff}
@@ -276,15 +340,18 @@ function TimeBox (props) {
                     </Col>
                 </Row>
                 {
-                    props.info === "" ? "" : <h6 className="text-info">{props.info}</h6>
+                    props.info === "" ? "" : <h6 className="text-info mt-3">{props.info}</h6>
                 }
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={props.close}>
                 Close
             </Button>
+            <Button variant="warning" onClick={props.reset}>
+                Remove Clocks
+            </Button>
             <Button variant="primary" onClick={props.submit}>
-                Submit
+                Submit Clocks
             </Button>
             </Modal.Footer>
         </Modal>

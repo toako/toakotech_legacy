@@ -183,6 +183,7 @@ app.get("/s/manager/schedule", (req, res) => {
                         res.json({
                             dates,
                             deptHours,
+                            deptTitle,
                             weekData: userOrientSchedule
                         });
                     });
@@ -192,6 +193,7 @@ app.get("/s/manager/schedule", (req, res) => {
                     res.json({
                         dates,
                         deptHours,
+                        deptTitle,
                         weekData: userOrientSchedule
                     });
                 }
@@ -205,6 +207,42 @@ app.post("/s/manager/schedule/changeWeek", (req, res) => {
     let currentDate = DateTime.fromISO(req.body.date);
     const dates = getWeekDates(currentDate.toISO());
     res.json({dates})
+});
+
+app.post("/s/manager/schedule/modify", (req, res) => {
+    const rb = req.body;
+    console.log(req.body);
+    //Convert date for use with luxon
+    const splitDate = rb.date.split("/");
+    if (parseInt(splitDate[0]) < 10) 
+        splitDate[0] = "0" + splitDate[0];
+    if (parseInt(splitDate[1]) < 10) 
+        splitDate[1] = "0" + splitDate[1];
+    const currentDate = DateTime.fromISO(`${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`);
+    const dates = getWeekDates(currentDate.toISO());
+    const localeDates = dates.map(date => {
+        return DateTime.fromISO(date).toLocaleString();
+    });
+    
+    WeekStore.findOne({orgID: 8032, startDate: localeDates[0]}, (err, weekStore) => {
+        if (err) console.error(err);
+
+        const dayIndex = weekStore.days.findIndex(day => day.date == rb.date);
+        const deptIndex = weekStore.days[dayIndex].departments.findIndex(dept => dept.title == rb.title);
+        const userIndex = weekStore.days[dayIndex].departments[deptIndex].users.findIndex(user => user.id == rb.id);
+
+        weekStore.days[dayIndex].departments[deptIndex].users[userIndex].expectedClock = rb.clocks;
+
+        weekStore.markModified('days');
+        weekStore.save((err) => {
+            if (err) console.error(err);
+            const userOrientSchedule = orientScheduleToUser(weekStore, rb.title);
+            res.json({
+                weekData: userOrientSchedule,
+                info: "Sucessfully modified time."
+            });
+        });
+    });
 });
 
 }
