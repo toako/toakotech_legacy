@@ -69,6 +69,8 @@ function getDeptUserData (id, org, users) {
 
 function orientScheduleToUser (data, deptTitle) {
     let deptSch = [];
+    let expectedHoursUsed = 0;
+    let actualHoursUsed = 0;
 
     data.days.forEach(day => {
         const thisDeptUsers = day.departments.find(dept => dept.title == deptTitle).users;
@@ -88,15 +90,38 @@ function orientScheduleToUser (data, deptTitle) {
             const daySchedule = day.users.find(user2 => user2.id == user.id);
             const expected = daySchedule.expectedClock;
             const actual = daySchedule.actualClock;
+            const expectedHours = calculateHours(daySchedule.expectedClock);
+            const actualHours = calculateHours(daySchedule.actualClock);
+
+            expectedHoursUsed += expectedHours;
+            actualHoursUsed += actualHours;
 
             return {
                 date: day.date,
                 expectedClock: expected,
-                actualClock: actual
+                actualClock: actual,
+                expectedHours,
+                actualHours
             }
         })
     }));
-    return userSchedules;
+    return {userSchedules, expectedHoursUsed, actualHoursUsed};
+}
+
+function calculateHours (timeArray) {
+
+    let timeMinArray = [];
+
+    timeArray.forEach(t => {
+        const th = t.split(":");
+        timeMinArray.push(parseInt(th[0]) * 60 + parseInt(th[1]));
+    });
+    
+    const lunchMins = timeMinArray[2] - timeMinArray[1];
+    const clockMins = timeMinArray[3] - timeMinArray[0];
+    const totalHours = Math.round(((clockMins - lunchMins) / 60) * 100) / 100;
+
+    return totalHours;
 }
 
 app.get("/s/admin/schedule", (req, res) => {
@@ -123,7 +148,6 @@ app.post("/s/admin/schedule", (req, res) => {
             }); 
     });
 });
-
 
 app.get("/s/manager/schedule", (req, res) => {
 
@@ -169,8 +193,8 @@ app.get("/s/manager/schedule", (req, res) => {
                                             posID: user.posID,
                                             posTitle: user.posTitle,
                                             posColor: user.posColor,
-                                            expectedClock: [null, null, null, null],
-                                            actualClock:  [null, null, null, null]
+                                            expectedClock: ["00:00","00:00","00:00","00:00"],
+                                            actualClock: ["00:00","00:00","00:00","00:00"]
                                         }
                                     })
                                 };
@@ -184,7 +208,9 @@ app.get("/s/manager/schedule", (req, res) => {
                             dates,
                             deptHours,
                             deptTitle,
-                            weekData: userOrientSchedule
+                            weekData: userOrientSchedule.userSchedules,
+                            expectedHoursUsed: userOrientSchedule.expectedHoursUsed,
+                            actualHoursUsed: userOrientSchedule.actualHoursUsed
                         });
                     });
                 }
@@ -194,19 +220,95 @@ app.get("/s/manager/schedule", (req, res) => {
                         dates,
                         deptHours,
                         deptTitle,
-                        weekData: userOrientSchedule
+                        weekData: userOrientSchedule.userSchedules,
+                        expectedHoursUsed: userOrientSchedule.expectedHoursUsed,
+                        actualHoursUsed: userOrientSchedule.actualHoursUsed
                     });
                 }
             });
         });
     });
-    
 });
 
 app.post("/s/manager/schedule/changeWeek", (req, res) => {
     let currentDate = DateTime.fromISO(req.body.date);
+
     const dates = getWeekDates(currentDate.toISO());
-    res.json({dates})
+
+    const localeDates = dates.map(date => {
+        return DateTime.fromISO(date).toLocaleString();
+    });
+
+    console.log(localeDates[0]);
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+
+        User.find({orgID: req.session.orgID}, (err, users) => {
+            if (err) console.error(err);
+
+            const deptData = getDeptUserData(req.session._id, org, users);
+            const userPosition = org.data.positionRegister.filter(posRegUser => posRegUser[0] == req.session._id)[0][1];
+            const thisDept = org.data.departments.filter(dept => dept.manager.id == userPosition)[0];
+            const deptTitle = thisDept.title;
+            const deptHours = thisDept.hours;
+
+            WeekStore.find({orgID: 8032, startDate: localeDates[0]}, (err, weekStore) => {
+                if (err) console.error(err);
+                
+                if (!weekStore.length > 0) {
+                    
+                    let newWeekStore = new WeekStore({
+                        orgID: req.session.orgID,
+                        startDate: localeDates[0],
+                        active: true,
+                        days: localeDates.map(date => ({
+                            date: date,
+                            departments: deptData.map(dept => {
+                                return {
+                                    title: dept.title,
+                                    hours: dept.hours,
+                                    users: dept.userData.map(user => {
+                                        return {
+                                            id: user.id,
+                                            name: user.name,
+                                            posID: user.posID,
+                                            posTitle: user.posTitle,
+                                            posColor: user.posColor,
+                                            expectedClock: ["00:00","00:00","00:00","00:00"],
+                                            actualClock: ["00:00","00:00","00:00","00:00"]
+                                        }
+                                    })
+                                };
+                            })
+                        }))
+                    });
+                    const userOrientSchedule = orientScheduleToUser(newWeekStore, deptTitle);
+                    newWeekStore.save(err => {
+                        if (err) console.error(err);
+                        res.json({
+                            dates,
+                            deptHours,
+                            deptTitle,
+                            weekData: userOrientSchedule.userSchedules,
+                            expectedHoursUsed: userOrientSchedule.expectedHoursUsed,
+                            actualHoursUsed: userOrientSchedule.actualHoursUsed
+                        });
+                    });
+                }
+                else {
+                    const userOrientSchedule = orientScheduleToUser(weekStore[0], deptTitle);
+                    res.json({
+                        dates,
+                        deptHours,
+                        deptTitle,
+                        weekData: userOrientSchedule.userSchedules,
+                        expectedHoursUsed: userOrientSchedule.expectedHoursUsed,
+                        actualHoursUsed: userOrientSchedule.actualHoursUsed
+                    });
+                }
+            });
+        });
+    });
 });
 
 app.post("/s/manager/schedule/modify", (req, res) => {
@@ -238,8 +340,81 @@ app.post("/s/manager/schedule/modify", (req, res) => {
             if (err) console.error(err);
             const userOrientSchedule = orientScheduleToUser(weekStore, rb.title);
             res.json({
-                weekData: userOrientSchedule,
+                weekData: userOrientSchedule.userSchedules,
+                expectedHoursUsed: userOrientSchedule.expectedHoursUsed,
+                actualHoursUsed: userOrientSchedule.actualHoursUsed,
                 info: "Sucessfully modified time."
+            });
+        });
+    });
+});
+
+app.get("/s/user/schedule", (req, res) => {
+    //Week 1 (this week)
+    let currentDate = DateTime.now();
+    const dates = getWeekDates(currentDate.toISO());
+    //Week 2 (next week)
+    const nextWeekDate = DateTime.fromISO(dates[0]).plus({days: 7});
+    const nextDates = getWeekDates(nextWeekDate.toISO());
+
+    const locDates0 = dates.map(date => {
+        return DateTime.fromISO(date).toLocaleString();
+    });
+    const locDates1 = nextDates.map(date => {
+        return DateTime.fromISO(date).toLocaleString();
+    });
+
+    Organization.findById(req.session.orgID, (err, org) => {
+        if (err) console.error(err);
+
+        const posIndex = org.data.positionRegister.find(posRegUser => posRegUser[0] == req.session._id)[1];
+        const deptTitle = org.data.departments.find(dept => dept.positions.findIndex(pos => pos.id == posIndex) != -1).title;
+        WeekStore.find({orgID: 8032}, (err, _weekStores) => {
+            if (err) console.error(err);
+            
+            let weekStore0 = _weekStores.find(ws => ws.startDate == locDates0[0]);
+            let weekStore1 = _weekStores.find(ws => ws.startDate == locDates1[0]);
+
+            const sch1 = orientScheduleToUser(weekStore0, deptTitle).userSchedules.find(user => user.id == req.session._id);
+            const sch2 = orientScheduleToUser(weekStore1, deptTitle).userSchedules.find(user => user.id == req.session._id);
+            res.json({
+                name: sch1.name,
+                id: sch1.id,
+                title: deptTitle,
+                schedule1: sch1.schedule,
+                schedule2: sch2.schedule,
+                startDate1: locDates0[0],
+                startDate2: locDates1[0],
+            });
+        });
+    });
+});
+
+app.post("/s/user/schedule/clock", (req, res) => {
+    const rb = req.body;
+    const index = rb.index;
+    console.log(index);
+
+    const currentDate = DateTime.now();
+    const dates = getWeekDates(currentDate.toISO());
+    const localeDates = dates.map(date => {
+        return DateTime.fromISO(date).toLocaleString();
+    });
+
+    WeekStore.findOne({orgID: 8032, startDate: localeDates[0]}, (err, weekStore) => {
+        if (err) console.error(err);
+
+        const dayIndex = weekStore.days.findIndex(day => day.date == currentDate.toLocaleString());
+        const deptIndex = weekStore.days[dayIndex].departments.findIndex(dept => dept.title == rb.title);
+        const userIndex = weekStore.days[dayIndex].departments[deptIndex].users.findIndex(user => user.id == rb.id);
+        weekStore.days[dayIndex].departments[deptIndex].users[userIndex].actualClock[index] = currentDate.toISOTime().substr(0,5);
+
+        weekStore.markModified('days');
+        weekStore.save((err) => {
+            if (err) console.error(err);
+
+            res.json({
+                info: "Sucessful clock at time."
             });
         });
     });

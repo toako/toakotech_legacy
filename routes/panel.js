@@ -24,7 +24,14 @@ app.get("/s/admin/panel", (req, res) => {
             if (err) console.error(err);
             
             const userPositionID = org.data.positionRegister.filter(posRegUser => posRegUser[0] == req.session._id)[0][1];
-            const positionName = org.data.positions.filter(pos => pos.id == userPositionID)[0].title;
+            
+            let positionName = "";
+            if (org.adminList.includes(req.session._id)) {
+                positionName = "admin";
+            }
+            else {
+                positionName = org.data.positions.filter(pos => pos.id == userPositionID)[0].title;
+            }
 
             res.json({
                 firstName: user.firstName,

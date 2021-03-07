@@ -32,7 +32,6 @@ class Schedule extends React.Component {
             lunchoff: "",
             clockoff: "",
             hoursUsed: 0,
-            hoursLeft: 0,
             totalHours: 0,
             showModal: false,
             modalUserID: "",
@@ -63,7 +62,8 @@ class Schedule extends React.Component {
                     dates: res.data.dates,
                     totalHours: res.data.deptHours,
                     deptTitle: res.data.deptTitle,
-                    weekData: res.data.weekData
+                    weekData: res.data.weekData,
+                    hoursUsed: res.data.expectedHoursUsed
                 });
             })
             .catch(err => console.log(err));
@@ -73,11 +73,14 @@ class Schedule extends React.Component {
         e.persist();
         Axios.post(`${server}/s/manager/schedule/changeWeek`, {date: e.target.value})
             .then(res => {
+                console.log(res.data.weekData);
+                console.log(res.data.deptTitle);
                 this.setState({
                     dateBox: e.target.value,
                     dates: res.data.dates,
                     deptTitle: res.data.deptTitle,
-                    weekData: res.data.weekData
+                    weekData: res.data.weekData,
+                    hoursUsed: res.data.expectedHoursUsed
                 });
             })
             .catch(err => console.log(err));
@@ -92,7 +95,6 @@ class Schedule extends React.Component {
             .filter(user => user.id === id)[0].schedule
             .filter(day => day.date === date)[0].expectedClock;
 
-        console.log(userClocks);
         userClocks = userClocks.map(c => c == null ? "00:00" : c);
 
         this.setState({
@@ -166,6 +168,26 @@ class Schedule extends React.Component {
             info = "Clock times are not in chronological order.";
         }
 
+        if (!error) {
+            let timeArray = [this.state.clockon, this.state.lunchon, this.state.lunchoff, this.state.clockoff];
+            let timeMinArray = [];
+
+            timeArray.forEach(t => {
+                const th = t.split(":");
+                timeMinArray.push(parseInt(th[0]) * 60 + parseInt(th[1]));
+            });
+            
+            const lunchMins = timeMinArray[2] - timeMinArray[1];
+            const clockMins = timeMinArray[3] - timeMinArray[0];
+            const totalHours = Math.round(((clockMins - lunchMins) / 60) * 100) / 100;
+
+            if (totalHours > this.state.totalHours - this.state.hoursUsed) {
+                error = true;
+                info = "Clock time exceeds hours left for department. Please adjust."
+            }
+        }
+        
+
         if (error) {
             this.setState({
                 modalInfo: info
@@ -180,7 +202,12 @@ class Schedule extends React.Component {
             }).then(res => {
                 this.setState({
                     weekData: res.data.weekData,
-                    modalInfo: res.data.info
+                    hoursUsed: res.data.expectedHoursUsed,
+                    modalInfo: res.data.info,
+                    clockon: "00:00",
+                    lunchon: "00:00",
+                    lunchoff: "00:00",
+                    clockoff: "00:00"
                 });
             }).catch(err => console.log(err));
         }
@@ -195,6 +222,7 @@ class Schedule extends React.Component {
         }).then(res => {
             this.setState({
                 weekData: res.data.weekData,
+                hoursUsed: res.data.expectedHoursUsed,
                 modalInfo: res.data.info
             });
         }).catch(err => console.log(err));
@@ -208,7 +236,7 @@ class Schedule extends React.Component {
             </Col>
             <Col className="col-3"><h6>Total Labor Hours: <span className="text-danger">{this.state.totalHours}</span></h6></Col>
             <Col className="col-3"><h6>Used Labor Hours: <span className="text-danger">{this.state.hoursUsed}</span></h6></Col>
-            <Col className="col-3"><h6>Available Labor Hours: <span className="text-danger">{this.state.hoursLeft}</span></h6></Col>
+            <Col className="col-3"><h6>Available Labor Hours: <span className="text-danger">{this.state.totalHours - this.state.hoursUsed}</span></h6></Col>
         </Row>
         <Row>
             {this.weekdays.map(wd => {
@@ -246,20 +274,21 @@ class Schedule extends React.Component {
                         <Col key={day.date} className={this.calendarColumnClasses3}>
                             <p className="cal-text">
                                 <span className="cal-head">Clock On: </span>
-                                {day.expectedClock[0] == null ? "None" : day.expectedClock[0]}
+                                {day.expectedClock[0]}
                             </p>
                             <p className="cal-text">
                                 <span className="cal-head">Lunch On: </span>
-                                {day.expectedClock[1] == null ? "None" : day.expectedClock[1]}
+                                {day.expectedClock[1]}
                             </p>
                             <p className="cal-text">
                                 <span className="cal-head">Lunch Off: </span>
-                                {day.expectedClock[2] == null ? "None" : day.expectedClock[2]}
+                                {day.expectedClock[2]}
                             </p>
                             <p className="cal-text">
                                 <span className="cal-head">Clock Off: </span>
-                                {day.expectedClock[3] == null ? "None" : day.expectedClock[3]}
+                                {day.expectedClock[3]}
                             </p>
+                            <p>Hours Scheduled: {day.expectedHours}</p>
                             <Button 
                                 id={`${user.id}|${day.date}|${user.name}`}
                                 onClick={this.handleModalOpen} 
