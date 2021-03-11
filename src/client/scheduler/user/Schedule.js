@@ -11,6 +11,7 @@ import React from "react";
 import Axios from "axios";
 
 import {Col, Row, Button} from "react-bootstrap";
+import { isNumber } from "react-simple-timefield";
 
 const server = process.env.REACT_APP_PROJECT_SERVER ? process.env.REACT_APP_PROJECT_SERVER : "";
 
@@ -42,6 +43,10 @@ class Schedule extends React.Component {
     componentDidMount() {
         Axios.get(`${server}/s/user/schedule`)
             .then (res => {
+
+                if (res.data.info) {
+                    console.log(res.data.info);
+                }
                 this.setState({
                     name: res.data.name,
                     id: res.data.id,

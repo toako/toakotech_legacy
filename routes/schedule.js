@@ -371,7 +371,10 @@ app.get("/s/user/schedule", (req, res) => {
         const deptTitle = org.data.departments.find(dept => dept.positions.findIndex(pos => pos.id == posIndex) != -1).title;
         WeekStore.find({orgID: 8032}, (err, _weekStores) => {
             if (err) console.error(err);
-            
+            if (_weekStores.length == 0) {
+                res.json({info: "No schedule produced."});
+            }
+
             let weekStore0 = _weekStores.find(ws => ws.startDate == locDates0[0]);
             let weekStore1 = _weekStores.find(ws => ws.startDate == locDates1[0]);
 
