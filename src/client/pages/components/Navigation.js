@@ -1,7 +1,6 @@
 import React from "react";
 import { IndexLinkContainer } from "react-router-bootstrap"
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import '@fortawesome/fontawesome-free/js/all.js';
 
 /*
@@ -10,38 +9,32 @@ import '@fortawesome/fontawesome-free/js/all.js';
 
 export default function Navigation () {
     return (
-        <Navbar fixed="top" id="navbar-tt">
-            <IndexLinkContainer to="/"><button id="nav-logo"/></IndexLinkContainer>
-            <Nav className="mr-auto">
-                <IndexLinkContainer to="/portfolio">
-                    <button className="nav-btn">Portfolio <i className="fas fa-book-open fa-xs"></i></button>
-                </IndexLinkContainer>
-                <IndexLinkContainer to="/projects">
-                    <button className="nav-btn">Projects <i className="fas fa-pencil-alt fa-xs"></i></button>
-                </IndexLinkContainer>
-                <IndexLinkContainer to="/about">
-                    <button className="nav-btn">About Me <i className="fas fa-user fa-xs"></i></button>
-                </IndexLinkContainer>
-                <IndexLinkContainer to="/contact">
-                    <button className="nav-btn">Contact <i className="fas fa-phone fa-xs"></i></button>
-                </IndexLinkContainer>
-                <IndexLinkContainer to="/eclipse">
-                    <button className="nav-btn" disabled>Eclipse <img 
-                        src="/res/logos/mitsu.png" 
-                        alt="mitsubishi logo" 
-                        width="20px" 
-                        height="20px" 
-                        style={{marginTop: "-4px"}}
-                        />
-                    </button>
-                </IndexLinkContainer>
-            </Nav>
-            <Nav>
-                <IndexLinkContainer to="/s">
-                    <button className="nav-btn">Scheduler App <i className="fas fa-calendar-alt fa-xs"></i></button>
-                </IndexLinkContainer>
-                <button href="https://github.com/toako" className="nav-btn">GitHub <i className="fab fa-github fa-sm"></i></button>
-            </Nav>
+        <Navbar collapseOnSelect expand="lg" bg="tt" fixed="top" variant="light" className="navbar-tt">
+            <Container>
+            <Navbar.Brand className="nav-btn" href="#home">
+                <img
+                alt=""
+                src="./res/iconlarge.png"
+                width="30"
+                height="30"
+                className="d-inline-block align-top mr-1"
+                />{'   '}
+                Will Kellermann
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="ml-auto mr-auto">
+                    <Nav.Link className="nav-btn" href="#portfolio">Portfolio</Nav.Link>
+                    <Nav.Link className="nav-btn" href="#projects">Projects</Nav.Link>
+                    <Nav.Link className="nav-btn" href="#about">About</Nav.Link>
+                    <Nav.Link className="nav-btn" href="#contact">Contact</Nav.Link>
+                    
+                </Nav>
+                <Nav>
+                    <Nav.Link className="nav-btn" href="#github">GitHub <i className="fab fa-github fa-sm"></i></Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+            </Container>
         </Navbar>
     )
     

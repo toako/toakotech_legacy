@@ -4,12 +4,23 @@
 *
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
+
+//Fonts
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap');
 
+// Breakpoints
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
 // GLOBALS
 ///////////////////////////////////////////////////
-
 $blue: #0069aa;
 $indigo: #7a09fa;
 $purple: #3003d9;
@@ -32,13 +43,36 @@ $gray-800: #1a1932;
 $gray-900: #0e071b;
 $black: #000;
 
+$purple3: #663399;
+$purple2: #7953A9;
+$purple1: #8B74BD;
+$bgcolor: #daddff;
+$blue1: #B9BFFF;
+$blue2: #4066E0;
+$blue3: #22277A;
+
+// The infinity palette
+$infred: #e60013;
+$inforange: #ff8126;
+$infyellow: #ffe800;
+$infgreen: #14ff2f;
+$infforest: #0b7417;
+$infnavy: #005d9b;
+$infblue: #009bff;
+$infcyan: #30ffff;
+$infpurple: #6d23ff;
+$infmagenta: #c214ff;
+$infgraydark: #494949;
+$infgraylight: #fafafa;
+
 
 $fn: "Nunito", sans-serif; //Nunito variable
 $fos: "Open Sans", sans-serif; //Roboto variable
+$op: "Overpass", sans-serif;
+$ns: "Nunito Sans", sans-serif;
 
 .fn { font-family: $fn } //Nunito
 .fos { font-family: $fos } //Roboto
-
 
 footer {
     padding: 10px;
@@ -46,14 +80,18 @@ footer {
     color: $white;
 }
 
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: $gray-200; }
+::-webkit-scrollbar-thumb { background: $gray-400; }
+::-webkit-scrollbar-thumb:hover { background: $gray-500; }
+
 //*{ border: 1px solid red; }
 
 // WEBSITE NAVIGATION BAR
 ///////////////////////////////////////////////////
-#navbar-tt {
-    background-color: $gray-900;
-    box-shadow: 0px 2px 7px 2px rgba($black, 0.3);
-    width: 100vw;
+.navbar-tt {
+    background-color: $gray-200 !important;
+    box-shadow: 0px 2px 7px 2px rgba($black, 0.1) !important;
 }
 
 #navbar-tt #nav-logo{
@@ -75,85 +113,107 @@ footer {
     background-repeat: no-repeat;
 }
 
-#navbar-tt .navbar-nav .nav-btn {
+.nav-btn {
     background: none;
 	border: none;
 	padding: 0;
 	outline: inherit;
     font-size: 1.4rem;
-    color: $cyan;
-    font-family: $fn;
+    color: $infnavy !important;
+    font-family: $ns;
+    font-weight: 700;
     margin: 8px 20px 8px 20px;
 }
 
-#navbar-tt .navbar-nav .nav-btn:hover {
-    color: $teal;
+.nav-btn:focus {
+    outline: inherit !important;
+}
+.nav-btn:hover {
+    transform: scale(1.05) !important;
+    transition-timing-function: ease-in !important;
+    transition: 0.07s !important;
+    font-weight: 800;
+}
+.nav-btn:not(:hover) {
+    transform: scale(1) !important;
+    transition-timing-function: ease-in !important;
+    transition: 0.07s !important;
+}
+
+/*
+    GLOBAL VARS
+*/
+
+.sec-title {
+    font-family: $op;
+    font-size: 70px;
+    line-height: 75px;
+    font-weight: 700;
+}
+
+/*
+    SECTION 0 (Greeting Area)
+*/
+.container#s0 {
+    margin: 0;
+    min-width: 100%;
+    padding: 0 15% 50px;
+    background-color: $gray-300;
+    font-family: $ns;
+}
+
+#s0-header {
+    padding: 65px 0px 50px;
+}
+
+#s0-name {
+    font-family: $op;
+    font-size: 100px;
+    line-height: 100px;
+    color: $infnavy;
+    font-weight: 700;
+    text-align: center;
+}
+
+#s0-summary {
+    font-family: $op;
+    font-size: 50px;
+    line-height: 50px;
+    color: $gray-700;
+    text-align: center;
+    margin-bottom: 0 !important;
+}
+
+#s0-subheader {
+    align-items: center;
+}
+
+#s0-descbox {
+    background-color: $gray-200;
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#s0-willportrait {
+    width: 90%;
+    margin: 0px 5% 0px;
+}
+
+#s0-desctext {
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+#s0-jumptitle {
+    text-align: center;
+    color: $gray-700;
+    font-size: 32px;
+    line-height: 32px;
     font-weight: bold;
-}
-
-#navbar-tt .navbar-nav .nav-btn:active {
-    color: $blue;
-    font-weight: bold;
-}
-
-/////////////
-/////////////
-/////////////
-//HOME PAGE//
-/////////////
-/////////////
-/////////////
-
-// HOME PAGE - GREETING AREA
-///////////////////////////////////////////////////
-#home-greet-area {
-    background-image: url("/res/bgHome.JPEG");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    height: 1080px;
-    padding-top: 200px;
-}
-
-#home-greet-title {
-    color: $white;
-    font-family: $fos;
-    font-size: 5vw;
-    text-shadow: 0px 0px 16px rgba($gray-900, .5);
-}
-
-#home-greet-location {
-    color: $white;
-    font-family: $fos;
-    font-size: 3vw;
-    text-shadow: 0px 0px 16px rgba($gray-900, .5);
-}
-
-#home-greet-hover-fom {
-    animation: MoveUpDown 3s linear infinite;
-    position: relative;
-    left: 50%;
-    bottom: 90%;
-    color: $white;
-    text-shadow: 0px 0px 8px rgba($gray-900, .5);
-    margin-top: 300px;
-}
-@keyframes MoveUpDown {
-    0%, 100% { bottom: 0; }
-    50% { bottom: 30px; }
-}
-
-#home-greet-fom {
-    font-size: 4vw;
-}
-
-// HOME PAGE - TOPIC AREA
-///////////////////////////////////////////////////
-
-#home-topic-area {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color: $gray-800;
+    font-style: italic;
+    margin: 30px 0px 30px;
 }
 
 #home-topic-title {
@@ -173,10 +233,8 @@ footer {
     border-style: solid;
     border-width: 10px 0px 0px 0px;
     border-radius: 10px;
-    margin-top: 50px;
-    padding: 0;
-    background-color: $gray-700;
-    min-height: 490px;
+    padding: 0 !important;
+    background-color: $gray-200;
 }
 .home-topic:focus {
     outline: inherit;
@@ -216,65 +274,49 @@ footer {
     font-family: $fn;
 }
 
-/////////////
-/////////////
-/////////////
-//PORTFOLIO//
-/// PAGE ////
-/////////////
-/////////////
-
-.port-body {
-    padding: 20px;
-    background-color: $gray-800;
+/*
+    SECTION 1 (Portfolio)
+*/
+.container#s1 {
+    margin: 0;
+    min-width: 100%;
+    padding: 0 20% 50px;
+    background-color: $gray-200;
+    color: $gray-900;
+    font-family: $ns;
 }
 
-.port-header {
-    margin-top: -20px 0px 0px 0px;
-    color: $teal;
-    letter-spacing: .2em;
+#s1-header {
+    font-family: $op;
+    font-size: 72px;
+    line-height: 72px;
     font-weight: bold;
-    font-family: $fos; 
-    font-size: 100px;
-    text-align: center;
-}
-
-.port-area {
+    color: $gray-200;
     background-color: $gray-700;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 5px;
-    height: 100%
+    margin: 20px auto 0;
+    padding: 15px 15px 3px;
+    border-radius: 20px 0px 20px 0px;
+    text-align: center;
+    display: inline-block;
 }
 
-.port-title {
-    color: $cyan;
-    font-family: $fn;
+.s1-title {
+    color: $infnavy;
+    font-weight: bold;
 }
 
-.port-bar {
+.s1-bar {
     width: 100%;
     height: 2px;
     border-color: $gray-500;
     border-width: 1px 0;
     border-style: solid none;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 20px;
 }
 
-.port-subtitle {
-    margin-top: 20px;
-    color: $teal;
-    text-decoration: underline;
-    font-family: $fn;
-}
-
-.port-area h5 {
-    font-family: $fn;
-    color: $white;
-}
 
 .exp {
-    color: $gray-100;
+    color: $gray-700;
     border-radius: 4px;
     padding: 1px 4px 1px 4px;
     font-family: $fn;
@@ -290,11 +332,6 @@ footer {
 .skl { background-color: $blue; }
 .adv { background-color: $indigo; }
 
-.fcc-prog {
-    margin-top: 20px;
-    font-family: $fn;
-    color: $white;
-}
 
 /////////////
 /////////////
