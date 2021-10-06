@@ -11,7 +11,7 @@ app.get("/ws", (req, res) => {
     res.json({"message": "willstyle entry complete"});
 });
 
-app.get("/ws/users", (req, res) => {
+/*app.get("/ws/users", (req, res) => {
     FunnelUser.find({}, (err, users) => {
         if (err) console.error(err);
         if (users.length === 0)
@@ -32,16 +32,17 @@ app.get("/ws/users", (req, res) => {
             })
         }
     });
-});
+});*/
 
 app.post("/ws/users/create", (req, res) => {
-    let rb = req.body.data;
+    let rb = req.body;
+    console.log(DateTime.now().toLocaleString());
     let newUser = new FunnelUser({
-        _id: req.body.sessionID,
-        dc: DateTime.now.toLocaleString(),
-        source: req.body.source,
-        email: "",
-        data: { allCookieData: req.body.cookieDump }
+        _id: rb.sessionID,
+        dc: DateTime.now().toLocaleString(),
+        source: rb.source,
+        email: "unknown",
+        data: { allCookieData: rb.cookieData }
     });
 
     // Save new owner to db
