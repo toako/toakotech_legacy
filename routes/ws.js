@@ -59,7 +59,7 @@ app.post("/ws/users/create", (req, res) => {
     })
 });
 
-app.post("/ws/users/visitCheckout", (req, res) => {
+app.post("/ws/users/checkout", (req, res) => {
     let rb = req.body;
     FunnelUser.findById(rb.sessionID, (err, user) => {
         if (err) console.error(err);
