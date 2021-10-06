@@ -19,7 +19,6 @@ class WS extends React.Component {
     }
 
     componentDidMount () {
-        console.log("running");
         Axios.get(`${server}/ws`)
             .then(res => {
                 console.log(res);
