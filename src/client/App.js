@@ -17,7 +17,11 @@ import NavGap from "./pages/components/NavGap.js"
 import Footer from "./pages/components/Footer.js";
 
 //Scheduler Imports
-import Portal from "./scheduler/Portal.js"
+import Portal from "./scheduler/Portal.js";
+
+//WillStyle Imports
+import Dashboard from "./willstyle/WS.js";
+
 
 //App class
 class App extends React.Component {
@@ -33,6 +37,7 @@ class App extends React.Component {
           <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>
           <Route exact path="/eclipse"><Navigation/><NavGap/><Eclipse /><Footer/></Route>
           <Route path="/s"><Portal /></Route>
+          <Route path="/ws"><Dashboard /></Route>
         </Switch>
       </Router>)
     );

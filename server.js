@@ -21,6 +21,7 @@ const user = require("./routes/user.js");
 const department = require("./routes/department.js");
 const panel = require("./routes/panel.js");
 const schedule = require("./routes/schedule.js");
+const ws = require('./routes/ws.js');
 
 const app = express();
 app.use(cors());
@@ -46,6 +47,7 @@ user(app);
 department(app);
 panel(app);
 schedule(app);
+ws(app);
 
 // PAGE NAVIGATION AND RUN SERVER
 ///////////////////////////////////////////////////
