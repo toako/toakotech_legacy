@@ -104,6 +104,7 @@ class Auth extends React.Component {
             <Container fluid className="p-5">
                 <Row className="justify-content-center">
                     <p className="display-3 p-4">Employee Clocking and Scheduling</p>
+                    <p className="display-3 p-4 font-weight-bold text-danger">NOTICE: App is very outdated and is planned for a rebuild, thank you for your patience.</p>
                 </Row>
                 <Row className="justify-content-center">
                     <LinkContainer to="/">

@@ -36,7 +36,7 @@ class App extends React.Component {
           <Route exact path="/about"><Navigation/><NavGap/><About /><Footer/></Route>
           <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>
           <Route exact path="/eclipse"><Navigation/><NavGap/><Eclipse /><Footer/></Route>
-          <Route path="/s"><Portal /></Route>
+          {/* <Route path="/s"><Portal /></Route> */}
           <Route path="/ws"><Dashboard /></Route>
         </Switch>
       </Router>)
