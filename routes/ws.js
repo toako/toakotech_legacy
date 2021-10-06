@@ -38,7 +38,7 @@ app.post("/ws/users/create", (req, res) => {
     let rb = req.body.data;
     let newUser = new FunnelUser({
         _id: req.body.sessionID,
-        dc: DateTime.fromISO(date).toLocaleString(),
+        dc: DateTime.now.toLocaleString(),
         source: req.body.source,
         email: "",
         data: { allCookieData: req.body.cookieDump }
