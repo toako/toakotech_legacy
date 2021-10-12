@@ -4,6 +4,7 @@ const uid = require("uniqid");
 const { DateTime } = require("luxon");
 
 const FunnelUser = require("./models/FunnelUser.js");
+const Partial = require("./models/Partial.js");
 
 module.exports = function (app) {
 
@@ -47,14 +48,14 @@ app.post("/ws/users/create", (req, res) => {
                 data: { allCookieData: rb.cookieData, splitVersion: rb.splitVersion, wentToCheckout: false, checkoutOption: "none"}
             });
         
-            // Save new owner to db
+            // Save new user to db
             newUser.save((err, data) => {
                 if (err) return console.error(err);
                 res.json({info: `A new user, ${newUser._id}, has been created successfully.`});
             });
         }
         else {
-            res.json({ "Message": "User has already been created" });
+            res.json({ "info": "User has already been created" });
         }
     })
 });
@@ -75,10 +76,51 @@ app.post("/ws/users/checkout", (req, res) => {
             });
         }
         else {
-            res.json({ "Message": "User not found." });
+            res.json({ "info": "User not found." });
         }
     })
 });
 
+app.post("/ws/partials/create", (req, res) => {
+    let rb = req.body;
+    Partial.findById(rb.sessionID, (err, partial) => {
+        if (err) console.error(err);
+        if (!partial) {
+            let newPartial = new Partial({
+                fn: rb.type == "fn" ? rb.args : "unknown",
+                ln: rb.type == "ln" ? rb.args : "unknown",
+                em: rb.type == "em" ? rb.args : "unknown"
+            });
+        
+            // Save new partial to db
+            newPartial.save((err, data) => {
+                if (err) return console.error(err);
+                res.json({ "info": `A new partial has been created successfully.`, id: newPartial._id });
+            });
+        }
+        else {
+            res.json({ "info": "Partial has already been created" });
+        }
+    })
+});
+
+app.post("/ws/partials/modify", (req, res) => {
+    let rb = req.body;
+    Partial.findById(rb.sessionID, (err, partial) => {
+        if (err) console.error(err);
+        if (partial) {
+            partial[rb.type] = args;
+        
+            // Save partial modification event
+            partial.save((err, data) => {
+                if (err) return console.error(err);
+                res.json({ "info": `Partial ${partial._id}, has been modified.`});
+            });
+        }
+        else {
+            res.json({ "info": "Partial not found." });
+        }
+    })
+});
 
 }
