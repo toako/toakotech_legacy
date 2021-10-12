@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 const Mixed = mongoose.Schema.Types.Mixed;
 
 module.exports = Partial = mongoose.model("Partial", new mongoose.Schema({
-    _id: { type: String, required: true },
     fn: { type: String },
     ln: { type: String },
     em: { type: String }
