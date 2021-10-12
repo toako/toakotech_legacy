@@ -109,7 +109,7 @@ app.post("/ws/partials/modify", (req, res) => {
     Partial.findById(rb.sessionID, (err, partial) => {
         if (err) console.error(err);
         if (partial) {
-            partial[rb.type] = args;
+            partial[rb.type] = rb.args;
         
             // Save partial modification event
             partial.save((err, data) => {
