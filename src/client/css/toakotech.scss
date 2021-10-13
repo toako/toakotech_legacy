@@ -301,6 +301,7 @@ footer {
 }
 
 .s1-title {
+    padding-top: 60px;
     color: $infnavy;
     font-weight: bold;
 }
@@ -312,6 +313,15 @@ footer {
     border-width: 1px 0;
     border-style: solid none;
     margin: 10px 0px 20px;
+}
+
+.s1-skillset {
+    font-weight: bold;
+    background-color: $gray-600;
+    color: $gray-200;
+    padding: 3px 10px;
+    border-radius: 8px 0px 8px 0px;
+    margin-right: 10px;
 }
 
 

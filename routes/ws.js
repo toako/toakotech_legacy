@@ -12,28 +12,46 @@ app.get("/ws", (req, res) => {
     res.json({"message": "willstyle entry complete"});
 });
 
-/*app.get("/ws/users", (req, res) => {
+app.get("/ws/st", (req, res) => {
     FunnelUser.find({}, (err, users) => {
         if (err) console.error(err);
-        if (users.length === 0)
-            res.json({error: "No users found."});
-        else {
-            let userList = users.map(u => {
-                return {
-                    id: u._id,
-                    dc: u.dc,
-                    source: u.source,
-                    email: u.email,
-                    data: u.data
-                }
-            });
-            res.json({
-                info: `${users.length} users found in site #${req.session.orgID}!`,
-                userData: userList
-            })
+        
+        let stData = {
+            a: {
+                total: 0,
+                wentToCheckout: 0,
+                stress1: 0,
+                stress3: 0,
+                stress6: 0
+            },
+            b: {
+                total: 0,
+                wentToCheckout: 0,
+                stress1: 0,
+                stress3: 0,
+                stress6: 0
+            },
+            corruptUsers: 0
         }
+
+        users.forEach(u =>{
+
+            if (u.data.splitVersion != "a" && u.data.splitVersion != "b") {
+                stData.corruptUsers++;
+                return;
+            }
+            else {
+                stData[u.data.splitVersion].total = stData[u.data.splitVersion].total + 1;
+                if (u.data.wentToCheckout) { 
+                    stData[u.data.splitVersion].wentToCheckout = stData[u.data.splitVersion].wentToCheckout + 1;
+                    stData[u.data.splitVersion][u.data.checkoutOption] = stData[u.data.splitVersion][u.data.checkoutOption] + 1;
+                }
+            }
+        });
+
+        res.json(stData);
     });
-});*/
+});
 
 app.post("/ws/users/create", (req, res) => {
     let rb = req.body;

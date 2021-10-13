@@ -96,51 +96,31 @@ class Portfolio1 extends React.Component {
                             I began FreeCodeCamp in August of 2020. Though I had the ability to code and took multiple coding classes through Boise State University, I wanted to step up my
                             game by reinforcing my knowledge and confidence in all things web development. For the unacquainted, FreeCodeCamp is a online coding camp that gives lessons, challenges,
                             and projects in various categories of web development. 
-                            <i>Check out my FreeCodeCamp profile <a href="https://www.freecodecamp.org/toako">here</a>.</i>
+                            <i> Check out my FreeCodeCamp profile <a href="https://www.freecodecamp.org/toako">here</a>.</i>
                         </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h1 className="text-center port-title">Coding Skillsets</h1>
-                        <div className="port-bar"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <div className="port-area">
-                            <h1 className="text-center port-title">Overview</h1>
-                            <div className="port-bar"/>
-                            <h2 className="port-subtitle">Important Takeaway</h2>
-                            <h5>
-                                I am a self-taught programmer, who has dabbled in many things, but I am 
-                                particularly good at web design using the MERN stack. My favorite form of 
-                                hobby-coding is Unity and C#. Another important note is that I am highly 
-                                proficient in math at a calculus 2 level.
-                            </h5>
-                            <h2 className="port-subtitle">Coding History</h2>
-                            <h5>
-                                I have been coding since 7th grade. 
-                                At Centennial High School, I took Boise State concurrent CS classes for
-                                4 years and got 11 college credits. There, I learned to work in a team, learn Java, 
-                                and dabble with Arduino microcontrollers. I started taking programming seriously 
-                                junior year of high school, and I have been teaching myself Unity game design, as 
-                                well as building up my knowledge and skills in full-stack web development.
-                            </h5>
-                            <h2 className="port-subtitle">FreeCodeCamp Certification</h2>
-                            <h5>
-                                FreeCodeCamp is a non-profit coding camp for learning JavaScript-based web development 
-                                and earning coding certificates in various categories. I use and have been completing 
-                                the FreeCodeCamp course and its certifications as a formal proof of my knowledge and
-                                learning of various JS-based libraries and technologies for full-stack web development.
-                            </h5>
-                            <h2 className="port-subtitle">Proving My Skills</h2>
-                            <h5>
-                                I have applied my MERN stack skills in this website and use Heroku as my server and environment. 
-                                This website heavily utilizes React-Bootstrap for styling. Please refer to my custom
-                                made employee scheduling app to see my database and authentication skills.
-                            </h5>
-                        </div>
+                        <h1 className="s1-title"><i class="fas fa-star"></i> Coding Skillsets</h1>
+                        <div className="s1-bar"/>
+                        <p>
+                            <span className="s1-skillset"><i class="fas fa-code"></i> MERN Stack Web Development</span> I build websites using 
+                            React and SCSS for the front-end, Express.JS and Node.JS on the back-end, and MongoDB (& Mongoose) for storage and retrieval of data. 
+                            In fact, this very website is built using the aforementioned libraries. I have used MERN on my website and also in my day-to-day work.<br/>
+                            
+                        </p>
+                        <p>
+                            <span className="s1-skillset"><i class="fas fa-funnel-dollar"></i> Sales Funnels & Tracking Tools</span> My current workplace has provided me an excellent opportunity
+                            to grow and build skills in the direct response marketing space. I can confidently build a sales funnel/website from top to bottom with tracking and upsells. I also
+                            build custom tracking tools in JS for scroll depth, user interaction, split testing, customer cookies and metrics, as well as collecting abandoned cart information. I have
+                            also built custom checkout forms, affiliate pages, and improved sales funnels for a few clients that are using the Clickbank affiliate marketing platform.
+                        </p>
+                        <p>
+                            <span className="s1-skillset"><i class="fas fa-funnel-dollar"></i> Unity Game Development</span> Right now, I am working on an unannounced game project in Unity,
+                            which uses C# for scripting, The game I am building is a top-down dungeon crawler that utilizes A* pathfinding, advanced randomly-generated regions and dungeons, and API usage for a wide range 
+                            of items, weapons, and creatures. This is what I do in my free time and is in no way something I do professionally.
+                        </p>
                     </Col>
                 </Row>
             </Container>);
