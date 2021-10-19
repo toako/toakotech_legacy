@@ -1,10 +1,12 @@
 "use strict";
 
 const uid = require("uniqid");
-const { DateTime } = require("luxon");
+const { DateTime, Duration, Interval } = require("luxon");
 
 const FunnelUser = require("./models/FunnelUser.js");
 const Partial = require("./models/Partial.js");
+
+let dur = Duration.fromObject({days: 1});
 
 module.exports = function (app) {
 
@@ -12,8 +14,22 @@ app.get("/ws", (req, res) => {
     res.json({"message": "willstyle entry complete"});
 });
 
+function getDateRange(ds, de) {
+    ds = DateTime.fromFormat(ds, "yyyy-MM-dd");
+    de = DateTime.fromFormat(de, "yyyy-MM-dd");
+    let allDates = [];
+    let totalDays = Interval.fromDateTimes(ds, de).length("days");
+
+    for (let i = 0; i <= totalDays; i++) { allDates.push(ds.plus({days: i}).toLocaleString()); }
+    return allDates;
+}
+
 app.get("/ws/st", (req, res) => {
-    FunnelUser.find({}, (err, users) => {
+    let rq = req.query;
+    console.log(rq);
+    let dates = getDateRange(rq.dateStart, rq.dateEnd);
+    dates.forEach(d => console.log(d));
+    FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
         
         let stData = {
@@ -35,7 +51,6 @@ app.get("/ws/st", (req, res) => {
         }
 
         users.forEach(u =>{
-
             if (u.data.splitVersion != "a" && u.data.splitVersion != "b") {
                 stData.corruptUsers++;
                 return;
