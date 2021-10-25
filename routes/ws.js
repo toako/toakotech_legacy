@@ -78,7 +78,7 @@ app.post("/ws/users/create", (req, res) => {
                 dc: DateTime.now().toLocaleString(),
                 source: rb.source,
                 email: "unknown",
-                data: { allCookieData: rb.cookieData, splitVersion: rb.splitVersion, wentToCheckout: false, checkoutOption: "none"}
+                data: { allCookieData: rb.cookieData, splitVersion: rb.splitVersion, wentToCheckout: false, checkoutOption: "none", upsells: ["0"]}
             });
         
             // Save new user to db
@@ -106,6 +106,44 @@ app.post("/ws/users/checkout", (req, res) => {
             user.save((err, data) => {
                 if (err) return console.error(err);
                 res.json({info: `User ${user._id}, went to checkout.`});
+            });
+        }
+        else {
+            res.json({ "info": "User not found." });
+        }
+    })
+});
+
+app.post("/ws/users/conversion", (req, res) => {
+    let rb = req.body;
+    FunnelUser.findById(rb.sessionID, (err, user) => {
+        if (err) console.error(err);
+        if (user) {
+            user.data.append({ "conversion": true })
+            // Save checkout event
+            user.markModified('data');
+            user.save((err, data) => {
+                if (err) return console.error(err);
+                res.json({info: `User ${user._id}, purchased at checkout.`});
+            });
+        }
+        else {
+            res.json({ "info": "User not found." });
+        }
+    })
+});
+
+app.post("/ws/users/upsell", (req, res) => {
+    let rb = req.body;
+    FunnelUser.findById(rb.sessionID, (err, user) => {
+        if (err) console.error(err);
+        if (user) {
+            user.data.upsells.push(rb.productID);
+            // Save checkout event
+            user.markModified('data');
+            user.save((err, data) => {
+                if (err) return console.error(err);
+                res.json({info: `User ${user._id}, purchased at checkout.`});
             });
         }
         else {
