@@ -78,7 +78,7 @@ app.post("/ws/users/create", (req, res) => {
                 dc: DateTime.now().toLocaleString(),
                 source: rb.source,
                 email: "unknown",
-                data: { allCookieData: rb.cookieData, splitVersion: rb.splitVersion, wentToCheckout: false, checkoutOption: "none", upsells: ["0"]}
+                data: { allCookieData: rb.cookieData, splitVersion: rb.splitVersion, wentToCheckout: false, checkoutOption: "none", purchases: ["init"]}
             });
         
             // Save new user to db
@@ -119,7 +119,7 @@ app.post("/ws/users/conversion", (req, res) => {
     FunnelUser.findById(rb.sessionID, (err, user) => {
         if (err) console.error(err);
         if (user) {
-            Object.append(user.data, { "conversion": true })
+            user.data.purchases.push("conversion");
             // Save checkout event
             user.markModified('data');
             user.save((err, data) => {
@@ -138,7 +138,7 @@ app.post("/ws/users/upsell", (req, res) => {
     FunnelUser.findById(rb.sessionID, (err, user) => {
         if (err) console.error(err);
         if (user) {
-            user.data.upsells.push(rb.productID);
+            user.data.purchases.push(rb.productID);
             // Save checkout event
             user.markModified('data');
             user.save((err, data) => {
