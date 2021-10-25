@@ -119,7 +119,7 @@ app.post("/ws/users/conversion", (req, res) => {
     FunnelUser.findById(rb.sessionID, (err, user) => {
         if (err) console.error(err);
         if (user) {
-            user.data.append({ "conversion": true })
+            Object.append(user.data, { "conversion": true })
             // Save checkout event
             user.markModified('data');
             user.save((err, data) => {
