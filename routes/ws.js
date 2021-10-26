@@ -37,28 +37,12 @@ app.get("/ws/st", (req, res) => {
     FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
         
+        //SPLIT TEST DATA
         let stData = {
-            a: {
-                total: 0,
-                wentToCheckout: 0,
-                stress1: 0,
-                stress3: 0,
-                stress6: 0
-            },
-            b: {
-                total: 0,
-                wentToCheckout: 0,
-                stress1: 0,
-                stress3: 0,
-                stress6: 0
-            },
+            a: { total: 0, wentToCheckout: 0, stress1: 0, stress3: 0, stress6: 0, conversion: 0 },
+            b: { total: 0, wentToCheckout: 0, stress1: 0, stress3: 0, stress6: 0, conversion: 0 },
             corruptUsers: 0
         }
-
-        let upsellData = {
-
-        };
-
         users.forEach(u =>{
             if (u.data.splitVersion != "a" && u.data.splitVersion != "b") {
                 stData.corruptUsers++;
@@ -69,6 +53,27 @@ app.get("/ws/st", (req, res) => {
                 if (u.data.wentToCheckout) { 
                     stData[u.data.splitVersion].wentToCheckout = stData[u.data.splitVersion].wentToCheckout + 1;
                     stData[u.data.splitVersion][u.data.checkoutOption] = stData[u.data.splitVersion][u.data.checkoutOption] + 1;
+                }
+                if (u.data.purchases) {
+                    if (u.data.purchases.includes("conversion")) stData[u.data.splitVersion].conversion = stData[u.data.splitVersion].conversion + 1;
+                }
+            }
+        });
+
+        //UPSELL DATA
+        let upsellOrder = ["mots2", "mots3", "mots6", "sleep1", "sleep3", "sleep6"];
+        let upsellData = { stress1: [0,0,0,0,0,0,0], stress3: [0,0,0,0,0,0,0], stress6: [0,0,0,0,0,0,0] };
+        
+        users.forEach(u => {
+            if (u.data.purchases) {
+                if (u.data.wentToCheckout && u.data.purchases.includes("conversion")) {
+                    const initProduct = u.data.checkoutOption;
+                    upsellData[initProduct][0] = upsellData[initProduct][0] + 1;
+                    if (u.data.purchases) {
+                        upsellOrder.forEach((o, i) => {
+                            if(u.data.purchases.includes(o)) upsellData[initProduct][i + 1] = upsellData[initProduct][i + 1] + 1;
+                        });
+                    }   
                 }
             }
         });
