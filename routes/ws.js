@@ -24,11 +24,16 @@ function getDateRange(ds, de) {
     return allDates;
 }
 
+/*
+GET FUNNEL DATA
+*/
+
 app.get("/ws/st", (req, res) => {
     let rq = req.query;
-    console.log(rq);
     let dates = getDateRange(rq.dateStart, rq.dateEnd);
     dates.forEach(d => console.log(d));
+
+    //FIND USERS BASED ON DATE
     FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
         
@@ -50,6 +55,10 @@ app.get("/ws/st", (req, res) => {
             corruptUsers: 0
         }
 
+        let upsellData = {
+
+        };
+
         users.forEach(u =>{
             if (u.data.splitVersion != "a" && u.data.splitVersion != "b") {
                 stData.corruptUsers++;
@@ -64,9 +73,13 @@ app.get("/ws/st", (req, res) => {
             }
         });
 
-        res.json(stData);
+        res.json({stData, upsellData});
     });
 });
+
+/*
+FUNNEL VISIT
+*/
 
 app.post("/ws/users/create", (req, res) => {
     let rb = req.body;
@@ -93,6 +106,10 @@ app.post("/ws/users/create", (req, res) => {
     })
 });
 
+/*
+FUNNEL WENT TO CHECKOUT
+*/
+
 app.post("/ws/users/checkout", (req, res) => {
     let rb = req.body;
     FunnelUser.findById(rb.sessionID, (err, user) => {
@@ -114,6 +131,10 @@ app.post("/ws/users/checkout", (req, res) => {
     })
 });
 
+/*
+FUNNEL CONVERSION
+*/
+
 app.post("/ws/users/conversion", (req, res) => {
     let rb = req.body;
     FunnelUser.findById(rb.sessionID, (err, user) => {
@@ -133,6 +154,10 @@ app.post("/ws/users/conversion", (req, res) => {
     })
 });
 
+/*
+FUNNEL UPSELL PURCHASE
+*/
+
 app.post("/ws/users/upsell", (req, res) => {
     let rb = req.body;
     FunnelUser.findById(rb.sessionID, (err, user) => {
@@ -151,6 +176,10 @@ app.post("/ws/users/upsell", (req, res) => {
         }
     })
 });
+
+/*
+CREATE PARTIAL
+*/
 
 app.post("/ws/partials/create", (req, res) => {
     let rb = req.body;
@@ -174,6 +203,10 @@ app.post("/ws/partials/create", (req, res) => {
         }
     })
 });
+
+/*
+MODIFY PARTIAL
+*/
 
 app.post("/ws/partials/modify", (req, res) => {
     let rb = req.body;
