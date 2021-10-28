@@ -194,7 +194,9 @@ app.post("/ws/partials/create", (req, res) => {
             let newPartial = new Partial({
                 fn: rb.type == "fn" ? rb.args : "unknown",
                 ln: rb.type == "ln" ? rb.args : "unknown",
-                em: rb.type == "em" ? rb.args : "unknown"
+                em: rb.type == "em" ? rb.args : "unknown",
+                ph: rb.type == "ph" ? rb.args : "unknown",
+                dc: rb.dc
             });
         
             // Save new partial to db
