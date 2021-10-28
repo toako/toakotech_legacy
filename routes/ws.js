@@ -183,6 +183,26 @@ app.post("/ws/users/upsell", (req, res) => {
 });
 
 /*
+GET PARTIALS
+*/
+
+app.get("/ws/partials", (req, res) => {
+    Partial.find({}, (err, partials) => {
+        if (err) console.error(err);
+        let pList = partials.filter(p => 
+            p.em.length > 1 && 
+            p.em != "unknown" && 
+            p.fn != "unknown" && 
+            p.ln != "unknown" &&
+            !p.fn.includes("Test") &&
+            !p.fn.includes("Customer") && 
+            !p.ln.includes("Please") && 
+            !p.ln.includes("Ignore"));
+        res.json(pList);
+    });
+});
+
+/*
 CREATE PARTIAL
 */
 
