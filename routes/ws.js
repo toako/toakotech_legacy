@@ -205,7 +205,7 @@ app.post("/ws/users/conversion", (req, res) => {
         if (user) {
             user.data.purchases.push("conversion");
             if(rb.params) {
-                user.data.push(rb.params);
+                user.data.params = rb.params;
             }
             // Save checkout event
             user.markModified('data');
