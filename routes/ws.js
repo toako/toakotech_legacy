@@ -25,7 +25,7 @@ function getDateRange(ds, de) {
 }
 
 /*
-GET FUNNEL DATA
+GET SS FUNNEL DATA
 */
 
 app.get("/ws/st", (req, res) => {
@@ -37,6 +37,7 @@ app.get("/ws/st", (req, res) => {
     FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
         
+        users = users.filter(u => u.source == "SvenCartStress");
         //SPLIT TEST DATA
         let stData = {
             a: { total: 0, wentToCheckout: 0, stress1: 0, stress3: 0, stress6: 0, conversion: 0 },
@@ -63,11 +64,12 @@ app.get("/ws/st", (req, res) => {
         //UPSELL DATA
         let upsellOrder = ["mots2", "mots3", "mots6", "sleep1", "sleep3", "sleep6"];
         let upsellData = { stress1: [0,0,0,0,0,0,0], stress3: [0,0,0,0,0,0,0], stress6: [0,0,0,0,0,0,0] };
-        
+        console.log(users);
         users.forEach(u => {
             if (u.data.purchases) {
                 if (u.data.wentToCheckout && u.data.purchases.includes("conversion")) {
                     const initProduct = u.data.checkoutOption;
+                    console.log(u.data);
                     upsellData[initProduct][0] = upsellData[initProduct][0] + 1;
                     if (u.data.purchases) {
                         upsellOrder.forEach((o, i) => {
@@ -83,22 +85,25 @@ app.get("/ws/st", (req, res) => {
 });
 
 /*
-GET FUNNEL DATA
+GET AN FUNNEL DATA
 */
 
-app.get("/ws/st", (req, res) => {
+app.get("/ws/an", (req, res) => {
     let rq = req.query;
+    console.log(rq);
     let dates = getDateRange(rq.dateStart, rq.dateEnd);
     dates.forEach(d => console.log(d));
 
     //FIND USERS BASED ON DATE
     FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
-        
+        console.log(users);
+        users = users.filter(u => u.source == "ANSMILE");
+        console.log(users);
         //SPLIT TEST DATA
         let stData = {
-            a: { total: 0, wentToCheckout: 0, stress1: 0, stress3: 0, stress6: 0, conversion: 0 },
-            b: { total: 0, wentToCheckout: 0, stress1: 0, stress3: 0, stress6: 0, conversion: 0 },
+            a: { total: 0, wentToCheckout: 0, smile1: 0, smile3: 0, smile6: 0, conversion: 0 },
+            b: { total: 0, wentToCheckout: 0, smile1: 0, smile3: 0, smile6: 0, conversion: 0 },
             corruptUsers: 0
         }
         users.forEach(u =>{
@@ -119,8 +124,8 @@ app.get("/ws/st", (req, res) => {
         });
         
         //UPSELL DATA
-        let upsellOrder = ["mots2", "mots3", "mots6", "sleep1", "sleep3", "sleep6"];
-        let upsellData = { stress1: [0,0,0,0,0,0,0], stress3: [0,0,0,0,0,0,0], stress6: [0,0,0,0,0,0,0] };
+        let upsellOrder = ["smile6u", "sleep1", "sleep3", "sleep6", "smile4u"];
+        let upsellData = { smile1: [0,0,0,0,0,0,0], smile3: [0,0,0,0,0,0,0], smile6: [0,0,0,0,0,0,0] };
         
         users.forEach(u => {
             if (u.data.purchases) {
