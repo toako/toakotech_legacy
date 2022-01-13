@@ -83,7 +83,7 @@ class Portfolio1 extends React.Component {
     }
     render () {
         return (<Container id="s1">
-                <Row className="text-center pt-5 pb-5">
+                <Row className="text-center pt-3 pb-3">
                     <Col>
                         <p id="s1-header">Portfolio</p>
                     </Col>

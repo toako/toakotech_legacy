@@ -84,6 +84,28 @@ app.get("/ws/st", (req, res) => {
     });
 });
 
+//CUSTOM QUERY AN
+app.get("/ws/st/custom", (req, res) => {
+    let rq = req.query;
+    console.log(rq);
+    let dates = getDateRange(rq.dateStart, rq.dateEnd);
+    dates.forEach(d => console.log(d));
+
+    //FIND USERS BASED ON DATE
+    FunnelUser.find().where("dc").in(dates).exec((err, users) => {
+        users = users.filter(u => u.source == "SvenCartStress");
+        if (rq.crt == "conversions")
+            users = users.filter(u => u.data.purchases.length > 1);
+        else if (rq.crt == "conversionsE") {
+            users = users.filter(u => u.data.purchases.length > 1);
+            // users = users.map(u => {
+
+            // });
+        }
+        res.json(users);
+    });
+});
+
 /*
 GET AN FUNNEL DATA
 */
@@ -97,9 +119,7 @@ app.get("/ws/an", (req, res) => {
     //FIND USERS BASED ON DATE
     FunnelUser.find().where("dc").in(dates).exec((err, users) => {
         if (err) console.error(err);
-        console.log(users);
         users = users.filter(u => u.source == "ANSMILE");
-        console.log(users);
         //SPLIT TEST DATA
         let stData = {
             a: { total: 0, wentToCheckout: 0, smile1: 0, smile3: 0, smile6: 0, conversion: 0 },
@@ -142,6 +162,29 @@ app.get("/ws/an", (req, res) => {
         });
 
         res.json({stData, upsellData});
+    });
+});
+
+
+//CUSTOM QUERY AN
+app.get("/ws/an/custom", (req, res) => {
+    let rq = req.query;
+    console.log(rq);
+    let dates = getDateRange(rq.dateStart, rq.dateEnd);
+    dates.forEach(d => console.log(d));
+
+    //FIND USERS BASED ON DATE
+    FunnelUser.find().where("dc").in(dates).exec((err, users) => {
+        users = users.filter(u => u.source == "ANSMILE");
+        if (rq.crt == "conversions")
+            users = users.filter(u => u.data.purchases.length > 1);
+        else if (rq.crt == "conversionsE") {
+            users = users.filter(u => u.data.purchases.length > 1);
+            // users = users.map(u => {
+
+            // });
+        }
+        res.json(users);
     });
 });
 

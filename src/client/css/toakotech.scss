@@ -43,7 +43,6 @@ $gray-800: #1a1932;
 $gray-900: #0e071b;
 $black: #000;
 
-$purple3: #663399;
 $purple2: #7953A9;
 $purple1: #8B74BD;
 $bgcolor: #daddff;
@@ -57,10 +56,10 @@ $inforange: #ff8126;
 $infyellow: #ffe800;
 $infgreen: #14ff2f;
 $infforest: #0b7417;
-$infnavy: #005d9b;
+$infnavy: #1e3c64;
 $infblue: #009bff;
 $infcyan: #30ffff;
-$infpurple: #6d23ff;
+$infpurple: #663399;
 $infmagenta: #c214ff;
 $infgraydark: #494949;
 $infgraylight: #fafafa;
@@ -158,7 +157,7 @@ footer {
     margin: 0;
     min-width: 100%;
     padding: 0 15% 50px;
-    background-color: $gray-300;
+    background-color: $infnavy;
     font-family: $ns;
 }
 
@@ -170,16 +169,17 @@ footer {
     font-family: $op;
     font-size: 100px;
     line-height: 100px;
-    color: $infnavy;
+    color: $gray-200;
     font-weight: 700;
     text-align: center;
 }
 
 #s0-summary {
     font-family: $op;
-    font-size: 50px;
-    line-height: 50px;
-    color: $gray-700;
+    font-size: 42px;
+    line-height: 42px;
+    color: $gray-200;
+    font-style: italic;
     text-align: center;
     margin-bottom: 0 !important;
 }
@@ -188,22 +188,17 @@ footer {
     align-items: center;
 }
 
-#s0-descbox {
+#s0-hr {
     background-color: $gray-200;
-    border-radius: 20px;
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-#s0-willportrait {
-    width: 90%;
-    margin: 0px 5% 0px;
+    width: 80%;
+    margin: 0 10% 45px;
 }
 
 #s0-desctext {
     font-size: 24px;
-    margin-bottom: 0;
+    font-weight: 300;
+    color: $gray-200;
+    margin: auto 10% 0;
 }
 
 #s0-jumptitle {
@@ -216,64 +211,6 @@ footer {
     margin: 30px 0px 30px;
 }
 
-#home-topic-title {
-    color: $cyan;
-    margin-bottom: 20px;
-    font-family: $fn;
-    font-size: 2vw;
-}
-
-#home-topic-subtitle {
-    color: $indigo;
-    font-family: $fn;
-    font-size: 1.5vw;
-}
-
-.home-topic {
-    border-style: solid;
-    border-width: 10px 0px 0px 0px;
-    border-radius: 10px;
-    padding: 0 !important;
-    background-color: $gray-200;
-}
-.home-topic:focus {
-    outline: inherit;
-}
-.home-topic:hover {
-    transform: scale(0.98);
-    transition-timing-function: ease-in;
-    transition: 0.2s;
-}
-.home-topic:not(:hover) {
-    transform: scale(1);
-    transition-timing-function: ease-in;
-    transition: 0.2s;
-}
-
-.home-topic-portfolio { border-color: $green;}
-.home-topic-projects { border-color: $yellow;}
-.home-topic-about { border-color: $red;}
-.home-topic-contact { border-color: $blue;}
-
-.home-topic-img {
-    width: 100%;
-    height: 100%;
-}
-
-.home-topic-textarea {
-    margin: 25px 40px 25px 40px;
-}
-
-.home-topic-header-portfolio { color: $green; font-weight: bold; font-family: $fn; };
-.home-topic-header-projects { color: $yellow; font-weight: bold; font-family: $fn; };
-.home-topic-header-about { color: $red; font-weight: bold; font-family: $fn; };
-.home-topic-header-contact { color: $blue; font-weight: bold; font-family: $fn; };
-
-.home-topic-desc {
-    color: $gray-200;
-    font-family: $fn;
-}
-
 /*
     SECTION 1 (Portfolio)
 */
@@ -284,6 +221,10 @@ footer {
     background-color: $gray-200;
     color: $gray-900;
     font-family: $ns;
+    font-size: 24px;
+    line-height: 44px;
+    font-weight: 300;
+    color: 100;
 }
 
 #s1-header {
@@ -292,7 +233,7 @@ footer {
     line-height: 72px;
     font-weight: bold;
     color: $gray-200;
-    background-color: $gray-700;
+    background-color: $infpurple;
     margin: 20px auto 0;
     padding: 15px 15px 3px;
     border-radius: 20px 0px 20px 0px;
@@ -301,8 +242,8 @@ footer {
 }
 
 .s1-title {
-    padding-top: 60px;
-    color: $infnavy;
+    padding-top: 20px;
+    color: $infpurple;
     font-weight: bold;
 }
 
@@ -317,7 +258,7 @@ footer {
 
 .s1-skillset {
     font-weight: bold;
-    background-color: $gray-600;
+    background-color: $purple2;
     color: $gray-200;
     padding: 3px 10px;
     border-radius: 8px 0px 8px 0px;
