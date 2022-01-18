@@ -11,7 +11,6 @@ import React from "react";
 import Axios from "axios";
 
 import {Col, Row, Button} from "react-bootstrap";
-import { isNumber } from "react-simple-timefield";
 
 const server = process.env.REACT_APP_PROJECT_SERVER ? process.env.REACT_APP_PROJECT_SERVER : "";
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { IndexLinkContainer } from "react-router-bootstrap"
 import { Navbar, Nav, Container } from "react-bootstrap";
 import '@fortawesome/fontawesome-free/js/all.js';
 
@@ -11,7 +10,7 @@ export default function Navigation () {
     return (
         <Navbar collapseOnSelect expand="lg" bg="tt" fixed="top" variant="light" className="navbar-tt">
             <Container>
-            <Navbar.Brand className="nav-btn" href="#home">
+            <Navbar.Brand className="nav-btn" href="#s0">
                 <img
                 alt=""
                 src="./res/iconlarge.png"
@@ -24,14 +23,12 @@ export default function Navigation () {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto mr-auto">
-                    <Nav.Link className="nav-btn" href="#portfolio">Portfolio</Nav.Link>
-                    <Nav.Link className="nav-btn" href="#projects">Projects</Nav.Link>
-                    <Nav.Link className="nav-btn" href="#about">About</Nav.Link>
-                    <Nav.Link className="nav-btn" href="#contact">Contact</Nav.Link>
-                    
+                    <Nav.Link className="nav-btn" href="#s1">Portfolio</Nav.Link>
+                    <Nav.Link className="nav-btn" href="#s2">Projects</Nav.Link>
+                    <Nav.Link className="nav-btn" href="#s3">Contact</Nav.Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link className="nav-btn" href="#github">GitHub <i className="fab fa-github fa-sm"></i></Nav.Link>
+                    <Nav.Link className="nav-btn" href="https://www.github.com/toako">GitHub <i className="fab fa-github fa-sm"></i></Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

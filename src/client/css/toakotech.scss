@@ -28,6 +28,7 @@ $pink: #c85086;
 $red: #891e2b;
 $orange: #ff5000;
 $yellow: #ffa214;
+$yellowhover: #d38511;
 $green: #1e6f50;
 $teal: #33984b;
 $cyan: #0098dc;
@@ -242,6 +243,23 @@ footer {
     margin: 30px 0px 30px;
 }
 
+@media screen and ( max-width: $md ) {
+    .container#s0 { padding: 0 7.5% 50px; }
+    #s0-header { padding: 70px 0px 30px; }
+    #s0-name{ font-size: 70px; line-height: 70px; } 
+    #s0-summary { font-size: 28px; line-height: 28px; }
+    #s0-hr { margin: 0 10% 25px; }
+    #s0-desctext { font-size: 20px; font-weight: 400; color: $gray-200; margin: auto 10% 50px; }
+}
+@media screen and ( max-width: $sm ) {
+    .container#s0 { padding: 0 4% 50px; }
+    #s0-header { padding: 70px 0px 30px; }
+    #s0-name{ font-size: 48px; line-height: 48px; } 
+    #s0-summary { font-size: 26px; line-height: 22px; }
+    #s0-hr { margin: 0 10% 25px; }
+    #s0-desctext { font-size: 20px; font-weight: 400; color: $gray-200; margin: auto auto 50px; }
+}
+
 /*
     SECTION 1 (Portfolio)
 */
@@ -255,12 +273,12 @@ footer {
     font-size: 24px;
     line-height: 44px;
     font-weight: 300;
-    color: 100;
 }
 
 #s1-header {
     font-family: $op;
     font-size: 72px;
+    font-style: italic;
     line-height: 72px;
     font-weight: 200;
     color: $gray-200;
@@ -286,201 +304,173 @@ footer {
     border-style: solid none;
     margin: 10px 0px 20px;
 }
-.s1-tab {
-    
+
+a[id^='skl-tab'] {
+    color: $infmagenta;
 }
-
-
-/////////////
-/////////////
-/////////////
-///PROJECTS//
-///  PAGE ///
-/////////////
-/////////////
-
-.proj-body {
-    width: 75%
-}
-
-.proj-header {
-    margin: -20px 0px 0px 0.15em;
-    color: $yellow;
-    letter-spacing: .2em;
+a[id^='skl-tab'].active {
     font-weight: bold;
-    font-family: "Roboto", sans-serif; 
-    font-size: 100px;
-    text-align: center;
+    color: $infpurple !important;
+    background-color: rgba(0,0,0,0.1) !important;
+    border-bottom: none !important;
 }
 
-.proj-box {
-    border-style: solid;
-    border-width: 0px 0px 0px 6px;
-    border-radius: 10px;
-    border-color: $yellow;
-    margin-top: 50px;
-    padding: 0;
+@media screen and ( max-width: $md ) {
+    .container#s1 { 
+        padding: 0 7.5% 50px; 
+        font-size: 20px;
+        line-height: 26px;
+        font-weight: 400;
+    }
+    #s1-header {
+        font-size: 44px;
+        line-height: 44px;
+        margin: 0px auto 0;
+        border-radius: 15px 0px 15px 0px;
+    }
+    .s1-title {
+        padding-top: 5px;
+        font-size: 26px;
+        text-align: center;
+    }
+}
+@media screen and ( max-width: $sm ) {
+    .container#s1 { padding: 0 4% 50px; }
+}
+
+/*
+    SECTION 2 (Projects)
+*/
+.container#s2 {
+    margin: 0;
+    min-width: 100%;
+    padding: 0 20% 50px;
     background-color: $gray-700;
-    min-height: 200px;
-}
-.proj-box:focus {
-    outline: inherit;
-}
-.proj-box:hover {
-    transform: scale(0.99);
-    transition-timing-function: ease-in;
-    transition: 0.2s;
-}
-.proj-box:not(:hover) {
-    transform: scale(1);
-    transition-timing-function: ease-in;
-    transition: 0.2s;
+    color: $gray-900;
+    font-family: $ns;
+    font-size: 24px;
+    line-height: 44px;
+    font-weight: 300;
+    color: 100;
 }
 
-.proj-img {
-    padding: 10px;
-    border-radius: 10px;
-    width: 100%
-}
-
-.proj-name {
-    margin-top: 20px;
-    font-size: 1.8vw;
-    font-family: $fn;
-    color: $yellow;
-    position: relative;
-}
-
-.proj-desc {
-    font-size: 1.3vw;
-    font-family: $fn;
-    color: $white;
-    position: absolute;
-    bottom: 0;
-    left: 2;
-    padding-right: 20px;
-}
-
-/////////////
-/////////////
-/////////////
-/// ABOUT ///
-///  PAGE ///
-/////////////
-/////////////
-
-.about-legend-panel {
-    background-color: $gray-900;
+#s2-header {
+    font-family: $op;
+    font-size: 72px;
+    font-style: italic;
+    line-height: 72px;
+    font-weight: 200;
+    color: $gray-700;
+    background-color: $yellow;
+    margin: 20px auto 0;
+    padding: 15px 30px 3px;
+    border-radius: 20px 0px 20px 0px;
     text-align: center;
+    display: inline-block;
+}
+
+.s2-button {
+    width: 90%;
+    margin: 10px 5%;
+    border-radius: 5px;
+    border-width: 0px 0px 2px;
+    font-size: 20px;
+    background-color: rgba($gray-500, 0.6);
+    border-color: $yellow;
+    padding-top: 10px;
+    -webkit-box-shadow: 0px 8px 14px -1px rgba($gray-900,0.1);
+    box-shadow: 0px 12px 8px -1px rgba($gray-900,0.1);
+}
+
+.s2-button:hover {
+    background-color: $yellow;
+    border-color: $yellowhover;
+    color: $gray-700;
+    border-width: 0px 0px 4px;
+    padding-bottom: 4px;
+}
+
+@media screen and ( max-width: $md ) {
+    .container#s2 { 
+        padding: 0 7.5% 50px; 
+        font-size: 20px;
+        line-height: 26px;
+        font-weight: 400;
+    }
+    #s2-header {
+        font-size: 44px;
+        line-height: 44px;
+        margin: 0px auto 0;
+        border-radius: 15px 0px 15px 0px;
+    }
+}
+@media screen and ( max-width: $sm ) {
+    .container#s2 { padding: 0 4% 50px; }
+}
+
+/*
+    SECTION 3 (Contact)
+*/
+.container#s3 {
     margin: 0;
-    padding: 0;
+    min-width: 100%;
+    padding: 0 20% 10px;
+    background-color: $gray-400;
+    color: $gray-900;
+    font-family: $ns;
+    font-size: 24px;
+    line-height: 44px;
+    font-weight: 300;
+    color: 100;
 }
 
-.about-legend-title {
-    font-family: $fos; 
-    font-weight: bold;
-    font-size: 2.5vw;
-    color: $gray-300;
-    padding-top: 5vh;
-    margin: 40px;
+#s3-header {
+    font-family: $op;
+    font-size: 72px;
+    font-style: italic;
+    line-height: 72px;
+    font-weight: 200;
+    color: $gray-400;
+    background-color: $infnavy;
+    margin: 20px auto 0;
+    padding: 15px 30px 3px;
+    border-radius: 20px 0px 20px 0px;
     text-align: center;
+    display: inline-block;
 }
 
-.about-legend-item {
-    color: $red;
-    background-color: $gray-900;
-    font-size: 2vw;
+.s3-link {
     font-weight: bold;
-    font-family: $fos;
-    border: none;
-    width: 100%;
-    padding: 20px 0px 20px 0px;
-}
-.about-legend-item:hover {
-    background-color: $gray-800;
-    color: $yellow;
+    color: $infnavy;
 }
 
-.about-stick {
-    position: fixed;
-    width: 17%;
-    top: 5%;
-    left: 0;
-    margin: 0;
-    padding: 0;
+.s3-bar {
+    width: 40%;
+    height: 1px;
+    background-color: rgba($gray-500, 0.5);
+    margin: 50px 30% 20px;
 }
 
-.about-main-panel {
-    color: $gray-800;
-    background-color: $gray-300;
-    padding: 50px 10vw 50px 10vw;
-}
-
-.about-main-bar {
-    width: 20%;
-    height: 2px;
-    border-color: $gray-800;
-    border-width: 1px 0;
-    border-style: solid none;
-    margin: 20px 0px 20px 0px;
-}
-
-.about-main-heading {
-    color: $red;
-    font-weight: bold;
-    text-shadow: 0px 0px 5px rgba($black, 0.2);
-    font-family: $fn;
-}
-
-.about-main-text {
-    margin-bottom: 50px;
-    line-height: 1.5;
-    font-family: $fn;
-}
-
-.about-emph {
-    font-weight: bold;
-    color: $gray-500;
-    text-decoration: underline;
-}
-
-.about-main-img {
-    width: 70%;
-    margin-bottom: 50px;
-}
-
-/////////////
-/////////////
-/////////////
-// CONTACT //
-///  PAGE ///
-/////////////
-/////////////
-
-.contact-body {
-    background-color: $gray-800;
-    height: 100vh;
-}
-
-.contact-header {
-    margin: -20px 0px 0px 0px;
-    color: $blue;
-    letter-spacing: .2em;
-    font-weight: bold;
-    font-family: $fos;
-    font-size: 7rem;
+#s3-footer {
     text-align: center;
+    font-size: 14px;
+    line-height: 14px;
 }
 
-.contact-method {
-    margin-top: 30px;
-    font-size: 1.5rem;
-    font-family: $fn;
-    color: $white;
-    text-align: center;
+@media screen and ( max-width: $md ) {
+    .container#s3 { 
+        padding: 0 7.5% 50px; 
+        font-size: 20px;
+        line-height: 26px;
+        font-weight: 400;
+    }
+    #s3-header {
+        font-size: 44px;
+        line-height: 44px;
+        margin: 0px auto 0;
+        border-radius: 15px 0px 15px 0px;
+    }
 }
-
-.cmt {
-    color: $cyan;
-    font-weight: bold;
+@media screen and ( max-width: $sm ) {
+    .container#s3 { padding: 0 4% 50px; }
 }

@@ -25,7 +25,7 @@ class Greeting0 extends React.Component {
                     <Col>
                         <hr id="s0-hr"/>
                         <p id="s0-desctext">
-                            Hello random internet viewer! My name is William, but people usually call me Will. I a web developer based out of 
+                            Hi! My name is William, but people usually call me Will. I a web developer based out of 
                             Boise, Idaho. I spend a majority of my time coding and building my skills in all things computers, the internet, and 
                             e-commerce. I spend my free time building games in Unity, going to the gym, skiing, Minecraft, and kickin' it with friends. 
                             Programming is my passion!

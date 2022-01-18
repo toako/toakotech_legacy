@@ -1,86 +1,13 @@
 import React from "react";
-import { Container, Row, Col, ProgressBar, Tab, Tabs } from "react-bootstrap";
+import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import '@fortawesome/fontawesome-free/js/all.js';
 
 /*
     SECTION 1 - PORTFOLIO; Show skills and abilites.
 */
 
-const languages = [
-    ["HTML", "html.png", "Pixel Icons", 2],
-    ["CSS + Bootstrap", "css.png", "Pixel Icons", 1],
-    ["JavaScript + ES6", "js.png", "", 2],
-    ["Node.js + Express", "node.png", "", 2],
-    ["React", "react.png", "", 2],
-    ["MongoDB", "mongo.png", "", 1],
-    ["Unity", "unity.png", "Icons8", 2],
-    ["C# (scripting)", "csharp.png", "", 1],
-    ["Python", "python.png", "", 1],
-    ["Java", "java.png", "", 0],
-    ["NumPy/Pandas", "pandas.png", "", 0],
-    ["D3", "d3.png", "", 0],
-    ["Arduino", "arduino.png", "", 1]
-];
-
-const certifications = [
-    ["1. Responsive Web Design Certification", 100, false],
-    ["2. JS Algorithms and Data Structures Certification", 100, false],
-    ["3. Front End Libraries Certification", 100, false],
-    ["4. Data Visualization Certification", 60, false],
-    ["5. APIs and Microservices Certification", 100, false],
-    ["6. Quality Assurance Certification", 60, false],
-    ["7. Scientific Computing with Python Certification", 100, true],
-    ["8. Data Analysis with Python Certification", 100, true],
-    ["9. Information Security Certification", 0, true],
-    ["10. Machine Learning with Python Certification", 0, true]
-];
-
 class Portfolio1 extends React.Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            lang: languages,
-            certs: certifications
-        };
-        this.skillTemplate = this.skillTemplate.bind(this);
-        this.certTemplate = this.certTemplate.bind(this);
-    }
     
-    skillTemplate (name, image, creator, level) {
-        const levels = ["fam","skl","adv"];
-        const fullLevels = ["Familiar", "Skilled", "Advanced"];
-
-        const imgText = `/res/logos/${image}`;
-        const creatorText = `${name} logo by ${creator || "unknown"}`;
-        const classText = `exp ${levels[level]}`;
-
-        return (
-            <Row className="align-items-center lang-item">
-                <Col className="col-2">
-                    <img src={imgText} alt={creatorText} width="60%"/>
-                </Col>
-                <Col className="col-6 mr-auto">
-                    <h4>{name}</h4>
-                </Col>
-                <Col className="col-4">
-                    <h4 className="text-center"><span className={classText}>{fullLevels[level]}</span></h4>
-                </Col>
-            </Row>
-        )
-    }
-    certTemplate (name, progress, isOptional) {
-        const isAnimated = progress < 100;
-        const barLength = progress > 5 ? progress : 5;
-        const optionalText = isOptional ? (<span className="exp opt">Optional</span>) : "";
-        const nameText = isOptional ? ` ${name}` : name;
-
-        return (
-            <div className="fcc-prog">
-                <h5>{optionalText}{nameText}</h5>
-                <ProgressBar variant="info" animated={isAnimated} now={barLength} label={`${progress}%`}/>
-            </div>
-        )
-    }
     render () {
         return (<Container id="s1">
                 <Row className="text-center pt-5 pb-5">
@@ -104,19 +31,19 @@ class Portfolio1 extends React.Component {
                     <Col>
                         <h1 className="s1-title"><i class="fas fa-star"></i> Coding Skillsets</h1>
                         <div className="s1-bar"/>
-                        <Tabs defaultActiveKey="mern" id="uncontrolled-tab-example" className="mb-3">
-                            <Tab eventKey="mern" title="MERN Web Development">
+                        <Tabs defaultActiveKey="mern" id="skl" className="mb-3">
+                            <Tab eventKey="mern" title="MERN Web Development" className="s1-tab">
                                 React and SCSS for the front-end, Express.JS and Node.JS on the back-end, and MongoDB (& Mongoose) for storage and retrieval of data. 
                                 In fact, this very website is built using the aforementioned libraries. I have used MERN on my website and also in my day-to-day work.
                             </Tab>
-                            <Tab eventKey="funnel" title="Funnels & E-Commerce">
+                            <Tab eventKey="funnel" title="Funnels & E-Commerce" className="s1-tab">
                                 I build sales funnels & e-commerce pages from top to bottom with metrics, retargeting, and upsells. I also
                                 build custom tracking tools in JS for scroll depth, user interaction, split testing, customer cookies and metrics, as well as collecting abandoned cart information. I have
                                 also built custom checkout forms, affiliate pages, and improved sales funnels for a few clients that are using the Clickbank affiliate marketing platform.
                             </Tab>
-                            <Tab eventKey="game" title="Game Dev">
-                                Right now, I am working on an unannounced game project in Unity,
-                                which uses C# for scripting, The game I am building is a top-down dungeon crawler that utilizes A* pathfinding, advanced randomly-generated regions and dungeons, and API usage for a wide range 
+                            <Tab eventKey="game" title="Game Dev" className="s1-tab">
+                                I'm actively working on an unrevealed game project in Unity using C#. It is a top-down dungeon crawler that utilizes A* 
+                                pathfinding, advanced randomly-generated regions and dungeons, and API usage for a wide range 
                                 of items, weapons, and creatures. This is what I do in my free time and is in no way something I do professionally.
                             </Tab>
                         </Tabs>
