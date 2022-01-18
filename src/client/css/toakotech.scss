@@ -162,8 +162,39 @@ footer {
 }
 
 #s0-header {
-    padding: 65px 0px 50px;
+    padding: 130px 0px 70px;
 }
+
+// BEGIN Gradient background. Credit to Ian Forest https://www.gradient-animator.com/ https://www.ianforrest.com/
+.s0-animbg {
+    background: linear-gradient(270deg, #1e3c64, #0089e1, #663399, #b416ec);
+    background-size: 800% 800%;
+    -webkit-animation: GradientBG 35s ease infinite;
+    -moz-animation: GradientBG 35s ease infinite;
+    -o-animation: GradientBG 35s ease infinite;
+    animation: GradientBG 35s ease infinite;
+}
+@-webkit-keyframes GradientBG {
+    0%{background-position:63% 0%}
+    50%{background-position:38% 100%}
+    100%{background-position:63% 0%}
+}
+@-moz-keyframes GradientBG {
+    0%{background-position:63% 0%}
+    50%{background-position:38% 100%}
+    100%{background-position:63% 0%}
+}
+@-o-keyframes GradientBG {
+    0%{background-position:63% 0%}
+    50%{background-position:38% 100%}
+    100%{background-position:63% 0%}
+}
+@keyframes GradientBG {
+    0%{background-position:63% 0%}
+    50%{background-position:38% 100%}
+    100%{background-position:63% 0%}
+}
+// END Gradient Background
 
 #s0-name {
     font-family: $op;
@@ -198,7 +229,7 @@ footer {
     font-size: 24px;
     font-weight: 300;
     color: $gray-200;
-    margin: auto 10% 0;
+    margin: auto 10% 100px;
 }
 
 #s0-jumptitle {
@@ -231,11 +262,11 @@ footer {
     font-family: $op;
     font-size: 72px;
     line-height: 72px;
-    font-weight: bold;
+    font-weight: 200;
     color: $gray-200;
     background-color: $infpurple;
     margin: 20px auto 0;
-    padding: 15px 15px 3px;
+    padding: 15px 30px 3px;
     border-radius: 20px 0px 20px 0px;
     text-align: center;
     display: inline-block;
@@ -255,33 +286,9 @@ footer {
     border-style: solid none;
     margin: 10px 0px 20px;
 }
-
-.s1-skillset {
-    font-weight: bold;
-    background-color: $purple2;
-    color: $gray-200;
-    padding: 3px 10px;
-    border-radius: 8px 0px 8px 0px;
-    margin-right: 10px;
+.s1-tab {
+    
 }
-
-
-.exp {
-    color: $gray-700;
-    border-radius: 4px;
-    padding: 1px 4px 1px 4px;
-    font-family: $fn;
-}
-
-.lang-item { 
-    margin: 16px; 
-    font-family: $fn;
-    color: $white;
-}
-.opt { background-color: $red; }
-.fam { background-color: $orange; }
-.skl { background-color: $blue; }
-.adv { background-color: $indigo; }
 
 
 /////////////

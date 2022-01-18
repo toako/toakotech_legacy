@@ -14,7 +14,7 @@ class Greeting0 extends React.Component {
     
     render () {
         return (
-            <Container id="s0">
+            <Container id="s0" className="s0-animbg">
                 <Row id="s0-header">
                     <Col>
                         <p id="s0-name">William <br/> Burciaga <br/> Kellermann</p>

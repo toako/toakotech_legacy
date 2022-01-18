@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ProgressBar } from "react-bootstrap";
+import { Container, Row, Col, ProgressBar, Tab, Tabs } from "react-bootstrap";
 import '@fortawesome/fontawesome-free/js/all.js';
 
 /*
@@ -83,9 +83,9 @@ class Portfolio1 extends React.Component {
     }
     render () {
         return (<Container id="s1">
-                <Row className="text-center pt-3 pb-3">
+                <Row className="text-center pt-5 pb-5">
                     <Col>
-                        <p id="s1-header">Portfolio</p>
+                        <p id="s1-header">P o r t f o l i o</p>
                     </Col>
                 </Row>
                 <Row>
@@ -104,23 +104,22 @@ class Portfolio1 extends React.Component {
                     <Col>
                         <h1 className="s1-title"><i class="fas fa-star"></i> Coding Skillsets</h1>
                         <div className="s1-bar"/>
-                        <p>
-                            <span className="s1-skillset"><i class="fas fa-code"></i> MERN Stack Web Development</span> I build websites using 
-                            React and SCSS for the front-end, Express.JS and Node.JS on the back-end, and MongoDB (& Mongoose) for storage and retrieval of data. 
-                            In fact, this very website is built using the aforementioned libraries. I have used MERN on my website and also in my day-to-day work.<br/>
-                            
-                        </p>
-                        <p>
-                            <span className="s1-skillset"><i class="fas fa-funnel-dollar"></i> Sales Funnels & Tracking Tools</span> My current workplace has provided me an excellent opportunity
-                            to grow and build skills in the direct response marketing space. I can confidently build a sales funnel/website from top to bottom with tracking and upsells. I also
-                            build custom tracking tools in JS for scroll depth, user interaction, split testing, customer cookies and metrics, as well as collecting abandoned cart information. I have
-                            also built custom checkout forms, affiliate pages, and improved sales funnels for a few clients that are using the Clickbank affiliate marketing platform.
-                        </p>
-                        <p>
-                            <span className="s1-skillset"><i class="fas fa-funnel-dollar"></i> Unity Game Development</span> Right now, I am working on an unannounced game project in Unity,
-                            which uses C# for scripting, The game I am building is a top-down dungeon crawler that utilizes A* pathfinding, advanced randomly-generated regions and dungeons, and API usage for a wide range 
-                            of items, weapons, and creatures. This is what I do in my free time and is in no way something I do professionally.
-                        </p>
+                        <Tabs defaultActiveKey="mern" id="uncontrolled-tab-example" className="mb-3">
+                            <Tab eventKey="mern" title="MERN Web Development">
+                                React and SCSS for the front-end, Express.JS and Node.JS on the back-end, and MongoDB (& Mongoose) for storage and retrieval of data. 
+                                In fact, this very website is built using the aforementioned libraries. I have used MERN on my website and also in my day-to-day work.
+                            </Tab>
+                            <Tab eventKey="funnel" title="Funnels & E-Commerce">
+                                I build sales funnels & e-commerce pages from top to bottom with metrics, retargeting, and upsells. I also
+                                build custom tracking tools in JS for scroll depth, user interaction, split testing, customer cookies and metrics, as well as collecting abandoned cart information. I have
+                                also built custom checkout forms, affiliate pages, and improved sales funnels for a few clients that are using the Clickbank affiliate marketing platform.
+                            </Tab>
+                            <Tab eventKey="game" title="Game Dev">
+                                Right now, I am working on an unannounced game project in Unity,
+                                which uses C# for scripting, The game I am building is a top-down dungeon crawler that utilizes A* pathfinding, advanced randomly-generated regions and dungeons, and API usage for a wide range 
+                                of items, weapons, and creatures. This is what I do in my free time and is in no way something I do professionally.
+                            </Tab>
+                        </Tabs>
                     </Col>
                 </Row>
             </Container>);

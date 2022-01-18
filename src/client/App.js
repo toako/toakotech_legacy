@@ -10,7 +10,6 @@ import Portfolio from './pages/Portfolio.js';
 import Projects from './pages/Projects.js';
 import About from './pages/About.js';
 import Contact from './pages/Contact.js';
-import Eclipse from'./pages/Eclipse.js';
 import Navigation from "./pages/components/Navigation.js";
 import NavGap from "./pages/components/NavGap.js"
 import Footer from "./pages/components/Footer.js";
@@ -32,8 +31,7 @@ class App extends React.Component {
           <Route exact path="/portfolio"><Navigation/><NavGap/><Portfolio /><Footer/></Route>
           <Route exact path="/projects"><Navigation/><NavGap/><Projects /><Footer/></Route>
           <Route exact path="/about"><Navigation/><NavGap/><About /><Footer/></Route>
-          <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>
-          <Route exact path="/eclipse"><Navigation/><NavGap/><Eclipse /><Footer/></Route>
+          <Route exact path="/contact"><Navigation/><NavGap/><Contact /><Footer/></Route>\
           {/* <Route path="/s"><Portal /></Route> */}
           <Route path="/ws"><Dashboard /></Route>
         </Switch>
